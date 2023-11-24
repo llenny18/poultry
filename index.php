@@ -1,4 +1,4 @@
-<?php require("./controller/db.php") ?>
+<?php require("./controller/db.php"); if(!isset($_SESSION['u_id'])){ redirect("./login.php");}?>
 <html class="no-js" lang="en">
 
 <head>

@@ -1,19 +1,10 @@
-<?php require("./controller/db.php");
-
-if(isset($_POST['uLogin'])){
-    $uname = $_POST['username'];
-    $upass = $_POST['upassword'];
-    $global = new Model();
-    $global->userLogin($uname, $upass);
-
-}
-?>
+<?php require("./controller/db.php"); ?>
 <html class="no-js" lang="en">
 
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>Log In - srtdash</title>
+    <title>Sign up - srtdash</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="shortcut icon" type="image/png" href="assets/images/icon/favicon.ico">
     <link rel="stylesheet" href="assets/css/bootstrap.min.css">
@@ -48,36 +39,45 @@ if(isset($_POST['uLogin'])){
             <div class="row no-gutters">
                 <div class="col-xl-4 offset-xl-8 col-lg-6 offset-lg-6">
                     <div class="login-box-s2 ptb--100">
-                        <form method="post">
+                        <form>
                             <div class="login-form-head">
-                                <h4>Log in</h4>
-                                <p>Hello there, Log in Now!</p>
+                                <h4>Sign up</h4>
+                                <p>Hello there, Sign up and Join with Us</p>
                             </div>
                             <div class="login-form-body">
                                 <div class="form-gp">
-                                    <label for="exampleInputName1">User Name</label>
-                                    <input type="text" id="exampleInputName1" name="username">
+                                    <label for="exampleInputName1">Full Name</label>
+                                    <input type="text" id="exampleInputName1">
                                     <i class="ti-user"></i>
                                 </div>
                                 <div class="form-gp">
-                                    <label for="exampleInputEmail1">Password</label>
-                                    <input type="text" id="exampleInputEmail1" name="upassword">
+                                    <label for="exampleInputEmail1">Email address</label>
+                                    <input type="email" id="exampleInputEmail1">
+                                    <i class="ti-email"></i>
+                                </div>
+                                <div class="form-gp">
+                                    <label for="exampleInputPassword1">Password</label>
+                                    <input type="password" id="exampleInputPassword1">
                                     <i class="ti-lock"></i>
                                 </div>
-                               
+                                <div class="form-gp">
+                                    <label for="exampleInputPassword2">Confirm Password</label>
+                                    <input type="password" id="exampleInputPassword2">
+                                    <i class="ti-lock"></i>
+                                </div>
                                 <div class="submit-btn-area">
-                                    <button id="form_submit" type="submit" name="uLogin">Log In <i class="ti-arrow-right"></i></button>
+                                    <button id="form_submit" type="submit">Submit <i class="ti-arrow-right"></i></button>
                                     <div class="login-other row mt-4">
                                         <div class="col-6">
-                                            <a class="fb-login" href="#">Log In with <i class="fa fa-facebook"></i></a>
+                                            <a class="fb-login" href="#">Sign up with <i class="fa fa-facebook"></i></a>
                                         </div>
                                         <div class="col-6">
-                                            <a class="google-login" href="#">Log In with <i class="fa fa-google"></i></a>
+                                            <a class="google-login" href="#">Sign up with <i class="fa fa-google"></i></a>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="form-footer text-center mt-5">
-                                    <p class="text-muted">Don't have an account? <a href="signup.html">Sign up now!</a></p>
+                                    <p class="text-muted">Don't have an account? <a href="login.html">Sign in</a></p>
                                 </div>
                             </div>
                         </form>
