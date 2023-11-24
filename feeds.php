@@ -1,4 +1,4 @@
-<!doctype html>
+<?php require("./controller/db.php") ?>
 <html class="no-js" lang="en">
 
 <head>
