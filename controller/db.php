@@ -48,6 +48,22 @@ Class Model {
 				$stmt->close();
 			}
         }
+
+        public function fetchFeeds() {
+
+			$query = "SELECT * FROM feedsinvestment";
+
+			if ($stmt = $this->conn->query($query)) {
+			
+            $num_of_rows = $stmt->num_rows;
+            while ($row = $stmt->fetch_assoc()) {
+                $data[] = $row;
+            }
+            $stmt->close();
+        }
+        return $data;
+    }
+
     }
 	function redirect($location=Null){
 		if($location!=Null){

@@ -1,9 +1,9 @@
 <?php require("./controller/db.php");
+$global = new Model();
 
 if(isset($_POST['uLogin'])){
     $uname = $_POST['username'];
     $upass = $_POST['upassword'];
-    $global = new Model();
     $global->userLogin($uname, $upass);
 
 }
