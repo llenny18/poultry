@@ -94,11 +94,8 @@ $feeds = $global->fetchFeeds();
         </div>
         <!-- main content area end -->
         <!-- footer area start-->
-        <footer>
-            <div class="footer-area">
-                <p>Footer</p>
-            </div>
-        </footer>
+        <?php include("./partials/footer.php"); ?>
+
         <!-- footer area end-->
     </div>
     <!-- page container area end -->
