@@ -1,6 +1,5 @@
 <?php require("./controller/db.php");
-$global = new Model();
-
+$global = new $_SESSION['model'];
 $feeds = $global->fetchFeeds();
 
 ?>

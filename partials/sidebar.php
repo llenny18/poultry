@@ -26,6 +26,7 @@
                                 </ul>
                             </li>
                             <li><a href="record.php"><i class="ti-receipt"></i> <span>Records of Profits</span></a></li>
+                            <li><a href="logout.php"><i class="ti-back-left"></i> <span>Logout</span></a></li>
                        
                         </ul>
                     </nav>

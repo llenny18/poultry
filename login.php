@@ -1,12 +1,13 @@
 <?php require("./controller/db.php");
-$global = new Model();
+$_SESSION['model'] = new Model();
 
 if(isset($_POST['uLogin'])){
     $uname = $_POST['username'];
     $upass = $_POST['upassword'];
-    $global->userLogin($uname, $upass);
+    $_SESSION['model']->userLogin($uname, $upass);
 
 }
+
 ?>
 <html class="no-js" lang="en">
 

@@ -45,7 +45,7 @@ Class Model {
 
                 }
                 
-				$stmt->close();
+				$stmt->close();         
 			}
         }
 
@@ -63,6 +63,21 @@ Class Model {
         }
         return $data;
     }
+
+	public function getUsername($uid) {
+
+	$query = "SELECT * FROM `useraccounts` where uID = ".$uid;
+
+	if ($stmt = $this->conn->query($query)) {
+
+	$num_of_rows = $stmt->num_rows;
+	while ($row = $stmt->fetch_assoc()) {
+		$data[] = $row;
+	}
+	$stmt->close();
+	}
+	return $data;
+	}
 
     }
 	function redirect($location=Null){
