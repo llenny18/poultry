@@ -20,9 +20,9 @@
                                 <a href="javascript:void(0)" aria-expanded="true"><i class="fa fa-table"></i>
                                     <span>Cash Flow</span></a>
                                 <ul class="collapse">
-                                    <li ><a href="feeds.php">Feeds</a></li>
+                                    <li ><a href="feeds.php">Feeds & Investments</a></li>
                                     <li><a href="misc.php">Miscellaneous</a></li>
-                                    <li><a href="invest.php">Investments</a></li>
+                                    <li><a href="payroll.php">Employee Wages</a></li>
                                 </ul>
                             </li>
                             <li><a href="record.php"><i class="ti-receipt"></i> <span>Records of Profits</span></a></li>
