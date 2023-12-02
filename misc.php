@@ -47,7 +47,7 @@
            
             <!-- page title area end -->
             <div class="main-content-inner">
-                <div class="row">ff
+                <div class="row">
                   
                  
                     <div class="col-12 mt-5">
