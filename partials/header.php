@@ -169,7 +169,7 @@
                             <h4 class="page-title pull-left">Dashboard</h4>
                             <ul class="breadcrumbs pull-left">
                                 <li><a href="index.php">Home</a></li>
-                                <li><span>Bar Chart</span></li>
+                                <li><span>Home</span></li>
                             </ul>
                         </div>
                     </div>
