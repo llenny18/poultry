@@ -35,10 +35,10 @@
                             <div class="single-report">
                                 <div class="s-sale-inner pt--30 mb-3">
                                     <div class="s-report-title d-flex justify-content-between">
-                                        <h4 class="header-title mb-0">Pigs Sold</h4>
+                                        <h4 class="header-title mb-0">Pigs Count</h4>
                                         <select class="custome-select border-0 pr-3">
-                                            <option selected="">Last 7 Days</option>
-                                            <option value="0">Last 7 Days</option>
+                                            <option selected="">Last 30 Days</option>
+                                            <option value="0">Last 30 Days</option>
                                         </select>
                                     </div>
                                 </div>
@@ -49,10 +49,10 @@
                             <div class="single-report">
                                 <div class="s-sale-inner pt--30 mb-3">
                                     <div class="s-report-title d-flex justify-content-between">
-                                        <h4 class="header-title mb-0">TBD</h4>
+                                        <h4 class="header-title mb-0">Estimated Profit</h4>
                                         <select class="custome-select border-0 pr-3">
-                                            <option selected="">Last 7 Days</option>
-                                            <option value="0">Last 7 Days</option>
+                                            <option selected="">Last 30 Days</option>
+                                            <option value="0">Last 30 Days</option>
                                         </select>
                                     </div>
                                 </div>
@@ -63,10 +63,10 @@
                             <div class="single-report">
                                 <div class="s-sale-inner pt--30 mb-3">
                                     <div class="s-report-title d-flex justify-content-between">
-                                        <h4 class="header-title mb-0">Storage Status</h4>
+                                        <h4 class="header-title mb-0">Feeds Status</h4>
                                         <select class="custome-select border-0 pr-3">
-                                            <option selected="">Last 7 Days</option>
-                                            <option value="0">Last 7 Days</option>
+                                            <option selected="">Last 30 Days</option>
+                                            <option value="0">Last 30 Days</option>
                                         </select>
                                     </div>
                                 </div>
@@ -77,10 +77,10 @@
                             <div class="single-report">
                                 <div class="s-sale-inner pt--30 mb-3">
                                     <div class="s-report-title d-flex justify-content-between">
-                                        <h4 class="header-title mb-0">Gross Profit</h4>
+                                        <h4 class="header-title mb-0">Pig deceased</h4>
                                         <select class="custome-select border-0 pr-3">
-                                            <option selected="">Last 7 Days</option>
-                                            <option value="0">Last 7 Days</option>
+                                            <option selected="">Last 30 Days</option>
+                                            <option value="0">Last 30 Days</option>
                                         </select>
                                     </div>
                                 </div>
@@ -94,10 +94,10 @@
                 <div class="card mt-5">
                     <div class="card-body">
                         <div class="d-flex justify-content-between mb-5">
-                            <h4 class="header-title mb-0">TBD Graph</h4>
+                            <h4 class="header-title mb-0">Monthly Revenue</h4>
                             <select class="custome-select border-0 pr-3">
-                                <option selected="">Last 7 Days</option>
-                                <option value="0">Last 7 Days</option>
+                                <option selected="">Last 30 Days</option>
+                                <option value="0">Last 30 Days</option>
                             </select>
                         </div>
                         <div id="visitor_graph"></div>

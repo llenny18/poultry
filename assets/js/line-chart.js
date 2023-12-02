@@ -449,13 +449,13 @@ if ($('#visitor_graph').length) {
         series: [{
                 name: 'USD',
                 data: [400, 470, 520, 500, 420, 350, 320, 400, 550, 600, 500, 420, 400],
-                fillColor: 'rgba(76, 57, 249, 0.5)',
+                fillColor: 'rgba(57, 249, 79, 0.5)',
                 lineColor: 'transparent'
             },
             {
                 name: 'BTC',
                 data: [450, 520, 550, 400, 450, 500, 400, 450, 500, 450, 400, 500, 450],
-                fillColor: 'rgba(103, 13, 251, 0.5)',
+                fillColor: 'rgba(0, 186, 68, 0.5)',
                 lineColor: 'transparent'
             }
         ]
