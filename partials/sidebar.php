@@ -8,7 +8,7 @@
                 <div class="menu-inner">
                     <nav>
                         <ul class="metismenu" id="menu">
-                            <li class="active">
+                            <li  class="active">
                                 <a href="javascript:void(0)" aria-expanded="true"><i class="ti-dashboard"></i><span>dashboard</span></a>
                                 <ul class="collapse">
                                     <li class="active"><a href="index.php">Home</a></li>
@@ -20,7 +20,7 @@
                                 <a href="javascript:void(0)" aria-expanded="true"><i class="fa fa-table"></i>
                                     <span>Cash Flow</span></a>
                                 <ul class="collapse">
-                                    <li><a href="feeds.php">Feeds</a></li>
+                                    <li ><a href="feeds.php">Feeds</a></li>
                                     <li><a href="misc.php">Miscellaneous</a></li>
                                     <li><a href="invest.php">Investments</a></li>
                                 </ul>

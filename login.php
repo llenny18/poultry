@@ -16,7 +16,7 @@ if(isset($_POST['uLogin'])){
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <title>Log In - srtdash</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="shortcut icon" type="image/png" href="assets/images/icon/favicon.ico">
+    <link rel="shortcut icon" type="image/png" href="./assets/images/icon/piggerylogo.png">
     <link rel="stylesheet" href="assets/css/bootstrap.min.css">
     <link rel="stylesheet" href="assets/css/font-awesome.min.css">
     <link rel="stylesheet" href="assets/css/themify-icons.css">
@@ -48,8 +48,11 @@ if(isset($_POST['uLogin'])){
         <div class="container-fluid p-0">
             <div class="row no-gutters">
                 <div class="col-xl-4 offset-xl-8 col-lg-6 offset-lg-6">
+                    
                     <div class="login-box-s2 ptb--100">
+                        
                         <form method="post">
+                        <div style=" text-align: center; padding: 10px;"><img src="./assets/images/icon/piggerylogo.png" width="150" alt="" ></div>
                             <div class="login-form-head">
                                 <h4>Log in</h4>
                                 <p>Hello there, Log in Now!</p>
@@ -68,14 +71,7 @@ if(isset($_POST['uLogin'])){
                                
                                 <div class="submit-btn-area">
                                     <button id="form_submit" type="submit" name="uLogin">Log In <i class="ti-arrow-right"></i></button>
-                                    <div class="login-other row mt-4">
-                                        <div class="col-6">
-                                            <a class="fb-login" href="#">Log In with <i class="fa fa-facebook"></i></a>
-                                        </div>
-                                        <div class="col-6">
-                                            <a class="google-login" href="#">Log In with <i class="fa fa-google"></i></a>
-                                        </div>
-                                    </div>
+                                    
                                 </div>
                                 <div class="form-footer text-center mt-5">
                                     <p class="text-muted">Don't have an account? <a href="signup.html">Sign up now!</a></p>
