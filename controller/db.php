@@ -7,12 +7,27 @@ ini_set('session.gc_maxlifetime', 60 * 60 * 24 * 100);
 
    
 session_start();
-Class Model {
-		private $server = "localhost";
-		private $username = "root";
-		private $password = "";
-		private $dbname = "poultryfarm";
-		private $conn;
+
+interface loginInterface {
+	public function userLogin($user_name, $user_pass);
+}
+
+interface feedInterface {
+	public function fetchFeeds();
+}
+
+interface usernameInterface {
+	public function getUsername($uid);
+}
+
+
+
+Class connGateway {
+		public $server = "localhost";
+		public $username = "root";
+		public $password = "";
+		public $dbname = "poultryfarm";
+		public $conn;
 
 		public function __construct() {
 			try {
@@ -22,6 +37,10 @@ Class Model {
 			
             }
         }
+
+	}
+
+Class loginClass extends connGateway implements loginInterface {
 
         public function userLogin($user_name, $user_pass) {
 			$query = "SELECT * FROM useraccounts WHERE userName = ? and userPassword = ?";
@@ -48,6 +67,10 @@ Class Model {
 				$stmt->close();         
 			}
         }
+	}
+
+
+Class feedClass extends connGateway  implements feedInterface {
 
         public function fetchFeeds() {
 
@@ -64,13 +87,15 @@ Class Model {
         return $data;
     }
 
+}
+
+Class usernameClass extends connGateway  implements usernameInterface {
 	public function getUsername($uid) {
 
 	$query = "SELECT * FROM `useraccounts` where uID = ".$uid;
 
 	if ($stmt = $this->conn->query($query)) {
 
-	$num_of_rows = $stmt->num_rows;
 	while ($row = $stmt->fetch_assoc()) {
 		$data[] = $row;
 	}
@@ -80,6 +105,9 @@ Class Model {
 	}
 
     }
+
+
+
 	function redirect($location=Null){
 		if($location!=Null){
 			echo "<script>window.location='{$location}'</script>";	
