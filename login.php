@@ -1,10 +1,10 @@
 <?php require("./controller/db.php");
-$_SESSION['model'] = new Model();
+$loginFunc = new loginClass();
 
 if(isset($_POST['uLogin'])){
     $uname = $_POST['username'];
     $upass = $_POST['upassword'];
-    $_SESSION['model']->userLogin($uname, $upass);
+    $loginFunc->userLogin($uname, $upass);
 
 }
 
