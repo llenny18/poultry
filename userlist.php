@@ -63,7 +63,7 @@ $base = "feeds";
                     <div class="col-lg-12 mt-5">
                         <div class="card">
                             <div class="card-body">
-                                <h4 class="header-title">All Investments of Feeds<a href="adduser.php"><i class="fa fa-user-plus m-1"></i>Add User</a></h4>
+                                <h4 class="header-title">All Investments of Feeds<a href="adduser.php"><i class="fa fa-user-plus m-2"></i>Add User</a></h4>
                                 <div class="single-table">
                                     <div class="table-responsive">
                                     <table id="dataTable3" class="text-center">

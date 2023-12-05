@@ -44,16 +44,17 @@ $userInfo = $userget->getUserbyID($userID);
                                         <h4 class="header-title">Edit User Employee Account</h4>
                                         <form class="needs-validation" novalidate="">
                                             <div class="form-row">
+                                                
                                                 <div class="col-md-4 mb-3">
                                                     <label for="validationCustom01">First name</label>
-                                                    <input type="text" class="form-control" id="validationCustom01" placeholder="First name" value="<?= $userInfo['ufname'] ?>"  required="">
+                                                    <input type="text" name="ufname" class="form-control" id="validationCustom01" placeholder="First name" value="<?= $userInfo['ufname'] ?>"  required="">
                                                     <div class="valid-feedback">
                                                         Looks good!
                                                     </div>
                                                 </div>
                                                 <div class="col-md-4 mb-3">
                                                     <label for="validationCustom02">Last name</label>
-                                                    <input type="text" class="form-control" id="validationCustom02" placeholder="Last name" value="<?= $userInfo['ulname'] ?>"  required="">
+                                                    <input type="text" name="ulname" class="form-control" id="validationCustom02" placeholder="Last name" value="<?= $userInfo['ulname'] ?>"  required="">
                                                     <div class="valid-feedback">
                                                         Looks good!
                                                     </div>
@@ -62,14 +63,12 @@ $userInfo = $userget->getUserbyID($userID);
                                                     <label for="validationCustomUsername">User Role</label>
                                                     <div class="input-group">
                                                         
-                                                        <select class="form-control" aria-label="Default select example">
+                                                        <select name="urole" class="form-control" aria-label="Default select example">
                                                             <option>Choose User Type</option>
                                                             <option <?php if($userInfo['urole']==2){ echo " selected "; } ?> value="2">Employee</option>
                                                             <option <?php if($userInfo['urole']==3){ echo " selected "; } ?>  value="3">Disabled</option>
                                                         </select>
-                                                        <div class="invalid-feedback">
-                                                            Please choose a username.
-                                                        </div>
+                                                        
                                                     </div>
                                                 </div>
                                                 <div class="col-md-6 mb-3">
@@ -78,7 +77,7 @@ $userInfo = $userget->getUserbyID($userID);
                                                         <div class="input-group-prepend">
                                                             <span class="input-group-text" id="inputGroupPrepend"><i class="fa fa-envelope-square" aria-hidden="true"></i></span>
                                                         </div>
-                                                        <input type="text" class="form-control" id="validationCustomUsername" placeholder="Username" value="<?= $userInfo['uname'] ?>" aria-describedby="inputGroupPrepend" required="">
+                                                        <input type="text" class="form-control" id="validationCustomUsername"  name="uname" placeholder="Username" value="<?= $userInfo['uname'] ?>" aria-describedby="inputGroupPrepend" required="">
                                                         <div class="invalid-feedback">
                                                             Please choose a username.
                                                         </div>
@@ -90,7 +89,7 @@ $userInfo = $userget->getUserbyID($userID);
                                                         <div class="input-group-prepend">
                                                             <span class="input-group-text" id="inputGroupPrepend"><i class="fa fa-lock" aria-hidden="true"></i></span>
                                                         </div>
-                                                        <input type="password" class="form-control" id="validationCustomUsername" value="" placeholder="Password" aria-describedby="inputGroupPrepend" required="">
+                                                        <input type="text" class="form-control" id="validationCustomUsername"  name="upass" value="<?= $userInfo['ulname'].$userInfo['urole'].$userInfo['email'] ?>" placeholder="Password" aria-describedby="inputGroupPrepend" required="">
                                                         <div class="invalid-feedback">
                                                             Please choose a username.
                                                         </div>
@@ -100,14 +99,14 @@ $userInfo = $userget->getUserbyID($userID);
                                             <div class="form-row">
                                                 <div class="col-md-6 mb-3">
                                                     <label for="validationCustom03">Contact Number</label>
-                                                    <input type="text" class="form-control" id="validationCustom03" value="<?= $userInfo['cnum'] ?>" placeholder="+639" required="">
+                                                    <input type="text" class="form-control" id="validationCustom03" name="cnum" value="<?= $userInfo['cnum'] ?>" placeholder="+639" required="">
                                                     <div class="invalid-feedback">
                                                         Please provide a valid city.
                                                     </div>
                                                 </div>
                                                 <div class="col-md-6 mb-3">
                                                     <label for="validationCustom03">Email</label>
-                                                    <input type="email" class="form-control" id="validationCustom03"  value="<?= $userInfo['email'] ?>"placeholder="@email" required="">
+                                                    <input type="email" class="form-control" id="validationCustom03" name="email" value="<?= $userInfo['email'] ?>"placeholder="@email" required="">
                                                     <div class="invalid-feedback">
                                                         Please provide a valid city.
                                                     </div>
@@ -116,10 +115,7 @@ $userInfo = $userget->getUserbyID($userID);
                                             </div>
                                             <div class="form-group">
                                                 <div class="form-check">
-                                                    <input class="form-check-input" type="checkbox" value="" id="invalidCheck" required="">
-                                                    <label class="form-check-label" for="invalidCheck">
-                                                        Agree to terms and conditions
-                                                    </label>
+                                                   
                                                     <div class="invalid-feedback">
                                                         You must agree before submitting.
                                                     </div>

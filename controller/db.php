@@ -31,6 +31,9 @@ interface userGetbyID {
 }
 
 
+interface addEditbyID {
+	public function addUserbyID($fname,$lname,$cnum,$email,$rid,$uname,$pass);
+}
 
 Class connGateway {
 		public $server = "localhost";
@@ -160,6 +163,26 @@ return $data;
 
 
 }
+
+Class adduserClass extends connGateway  implements addEditbyID {
+
+public function addUserbyID($fname,$lname,$cnum,$email,$rid,$uname,$pass){
+
+	
+	$query = "CALL insert_employee(?,?,?,?,?,?,?)";
+
+if ($stmt = $this->conn->prepare($query)) {
+	$stmt->bind_param('sssssss', $fname,$lname,$cnum,$email,$rid,$uname,$pass);
+	$stmt->execute();
+	$stmt->close();
+	echo "<script>alert('Employee Register Successful!'); window.location='userlist.php'</script>";
+}
+
+}
+}
+
+
+
 
 
 

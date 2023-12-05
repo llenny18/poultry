@@ -1,5 +1,21 @@
-<?php require("./controller/db.php"); if(!isset($_SESSION['u_id'])){ redirect("./login.php");}?>
-<html class="no-js" lang="en">
+<?php require("./controller/db.php"); 
+if(!isset($_SESSION['u_id'])){ redirect("./login.php");}
+
+$addemployee = new adduserClass();
+
+if(isset($_POST['add_emp'])){
+$fname = $_POST['ufname'];
+$lname = $_POST['ulname'];
+$rid = $_POST['urole'];
+$uname = $_POST['uname'];
+$pass = $_POST['upass'];
+$cnum = $_POST['cnum'];
+$email = $_POST['email'];
+
+    $addemployee->addUserbyID($fname,$lname,$rid,$uname,$pass,$cnum,$email);
+}
+
+?>
 
 <head>
 <?php include("./partials/head.php"); ?>
@@ -33,30 +49,55 @@
                             <div class="col-12">
                                 <div class="card mt-5">
                                     <div class="card-body">
-                                        <h4 class="header-title">Server side</h4>
-                                        <form class="needs-validation" novalidate="">
+                                        <h4 class="header-title">Add User Employee Account</h4>
+                                        <form class="needs-validation" novalidate="" method="post">
                                             <div class="form-row">
+                                                
                                                 <div class="col-md-4 mb-3">
                                                     <label for="validationCustom01">First name</label>
-                                                    <input type="text" class="form-control" id="validationCustom01" placeholder="First name" value="Mark" required="">
+                                                    <input type="text" name="ufname" class="form-control" id="validationCustom01" placeholder="First name"   required="">
                                                     <div class="valid-feedback">
                                                         Looks good!
                                                     </div>
                                                 </div>
                                                 <div class="col-md-4 mb-3">
                                                     <label for="validationCustom02">Last name</label>
-                                                    <input type="text" class="form-control" id="validationCustom02" placeholder="Last name" value="Otto" required="">
+                                                    <input type="text" name="ulname" class="form-control" id="validationCustom02" placeholder="Last name"  required="">
                                                     <div class="valid-feedback">
                                                         Looks good!
                                                     </div>
                                                 </div>
                                                 <div class="col-md-4 mb-3">
+                                                    <label for="validationCustomUsername">User Role</label>
+                                                    <div class="input-group">
+                                                        
+                                                        <select name="urole" class="form-control" aria-label="Default select example">
+                                                            <option>Choose User Type</option>
+                                                            <option  value="2">Employee</option>
+                                                            <option  value="3">Disabled</option>
+                                                        </select>
+                                                        
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6 mb-3">
                                                     <label for="validationCustomUsername">Username</label>
                                                     <div class="input-group">
                                                         <div class="input-group-prepend">
-                                                            <span class="input-group-text" id="inputGroupPrepend">@</span>
+                                                            <span class="input-group-text" id="inputGroupPrepend"><i class="fa fa-envelope-square" aria-hidden="true"></i></span>
                                                         </div>
-                                                        <input type="text" class="form-control" id="validationCustomUsername" placeholder="Username" aria-describedby="inputGroupPrepend" required="">
+                                                        <input type="text" class="form-control" id="validationCustomUsername"  name="uname" placeholder="Username" aria-describedby="inputGroupPrepend" required="">
+                                                        <div class="invalid-feedback">
+                                                            Please choose a username.
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6 mb-3">
+                                                    <label for="validationCustomUsername">Password</label>
+                                                    <div class="input-group">
+                                                        <div class="input-group-prepend">
+                                                            <span class="input-group-text" id="inputGroupPrepend"><i class="fa fa-lock" aria-hidden="true"></i></span>
+                                                        </div>
+                                                        <input type="text" class="form-control" id="validationCustomUsername"  name="upass"  placeholder="Password" aria-describedby="inputGroupPrepend" required="">
                                                         <div class="invalid-feedback">
                                                             Please choose a username.
                                                         </div>
@@ -65,39 +106,30 @@
                                             </div>
                                             <div class="form-row">
                                                 <div class="col-md-6 mb-3">
-                                                    <label for="validationCustom03">City</label>
-                                                    <input type="text" class="form-control" id="validationCustom03" placeholder="City" required="">
+                                                    <label for="validationCustom03">Contact Number</label>
+                                                    <input type="text" class="form-control" id="validationCustom03" name="cnum" placeholder="+639" required="">
                                                     <div class="invalid-feedback">
                                                         Please provide a valid city.
                                                     </div>
                                                 </div>
-                                                <div class="col-md-3 mb-3">
-                                                    <label for="validationCustom04">State</label>
-                                                    <input type="text" class="form-control" id="validationCustom04" placeholder="State" required="">
+                                                <div class="col-md-6 mb-3">
+                                                    <label for="validationCustom03">Email</label>
+                                                    <input type="email" class="form-control" id="validationCustom03" name="email"  placeholder="@email" required="">
                                                     <div class="invalid-feedback">
-                                                        Please provide a valid state.
+                                                        Please provide a valid city.
                                                     </div>
                                                 </div>
-                                                <div class="col-md-3 mb-3">
-                                                    <label for="validationCustom05">Zip</label>
-                                                    <input type="text" class="form-control" id="validationCustom05" placeholder="Zip" required="">
-                                                    <div class="invalid-feedback">
-                                                        Please provide a valid zip.
-                                                    </div>
-                                                </div>
+                                              
                                             </div>
                                             <div class="form-group">
                                                 <div class="form-check">
-                                                    <input class="form-check-input" type="checkbox" value="" id="invalidCheck" required="">
-                                                    <label class="form-check-label" for="invalidCheck">
-                                                        Agree to terms and conditions
-                                                    </label>
+                                                   
                                                     <div class="invalid-feedback">
                                                         You must agree before submitting.
                                                     </div>
                                                 </div>
                                             </div>
-                                            <button class="btn btn-primary" type="submit">Submit form</button>
+                                            <button class="btn btn-primary" type="submit" name="add_emp">Submit form</button>
                                         </form>
                                     </div>
                                 </div>
