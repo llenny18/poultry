@@ -1,6 +1,20 @@
-<?php
+<?php 
+$global = new investClass();
+$invests = $global->fetchInvestments();
+
+$base = "feeds";
 function isPageActive($page) {
     return strpos($_SERVER['REQUEST_URI'], $page) !== false;
+
+}
+
+function hasActivePage($invests) {
+    foreach($invests as $invest) {
+        if (isPageActive($invest['typeName'] . '.php')) {
+            return true;
+        }
+    }
+    return false;
 }
 ?>
 
@@ -22,13 +36,15 @@ function isPageActive($page) {
                                 </ul>
                             </li>
                            
-                            <li class="<?= isPageActive('feeds.php') || isPageActive('misc.php') || isPageActive('payroll.php') ? 'active' : ''; ?>">
+                            <li class="<?= hasActivePage($invests) ? 'active' : ''; ?>">
                                 <a href="javascript:void(0)" aria-expanded="true"><i class="fa fa-table"></i>
-                                    <span>Cash Flow</span></a>
+                                    <span>Investments</span></a>
                                 <ul class="collapse">
-                                    <li class="<?= isPageActive('feeds.php') ? 'active' : ''; ?>"><a href="feeds.php">Feeds & Investments</a></li>
-                                    <li class="<?= isPageActive('misc.php') ? 'active' : ''; ?>"><a href="misc.php">Miscellaneous</a></li>
-                                    <li class="<?= isPageActive('payroll.php') ? 'active' : ''; ?>"><a href="payroll.php">Employee Wages</a></li>
+                                    <?php foreach($invests as $invest) { ?>
+                                        <li class="<?= isPageActive($invest['typeName'] . '.php') ? 'active' : ''; ?>">
+                                            <a href="<?= $invest['typeName'] . '.php' ?>"><?= $invest['typeName'] ?></a>
+                                        </li>
+                                    <?php } ?>
                                 </ul>
                             </li>
                             
