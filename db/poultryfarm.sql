@@ -700,6 +700,17 @@ ALTER TABLE `pigsold`
 ALTER TABLE `userinfo`
   ADD CONSTRAINT `fk_roleID` FOREIGN KEY (`roleID`) REFERENCES `userrole` (`roleID`),
   ADD CONSTRAINT `fk_userID` FOREIGN KEY (`userID`) REFERENCES `useraccounts` (`userID`);
+
+--
+-- Dumping data for table `investmenttype`
+--
+
+INSERT INTO `investmenttype` (`typeID`, `typeName`) VALUES
+(1, 'Bills'),
+(2, 'Medicines & Vitamins'),
+(3, 'E-Wages'),
+(4, 'Miscellaneous');
+
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
