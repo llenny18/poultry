@@ -20,6 +20,13 @@ interface usernameInterface {
 	public function getUsername($uid);
 }
 
+interface userList {
+	public function getUsers();
+}
+interface disabledUsers {
+	public function getUsers();
+}
+
 
 
 Class connGateway {
@@ -43,18 +50,19 @@ Class connGateway {
 Class loginClass extends connGateway implements loginInterface {
 
         public function userLogin($user_name, $user_pass) {
-			$query = "SELECT * FROM useraccounts WHERE userName = ? and userPassword = ?";
+			$query = "SELECT * FROM useraccounts WHERE u_username = ? and u_password = ?";
 
 			if ($stmt = $this->conn->prepare($query)) {
 				$stmt->bind_param("ss", $user_name, $user_pass);
                 
 				$stmt->execute();
-                
                 $results = $stmt->get_result();
                 if(($results)==true) {
                 
                     while ($row = $results->fetch_assoc()) {
-                    $_SESSION['u_id'] = $row['uID'];
+                    $_SESSION['u_id'] = $row['userID'];
+                    echo '<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script><script>let timerInterval; Swal.fire({ title: "Login Success!", html: "Welcome to Financial Management System.", timer: 2000, timerProgressBar: true, didOpen: () => { Swal.showLoading(); const timer = Swal.getPopup().querySelector("b"); timerInterval = setInterval(() => { timer.textContent = `${Swal.getTimerLeft()}`; }, 100); }, willClose: () => { clearInterval(timerInterval); } }).then((result) => { /* Read more about handling dismissals below */ if (result.dismiss === Swal.DismissReason.timer) { console.log("I was closed by the timer"); } });</script>';
+
                     redirect("index.php");
                 }
 					
@@ -68,7 +76,6 @@ Class loginClass extends connGateway implements loginInterface {
 			}
         }
 	}
-
 
 Class feedClass extends connGateway  implements feedInterface {
 
@@ -92,11 +99,14 @@ Class feedClass extends connGateway  implements feedInterface {
 Class usernameClass extends connGateway  implements usernameInterface {
 	public function getUsername($uid) {
 
-	$query = "SELECT * FROM `useraccounts` where uID = ".$uid;
+	$query = "SELECT * FROM `viewUsers` where userID = ?";
 
-	if ($stmt = $this->conn->query($query)) {
-
-	while ($row = $stmt->fetch_assoc()) {
+	if ($stmt = $this->conn->prepare($query)) {
+	$stmt->bind_param("s", $uid);
+	$stmt->execute();
+    $results = $stmt->get_result();
+                
+	while ($row = $results->fetch_assoc()) {
 		$data[] = $row;
 	}
 	$stmt->close();
@@ -107,6 +117,44 @@ Class usernameClass extends connGateway  implements usernameInterface {
     }
 
 
+	Class usersClass extends connGateway  implements userList {
+
+public function getUsers() {
+
+	$query = "SELECT * FROM `viewusers` where RoleID > 0 and RoleID != 3";
+
+	if ($stmt = $this->conn->query($query)) {
+	
+	$num_of_rows = $stmt->num_rows;
+	while ($row = $stmt->fetch_assoc()) {
+		$data[] = $row;
+	}
+	$stmt->close();
+}
+return $data;
+}
+
+}
+
+
+Class disabled_usersClass extends connGateway  implements disabledUsers {
+
+public function getUsers() {
+
+	$query = "SELECT * FROM `viewusers` where RoleID = 3";
+
+	if ($stmt = $this->conn->query($query)) {
+	
+	$num_of_rows = $stmt->num_rows;
+	while ($row = $stmt->fetch_assoc()) {
+		$data[] = $row;
+	}
+	$stmt->close();
+}
+return $data;
+}
+
+}
 
 	function redirect($location=Null){
 		if($location!=Null){

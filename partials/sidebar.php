@@ -31,6 +31,15 @@ function isPageActive($page) {
                                     <li class="<?= isPageActive('payroll.php') ? 'active' : ''; ?>"><a href="payroll.php">Employee Wages</a></li>
                                 </ul>
                             </li>
+                            
+                            <li class="<?= isPageActive('userlist.php') || isPageActive('disabledusers.php') ? 'active' : ''; ?>">
+                                <a href="javascript:void(0)" aria-expanded="true"><i class="fa fa-table"></i>
+                                    <span>Manage Users</span></a>
+                                <ul class="collapse">
+                                    <li class="<?= isPageActive('userlist.php') ? 'active' : ''; ?>"><a href="userlist.php">Users List</a></li>
+                                    <li class="<?= isPageActive('disabledusers.php') ? 'active' : ''; ?>"><a href="disabledusers.php">Disabled Accounts</a></li>
+                                </ul>
+                            </li>
                             <li class="<?= isPageActive('record.php') ? 'active' : ''; ?>"> <a href="record.php"><i class="ti-receipt"></i> <span>Records of Profits</span></a></li>
                             <li class="<?= isPageActive('logout.php') ? 'active' : ''; ?>"> <a href="logout.php"><i class="ti-back-left"></i> <span>Logout</span></a></li>
                        
