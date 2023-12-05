@@ -34,8 +34,14 @@ interface userList {
 interface disabledUsers {
 	public function getUsers();
 }
+interface userGetbyID {
+	public function getUserbyID($uid);
+}
 
 
+interface addEditbyID {
+	public function addUserbyID($fname,$lname,$cnum,$email,$rid,$uname,$pass);
+}
 
 Class connGateway {
 		public $server = "localhost";
@@ -206,6 +212,51 @@ public function getUsers() {
 return $data;
 }
 
+
+
+}
+
+Class adduserClass extends connGateway  implements addEditbyID {
+
+public function addUserbyID($fname,$lname,$cnum,$email,$rid,$uname,$pass){
+
+	
+	$query = "CALL insert_employee(?,?,?,?,?,?,?)";
+
+if ($stmt = $this->conn->prepare($query)) {
+	$stmt->bind_param('sssssss', $fname,$lname,$cnum,$email,$rid,$uname,$pass);
+	$stmt->execute();
+	$stmt->close();
+	echo "<script>alert('Employee Register Successful!'); window.location='userlist.php'</script>";
+}
+
+}
+}
+
+
+
+
+
+
+Class userGet extends connGateway  implements userGetbyID {
+
+public function getUserbyID($uid) {
+
+	$query = "SELECT * FROM `viewusers` where userID = ?";
+
+	if ($stmt = $this->conn->prepare($query)) {
+	$stmt->bind_param("s", $uid);
+	$stmt->execute();
+    $results = $stmt->get_result();
+	while ($row = $results->fetch_assoc()) {
+		$data = array("ufname"=>"{$row['u_firstname']}", "ulname"=>"{$row['u_lastname']}", "urole"=>"{$row['roleID']}", "uname"=>"{$row['u_username']}", "upass"=>"{$row['u_password']}", "cnum"=>"{$row['u_contactnum']}", "email"=>"{$row['u_email']}");
+	}
+	$stmt->close();
+
+return $data;
+}
+
+}
 }
 
 	function redirect($location=Null){
