@@ -3,7 +3,7 @@ $loginFunc = new loginClass();
 
 if(isset($_POST['uLogin'])){
     $uname = $_POST['username'];
-    $upass = $_POST['upassword'];
+    $upass = hash('sha256', $_POST['upassword']);
     $loginFunc->userLogin($uname, $upass);
 
 }

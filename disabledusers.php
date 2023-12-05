@@ -1,119 +1,106 @@
-<?php require("./controller/db.php"); if(!isset($_SESSION['u_id'])){ redirect("./login.php");}?>
+<?php require("./controller/db.php");
+$global = new disabled_usersClass();
+$feeds = $global->getUsers();
+
+$base = "feeds";
+?>
 <html class="no-js" lang="en">
 
 <head>
-<?php include("./partials/head.php"); ?>
-    
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>Laroza Poultry Farm</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="shortcut icon" type="image/png" href="./assets/images/icon/piggerylogo.png">
+    <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="assets/css/font-awesome.min.css">
+    <link rel="stylesheet" href="assets/css/themify-icons.css">
+    <link rel="stylesheet" href="assets/css/metisMenu.css">
+    <link rel="stylesheet" href="assets/css/owl.carousel.min.css">
+    <link rel="stylesheet" href="assets/css/slicknav.min.css">
+    <!-- amcharts css -->
+    <link rel="stylesheet" href="https://www.amcharts.com/lib/3/plugins/export/export.css" type="text/css" media="all" />
+    <!-- Start datatable css -->
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.18/css/dataTables.bootstrap4.min.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/responsive/2.2.3/css/responsive.bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/responsive/2.2.3/css/responsive.jqueryui.min.css">
+    <!-- style css -->
+    <link rel="stylesheet" href="assets/css/typography.css">
+    <link rel="stylesheet" href="assets/css/default-css.css">
+    <link rel="stylesheet" href="assets/css/styles.css">
+    <link rel="stylesheet" href="assets/css/responsive.css">
+    <!-- modernizr css -->
+    <script src="assets/js/vendor/modernizr-2.8.3.min.js"></script>
 </head>
 
 <body>
-    
     <!--[if lt IE 8]>
             <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
         <![endif]-->
     <!-- preloader area start -->
-   
+    <div id="preloader">
+        <div class="loader"></div>
+    </div>
     <!-- preloader area end -->
     <!-- page container area start -->
     <div class="page-container">
         <!-- sidebar menu area start -->
-    <?php include("./partials/sidebar.php"); ?>
+        <?php include("./partials/sidebar.php"); ?>
         <!-- sidebar menu area end -->
         <!-- main content area start -->
         <div class="main-content">
             <!-- header area start -->
             <?php include("./partials/header.php"); ?>
-
             <!-- header area end -->
             <!-- page title area start -->
-            
+          
             <!-- page title area end -->
             <div class="main-content-inner">
-                <!-- sales report area start -->
-                <div class="sales-report-area sales-style-two">
-                    <div class="row">
-                        <div class="col-xl-3 col-ml-3 col-md-6 mt-5">
-                            <div class="single-report">
-                                <div class="s-sale-inner pt--30 mb-3">
-                                    <div class="s-report-title d-flex justify-content-between">
-                                        <h4 class="header-title mb-0">Pigs Count</h4>
-                                        <select class="custome-select border-0 pr-3">
-                                            <option selected="">Last 30 Days</option>
-                                            <option value="0">Last 30 Days</option>
-                                        </select>
+                <div class="row">
+                    
+                    <div class="col-lg-12 mt-5">
+                        <div class="card">
+                            <div class="card-body">
+                                <h4 class="header-title">All Investments of Feeds</h4>
+                                <div class="single-table">
+                                    <div class="table-responsive">
+                                    <table id="dataTable3" class="text-center">
+                                            <thead class="text-uppercase bg-info">
+                                                <tr class="text-white">
+                                                    <th scope="col">User ID</th>
+                                                    <th scope="col">Full Name</th>
+                                                    <th scope="col">Username</th>
+                                                    <th scope="col">User Description</th>
+                                                    <th scope="col">Action</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <?php foreach($feeds as $feed){ ?>
+                                                <tr>
+                                                    <th scope="row"><?= $feed['userID']; ?></th>
+                                                    <td><?= $feed['fullName']; ?></td>
+                                                    <td><?= $feed['u_username']; ?></td>
+                                                    <td><?= $feed['roleDesc']; ?></td>
+                                                    <td><i class="ti-trash"></i></td>
+                                                </tr>
+                                                <?php } ?>
+                                                
+                                            </tbody>
+                                        </table>
                                     </div>
                                 </div>
-                                <canvas id="coin_sales4" height="100"></canvas>
-                            </div>
-                        </div>
-                        <div class="col-xl-3 col-ml-3 col-md-6 mt-5">
-                            <div class="single-report">
-                                <div class="s-sale-inner pt--30 mb-3">
-                                    <div class="s-report-title d-flex justify-content-between">
-                                        <h4 class="header-title mb-0">Estimated Profit</h4>
-                                        <select class="custome-select border-0 pr-3">
-                                            <option selected="">Last 30 Days</option>
-                                            <option value="0">Last 30 Days</option>
-                                        </select>
-                                    </div>
-                                </div>
-                                <canvas id="coin_sales5" height="100"></canvas>
-                            </div>
-                        </div>
-                        <div class="col-xl-3 col-ml-3 col-md-6  mt-5">
-                            <div class="single-report">
-                                <div class="s-sale-inner pt--30 mb-3">
-                                    <div class="s-report-title d-flex justify-content-between">
-                                        <h4 class="header-title mb-0">Feeds Status</h4>
-                                        <select class="custome-select border-0 pr-3">
-                                            <option selected="">Last 30 Days</option>
-                                            <option value="0">Last 30 Days</option>
-                                        </select>
-                                    </div>
-                                </div>
-                                <canvas id="coin_sales6" height="100"></canvas>
-                            </div>
-                        </div>
-                        <div class="col-xl-3 col-ml-3 col-md-6 mt-5">
-                            <div class="single-report">
-                                <div class="s-sale-inner pt--30 mb-3">
-                                    <div class="s-report-title d-flex justify-content-between">
-                                        <h4 class="header-title mb-0">Pig deceased</h4>
-                                        <select class="custome-select border-0 pr-3">
-                                            <option selected="">Last 30 Days</option>
-                                            <option value="0">Last 30 Days</option>
-                                        </select>
-                                    </div>
-                                </div>
-                                <canvas id="coin_sales7" height="100"></canvas>
                             </div>
                         </div>
                     </div>
+                  
                 </div>
-                <!-- sales report area end -->
-                <!-- visitor graph area start -->
-                <div class="card mt-5">
-                    <div class="card-body">
-                        <div class="d-flex justify-content-between mb-5">
-                            <h4 class="header-title mb-0">Monthly Revenue</h4>
-                            <select class="custome-select border-0 pr-3">
-                                <option selected="">Last 30 Days</option>
-                                <option value="0">Last 30 Days</option>
-                            </select>
-                        </div>
-                        <div id="visitor_graph"></div>
-                    </div>
-                </div>
-                <!-- visitor graph area end -->
-                <!-- order list area start -->
-             
-              
             </div>
         </div>
         <!-- main content area end -->
         <!-- footer area start-->
-    <?php include("./partials/footer.php"); ?>
-        
+        <?php include("./partials/footer.php"); ?>
+
         <!-- footer area end-->
     </div>
     <!-- page container area end -->
@@ -296,7 +283,8 @@
     </div>
     <!-- offset area end -->
     <!-- jquery latest version -->
-    <script src="assets/js/vendor/jquery-2.2.4.min.js"></script>
+       <!-- jquery latest version -->
+       <script src="assets/js/vendor/jquery-2.2.4.min.js"></script>
     <!-- bootstrap 4 js -->
     <script src="assets/js/popper.min.js"></script>
     <script src="assets/js/bootstrap.min.js"></script>
@@ -305,22 +293,12 @@
     <script src="assets/js/jquery.slimscroll.min.js"></script>
     <script src="assets/js/jquery.slicknav.min.js"></script>
 
-    <!-- start chart js -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.min.js"></script>
-    <!-- start highcharts js -->
-    <script src="https://code.highcharts.com/highcharts.js"></script>
-    <!-- start zingchart js -->
-    <script src="https://cdn.zingchart.com/zingchart.min.js"></script>
-    <script>
-    zingchart.MODULESDIR = "https://cdn.zingchart.com/modules/";
-    ZC.LICENSE = ["569d52cefae586f634c54f86dc99e6a9", "ee6b7db5b51705a13dc2339db3edaf6d"];
-    </script>
-    <!-- all line chart activation -->
-    <script src="assets/js/line-chart.js"></script>
-    <!-- all bar chart activation -->
-    <script src="assets/js/bar-chart.js"></script>
-    <!-- all pie chart -->
-    <script src="assets/js/pie-chart.js"></script>
+    <!-- Start datatable js -->
+    <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.js"></script>
+    <script src="https://cdn.datatables.net/1.10.18/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.18/js/dataTables.bootstrap4.min.js"></script>
+    <script src="https://cdn.datatables.net/responsive/2.2.3/js/dataTables.responsive.min.js"></script>
+    <script src="https://cdn.datatables.net/responsive/2.2.3/js/responsive.bootstrap.min.js"></script>
     <!-- others plugins -->
     <script src="assets/js/plugins.js"></script>
     <script src="assets/js/scripts.js"></script>
