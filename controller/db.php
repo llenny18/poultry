@@ -16,6 +16,14 @@ interface feedInterface {
 	public function fetchFeeds();
 }
 
+interface investInterface {
+	public function fetchInvestments();
+}
+
+interface investRecords {
+	public function fetchRecords($typeID);
+}
+
 interface usernameInterface {
 	public function getUsername($uid);
 }
@@ -187,6 +195,50 @@ Class feedClass extends connGateway  implements feedInterface {
         return $data;
     }
 
+}
+
+Class investClass extends connGateway  implements investInterface {
+
+	public function fetchInvestments() {
+
+		$query = "SELECT * FROM investmenttype";
+
+		if ($stmt = $this->conn->query($query)) {
+		
+		$num_of_rows = $stmt->num_rows;
+		while ($row = $stmt->fetch_assoc()) {
+			$data[] = $row;
+		}
+		$stmt->close();
+		}
+		return $data;
+	}
+
+}
+
+Class recordClass extends connGateway  implements investRecords {
+
+	public function fetchRecords($typeID) {
+
+		$query = "SELECT * FROM `investments` WHERE typeID = ?";
+
+		if ($stmt = $this->conn->prepare($query)) {
+			$stmt->bind_param("s", $typeID);
+			$stmt->execute();
+			$result = $stmt->get_result();
+			while ($row = $result->fetch_assoc()) {
+				$data[] = $row;
+			}
+			$stmt->close();
+			if (empty($data)) {
+				// Handle the case when no data is found
+				echo "No records found for typeID: $typeID";
+			}
+			else { 
+				return $data;
+			}
+		}	
+	}
 }
 
 Class usernameClass extends connGateway  implements usernameInterface {
@@ -725,7 +777,7 @@ return $data;
 		}else{
 			echo 'error location';
 		}
-		 
+		
 	}
 
 	
