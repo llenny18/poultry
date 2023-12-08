@@ -1,8 +1,7 @@
 <?php require("./controller/db.php");
-$global = new disabled_usersClass();
-$users = $global->getUsers();
+$global = new piglistClass();
+$list = $global->display_pigList() ?? [];
 
-$base = "users";
 ?>
 <html class="no-js" lang="en">
 
@@ -15,6 +14,7 @@ $base = "users";
     <link rel="stylesheet" href="assets/css/bootstrap.min.css">
     <link rel="stylesheet" href="assets/css/font-awesome.min.css">
     <link rel="stylesheet" href="assets/css/themify-icons.css">
+    <link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css">
     <link rel="stylesheet" href="assets/css/metisMenu.css">
     <link rel="stylesheet" href="assets/css/owl.carousel.min.css">
     <link rel="stylesheet" href="assets/css/slicknav.min.css">
@@ -62,27 +62,25 @@ $base = "users";
                     <div class="col-lg-12 mt-5">
                         <div class="card">
                             <div class="card-body">
-                                <h4 class="header-title">All Investments of Feeds</h4>
+                                <h4 class="header-title">Pigs List<a href="addpiglist.php"><i class="fa fa-user-plus m-2"></i>Add Pig List</a></h4>
                                 <div class="single-table">
                                     <div class="table-responsive">
                                     <table id="dataTable3" class="text-center">
                                             <thead class="text-uppercase bg-info">
                                                 <tr class="text-white">
-                                                    <th scope="col">User ID</th>
-                                                    <th scope="col">Full Name</th>
-                                                    <th scope="col">Username</th>
-                                                    <th scope="col">User Description</th>
+                                                    <th scope="col">House ID</th>
+                                                    <th scope="col">Pigs Count</th>
+                                                    <th scope="col">Pigs Deceased</th>
                                                     <th scope="col">Action</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                <?php foreach($users as $user){ ?>
+                                                <?php foreach($list as $listnow){ ?>
                                                 <tr>
-                                                    <th scope="row"><?= $user['userID']; ?></th>
-                                                    <td><?= $user['fullName']; ?></td>
-                                                    <td><?= $user['u_username']; ?></td>
-                                                    <td><?= $user['roleDesc']; ?></td>
-                                                    <td><a href="deleteuser.php?uid=<?= $user['userID']; ?>"><i class="fa fa-user-times m-1"></i>Delete Account</a></td>
+                                                    <th scope="row"><?= $listnow['HouseID']; ?></th>
+                                                    <td><?= $listnow['PigCount']; ?></td>
+                                                    <td><?= $listnow['PigDeceased']; ?></td>
+                                                    <td><a href="edituser.php?pid=<?= $listnow['HouseID']; ?>"><i class="fa fa-pencil-square m-1"></i>Edit</a> | <a href="disapigs.php?pid=<?= $listnow['HouseID']; ?>&processType=piglist"><i class="fa fa-user-times m-1"></i>Disable</a></td>
                                                 </tr>
                                                 <?php } ?>
                                                 

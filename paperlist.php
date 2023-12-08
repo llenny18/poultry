@@ -1,8 +1,7 @@
 <?php require("./controller/db.php");
-$global = new disabled_usersClass();
-$users = $global->getUsers();
+$global = new paperListClass();
+$papers = $global->display_paperInfo() ?? [];
 
-$base = "users";
 ?>
 <html class="no-js" lang="en">
 
@@ -15,6 +14,7 @@ $base = "users";
     <link rel="stylesheet" href="assets/css/bootstrap.min.css">
     <link rel="stylesheet" href="assets/css/font-awesome.min.css">
     <link rel="stylesheet" href="assets/css/themify-icons.css">
+    <link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css">
     <link rel="stylesheet" href="assets/css/metisMenu.css">
     <link rel="stylesheet" href="assets/css/owl.carousel.min.css">
     <link rel="stylesheet" href="assets/css/slicknav.min.css">
@@ -62,27 +62,27 @@ $base = "users";
                     <div class="col-lg-12 mt-5">
                         <div class="card">
                             <div class="card-body">
-                                <h4 class="header-title">All Investments of Feeds</h4>
+                                <h4 class="header-title">Paper List<a href="addpaper.php"><i class="fa fa-user-plus m-2"></i>Add Paper</a></h4>
                                 <div class="single-table">
                                     <div class="table-responsive">
                                     <table id="dataTable3" class="text-center">
                                             <thead class="text-uppercase bg-info">
                                                 <tr class="text-white">
-                                                    <th scope="col">User ID</th>
-                                                    <th scope="col">Full Name</th>
-                                                    <th scope="col">Username</th>
-                                                    <th scope="col">User Description</th>
+                                                    <th scope="col">Paper ID</th>
+                                                    <th scope="col">Paper Type</th>
+                                                    <th scope="col">paper Description</th>
+                                                    <th scope="col">Image (Click to Download)</th>
                                                     <th scope="col">Action</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                <?php foreach($users as $user){ ?>
+                                                <?php foreach($papers as $paper){ ?>
                                                 <tr>
-                                                    <th scope="row"><?= $user['userID']; ?></th>
-                                                    <td><?= $user['fullName']; ?></td>
-                                                    <td><?= $user['u_username']; ?></td>
-                                                    <td><?= $user['roleDesc']; ?></td>
-                                                    <td><a href="deleteuser.php?uid=<?= $user['userID']; ?>"><i class="fa fa-user-times m-1"></i>Delete Account</a></td>
+                                                    <th scope="row"><?= $paper['paperID']; ?></th>
+                                                    <td><?= $paper['p_typeName']; ?></td>
+                                                    <td><?= $paper['p_typeDesc']; ?></td>
+                                                    <td><?php echo '<img src="data:image/jpg;base64,' .  base64_encode($paper['p_image'])  . '" />' ?></td>
+                                                    <td><a href="edituser.php?uid=<?= $paper['paperID']; ?>"><i class="fa fa-pencil-square m-1"></i>Edit</a> | <a href="disapaper.php?pid=<?= $paper['paperID']; ?>"><i class="fa fa-user-times m-1"></i>Disable</a></td>
                                                 </tr>
                                                 <?php } ?>
                                                 

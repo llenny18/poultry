@@ -37,10 +37,57 @@ interface disabledUsers {
 interface userGetbyID {
 	public function getUserbyID($uid);
 }
+interface userDisable {
+	public function disableUser($uid);
+}
 
 
 interface addEditbyID {
 	public function addUserbyID($fname,$lname,$cnum,$email,$rid,$uname,$pass);
+}
+
+interface editEditbyID {
+	public function editUserbyID($uid, $fname,$lname,$cnum,$email,$rid,$uname,$pass);
+}
+
+interface deleteEditbyID {
+	public function deletebyID($uid);
+}
+interface pigList {
+	public function display_pigList();
+}
+interface pigSold {
+	public function display_pigSold();
+}
+interface pigPrice {
+	public function display_pigPrice();
+}
+interface archpigList {
+	public function displayarch_pigList();
+}
+interface archpigSold {
+	public function displayarch_pigSold();
+}
+interface archpigPrice {
+	public function displayarch_pigPrice();
+}
+interface paperInfo {
+	public function display_paperInfo();
+}
+interface archpaperInfo {
+	public function displayarch_paperInfo();
+}
+interface disapaper {
+	public function disa_paper($uid);
+}
+interface disaPiglist {
+	public function disa_Piglist($uid);
+}
+interface disaPigprice {
+	public function disa_Pigprice($uid);
+}
+interface disaPigsold {
+	public function disa_Pigsold($uid);
 }
 
 Class connGateway {
@@ -179,17 +226,21 @@ Class usernameClass extends connGateway  implements usernameInterface {
 
 public function getUsers() {
 
-	$query = "SELECT * FROM `viewusers` where RoleID > 0 and RoleID != 3";
+	$query = "SELECT * FROM `viewusers` where CreatedAt is not null and DeletedAt is null";
 
 	if ($stmt = $this->conn->query($query)) {
 	
 	$num_of_rows = $stmt->num_rows;
+	if($num_of_rows >0){
 	while ($row = $stmt->fetch_assoc()) {
 		$data[] = $row;
 	}
 	$stmt->close();
-}
 return $data;
+
+}
+
+}
 }
 
 }
@@ -199,7 +250,7 @@ Class disabled_usersClass extends connGateway  implements disabledUsers {
 
 public function getUsers() {
 
-	$query = "SELECT * FROM `viewusers` where RoleID = 3";
+	$query = "SELECT * FROM `viewusers` where DeletedAt is not null";
 
 	if ($stmt = $this->conn->query($query)) {
 	
@@ -227,7 +278,57 @@ if ($stmt = $this->conn->prepare($query)) {
 	$stmt->bind_param('sssssss', $fname,$lname,$cnum,$email,$rid,$uname,$pass);
 	$stmt->execute();
 	$stmt->close();
-	echo "<script>alert('Employee Register Successful!'); window.location='userlist.php'</script>";
+	echo "<script>alert('Account Register Successful!'); window.location='userlist.php'</script>";
+}
+
+}
+}
+Class deleteuserClass extends connGateway  implements deleteEditbyID {
+
+public function deletebyID($uid){
+
+	
+	$query = "CALL delete_employee(?)";
+
+if ($stmt = $this->conn->prepare($query)) {
+	$stmt->bind_param('s', $uid);
+	$stmt->execute();
+	$stmt->close();
+	echo "<script>alert('Account Deleted Successful!'); window.location='disabledusers.php'</script>";
+}
+
+}
+}
+
+
+Class edituserClass extends connGateway  implements editEditbyID {
+
+public function editUserbyID($uid, $fname,$lname,$cnum,$email,$rid,$uname,$pass){
+
+	
+	$query = "CALL update_employee(?,?,?,?,?,?,?,?)";
+
+if ($stmt = $this->conn->prepare($query)) {
+	$stmt->bind_param('ssssssss',$uid, $fname,$lname,$cnum,$email,$rid,$uname,$pass);
+	$stmt->execute();
+	$stmt->close();
+	echo "<script>alert('Account Updated Successful!'); window.location='userlist.php'</script>";
+}
+
+}
+}
+Class disableUserClass extends connGateway  implements userDisable {
+
+public function disableUser($uid){
+
+	
+	$query = "UPDATE `useraccounts` SET `DeletedAt` = curdate() WHERE `useraccounts`.`userID` = ?";
+
+if ($stmt = $this->conn->prepare($query)) {
+	$stmt->bind_param('s', $uid);
+	$stmt->execute();
+	$stmt->close();
+	echo "<script>alert('Account Disabled Successful!'); window.location='userlist.php'</script>";
 }
 
 }
@@ -235,8 +336,75 @@ if ($stmt = $this->conn->prepare($query)) {
 
 
 
+Class disablePaperClass extends connGateway  implements disapaper {
+
+public function disa_paper($uid){
+
+	
+	$query = "UPDATE `paperrecords` SET `DeletedAt` = curdate() WHERE `paperrecords`.`paperID` = ?";
+
+if ($stmt = $this->conn->prepare($query)) {
+	$stmt->bind_param('s', $uid);
+	$stmt->execute();
+	$stmt->close();
+	echo "<script>alert('Paper Disabled Successful!'); window.location='paperlist.php'</script>";
+}
+
+}
+}
 
 
+Class disablePLClass extends connGateway  implements disaPiglist {
+
+public function disa_Piglist($uid){
+
+	
+	$query = "UPDATE `piglist` SET `DeletedAt` = curdate() WHERE `piglist`.`HouseID` = ?";
+
+if ($stmt = $this->conn->prepare($query)) {
+	$stmt->bind_param('s', $uid);
+	$stmt->execute();
+	$stmt->close();
+	echo "<script>alert('Pigs list Disabled Successful!'); window.location='piglist.php'</script>";
+}
+
+}
+}
+
+Class disablePPClass extends connGateway  implements disaPigprice {
+
+public function disa_Pigprice($uid){
+
+	
+	$query = "UPDATE `pigprice` SET `DeletedAt` = curdate() WHERE `pigprice`.`priceID` = ?";
+
+if ($stmt = $this->conn->prepare($query)) {
+	$stmt->bind_param('s', $uid);
+	$stmt->execute();
+	$stmt->close();
+	echo "<script>alert('Pigs Price Disabled Successful!'); window.location='pigprice.php'</script>";
+}
+
+}
+}
+
+
+Class disablePSClass extends connGateway  implements disaPigsold {
+
+public function disa_Pigsold($uid){
+
+	
+	$query = "UPDATE `pigsold` SET `DeletedAt` = curdate() WHERE `pigsold`.`soldID` = ?";
+
+if ($stmt = $this->conn->prepare($query)) {
+	$stmt->bind_param('s', $uid);
+	$stmt->execute();
+	$stmt->close();
+	echo "<script>alert('Pigs Sold Disabled Successful!'); window.location='pigsold.php'</script>";
+}
+
+}
+}
 
 Class userGet extends connGateway  implements userGetbyID {
 
@@ -255,6 +423,166 @@ public function getUserbyID($uid) {
 
 return $data;
 }
+
+}
+}
+
+
+Class piglistClass extends connGateway  implements pigList {
+
+public function display_pigList(){
+
+	$query = "SELECT * FROM `piglist`  where CreatedAt is not null and DeletedAt is null";
+
+	if ($stmt = $this->conn->query($query)) {
+	
+	$num_of_rows = $stmt->num_rows;
+	while ($row = $stmt->fetch_assoc()) {
+		$data[] = $row;
+	}
+	$stmt->close();
+}
+return $data;
+}
+
+
+}
+
+Class pigsoldClass extends connGateway  implements pigSold {
+
+public function display_pigSold(){
+
+	$query = "SELECT * FROM `pigsprofit` where CreatedAt is not null and DeletedAt is null";
+
+	if ($stmt = $this->conn->query($query)) {
+	
+	$num_of_rows = $stmt->num_rows;
+	while ($row = $stmt->fetch_assoc()) {
+		$data[] = $row;
+	}
+	$stmt->close();
+}
+return $data;
+
+}
+}
+
+Class pigpriceClass extends connGateway  implements pigPrice {
+
+public function display_pigPrice(){
+
+	$query = "SELECT * FROM `pigprice` where CreatedAt is not null and DeletedAt is null";
+
+	if ($stmt = $this->conn->query($query)) {
+	
+	$num_of_rows = $stmt->num_rows;
+	while ($row = $stmt->fetch_assoc()) {
+		$data[] = $row;
+	}
+	$stmt->close();
+}
+return $data;
+
+
+}
+}
+
+
+Class archpiglistClass extends connGateway  implements archpigList {
+
+public function displayarch_pigList(){
+
+	$query = "SELECT * FROM `piglist` where DeletedAt is not null";
+
+	if ($stmt = $this->conn->query($query)) {
+	
+	$num_of_rows = $stmt->num_rows;
+	while ($row = $stmt->fetch_assoc()) {
+		$data[] = $row;
+	}
+	$stmt->close();
+}
+return $data;
+}
+
+
+}
+
+Class archpigsoldClass extends connGateway  implements archpigSold {
+
+public function displayarch_pigSold(){
+
+	$query = "SELECT * FROM `pigsprofit` where DeletedAt is not null";
+
+	if ($stmt = $this->conn->query($query)) {
+	
+	$num_of_rows = $stmt->num_rows;
+	while ($row = $stmt->fetch_assoc()) {
+		$data[] = $row;
+	}
+	$stmt->close();
+}
+return $data;
+
+}
+}
+
+Class archpigpriceClass extends connGateway  implements archpigPrice {
+
+public function displayarch_pigPrice(){
+
+	$query = "SELECT * FROM `pigprice` where DeletedAt is not null";
+
+	if ($stmt = $this->conn->query($query)) {
+	
+	$num_of_rows = $stmt->num_rows;
+	while ($row = $stmt->fetch_assoc()) {
+		$data[] = $row;
+	}
+	$stmt->close();
+}
+return $data;
+
+
+}
+}
+
+Class paperListClass extends connGateway  implements paperInfo {
+
+public function display_paperInfo(){
+
+	$query = "SELECT * FROM `paperinfo` where CreatedAt is not null and DeletedAt is null";
+
+	if ($stmt = $this->conn->query($query)) {
+	
+	$num_of_rows = $stmt->num_rows;
+	while ($row = $stmt->fetch_assoc()) {
+		$data[] = $row;
+	}
+	$stmt->close();
+}
+return $data;
+
+
+}
+}
+
+Class archpaperListClass extends connGateway  implements archpaperInfo {
+
+public function displayarch_paperInfo(){
+
+	$query = "SELECT * FROM `paperinfo` where DeletedAt is not null";
+
+	if ($stmt = $this->conn->query($query)) {
+	
+	$num_of_rows = $stmt->num_rows;
+	while ($row = $stmt->fetch_assoc()) {
+		$data[] = $row;
+	}
+	$stmt->close();
+}
+return $data;
+
 
 }
 }

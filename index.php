@@ -8,13 +8,6 @@
 
 <body>
     
-    <!--[if lt IE 8]>
-            <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
-        <![endif]-->
-    <!-- preloader area start -->
-   
-    <!-- preloader area end -->
-    <!-- page container area start -->
     <div class="page-container">
         <!-- sidebar menu area start -->
     <?php include("./partials/sidebar.php"); ?>
@@ -37,10 +30,7 @@
                                 <div class="s-sale-inner pt--30 mb-3">
                                     <div class="s-report-title d-flex justify-content-between">
                                         <h4 class="header-title mb-0">Pigs Count</h4>
-                                        <select class="custome-select border-0 pr-3">
-                                            <option selected="">Last 30 Days</option>
-                                            <option value="0">Last 30 Days</option>
-                                        </select>
+                                        Per Month - This Year
                                     </div>
                                 </div>
                                 <canvas id="coin_sales4" height="100"></canvas>
@@ -51,10 +41,7 @@
                                 <div class="s-sale-inner pt--30 mb-3">
                                     <div class="s-report-title d-flex justify-content-between">
                                         <h4 class="header-title mb-0">Estimated Profit</h4>
-                                        <select class="custome-select border-0 pr-3">
-                                            <option selected="">Last 30 Days</option>
-                                            <option value="0">Last 30 Days</option>
-                                        </select>
+                                        Per Month - This Year
                                     </div>
                                 </div>
                                 <canvas id="coin_sales5" height="100"></canvas>
@@ -64,11 +51,8 @@
                             <div class="single-report">
                                 <div class="s-sale-inner pt--30 mb-3">
                                     <div class="s-report-title d-flex justify-content-between">
-                                        <h4 class="header-title mb-0">Feeds Status</h4>
-                                        <select class="custome-select border-0 pr-3">
-                                            <option selected="">Last 30 Days</option>
-                                            <option value="0">Last 30 Days</option>
-                                        </select>
+                                        <h4 class="header-title mb-0">Expenses</h4>
+                                        Per Month - This Year
                                     </div>
                                 </div>
                                 <canvas id="coin_sales6" height="100"></canvas>
@@ -79,10 +63,7 @@
                                 <div class="s-sale-inner pt--30 mb-3">
                                     <div class="s-report-title d-flex justify-content-between">
                                         <h4 class="header-title mb-0">Pig deceased</h4>
-                                        <select class="custome-select border-0 pr-3">
-                                            <option selected="">Last 30 Days</option>
-                                            <option value="0">Last 30 Days</option>
-                                        </select>
+                                        Per Month - This Year
                                     </div>
                                 </div>
                                 <canvas id="coin_sales7" height="100"></canvas>
@@ -304,7 +285,6 @@
     <script src="assets/js/metisMenu.min.js"></script>
     <script src="assets/js/jquery.slimscroll.min.js"></script>
     <script src="assets/js/jquery.slicknav.min.js"></script>
-
     <!-- start chart js -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.min.js"></script>
     <!-- start highcharts js -->
@@ -324,6 +304,268 @@
     <!-- others plugins -->
     <script src="assets/js/plugins.js"></script>
     <script src="assets/js/scripts.js"></script>
+
+    <script>
+/*--------------  coin_sales4 bar chart start ------------*/
+if ($('#coin_sales4').length) {
+    var ctx = document.getElementById("coin_sales4").getContext('2d');
+    var chart = new Chart(ctx, {
+        // The type of chart we want to create
+        type: 'bar',
+        // The data for our dataset
+        data: {
+            labels: ["01", "02", "03", "04", "05", "06", "07", "08", "09", "10"],
+            datasets: [{
+                label: "Sales",
+                data: [250, 320, 380, 330, 420, 250, 180, 250, 100, 300],
+                backgroundColor: [
+                    '#39A839',
+                    '#51F051',
+                    '#39A839',
+                    '#51F051',
+                    '#39A839',
+                    '#51F051',
+                    '#39A839',
+                    '#51F051',
+                    '#51F051',
+                    '#39A839'
+                ]
+            }]
+        },
+        // Configuration options go here
+        options: {
+            legend: {
+                display: false
+            },
+            animation: {
+                easing: "easeInOutBack"
+            },
+            scales: {
+                yAxes: [{
+                    display: !1,
+                    ticks: {
+                        fontColor: "#cccccc",
+                        beginAtZero: !0,
+                        padding: 0
+                    },
+                    gridLines: {
+                        zeroLineColor: "transparent"
+                    }
+                }],
+                xAxes: [{
+                    display: !1,
+                    gridLines: {
+                        zeroLineColor: "transparent",
+                        display: !1
+                    },
+                    ticks: {
+                        beginAtZero: !0,
+                        padding: 0,
+                        fontColor: "#cccccc"
+                    }
+                }]
+            }
+        }
+    });
+}
+
+/*--------------  coin_sales4 bar chart End ------------*/
+
+/*--------------  coin_sales5 bar chart start ------------*/
+if ($('#coin_sales5').length) {
+    var ctx = document.getElementById("coin_sales5").getContext('2d');
+    var chart = new Chart(ctx, {
+        // The type of chart we want to create
+        type: 'bar',
+        // The data for our dataset
+        data: {
+            labels: ["01", "02", "03", "04", "05", "06", "07", "08", "09", "10"],
+            datasets: [{
+                label: "Sales",
+                data: [250, 220, 380, 130, 420, 230, 180, 220, 150, 300],
+                backgroundColor: [
+                    '#39A839',
+                    '#51F051',
+                    '#39A839',
+                    '#51F051',
+                    '#39A839',
+                    '#51F051',
+                    '#39A839',
+                    '#51F051',
+                    '#51F051',
+                    '#39A839'
+                ]
+            }]
+        },
+        // Configuration options go here
+        options: {
+            legend: {
+                display: false
+            },
+            animation: {
+                easing: "easeInOutBack"
+            },
+            scales: {
+                yAxes: [{
+                    display: !1,
+                    ticks: {
+                        fontColor: "#cccccc",
+                        beginAtZero: !0,
+                        padding: 0
+                    },
+                    gridLines: {
+                        zeroLineColor: "transparent"
+                    }
+                }],
+                xAxes: [{
+                    display: !1,
+                    gridLines: {
+                        zeroLineColor: "transparent",
+                        display: !1
+                    },
+                    ticks: {
+                        beginAtZero: !0,
+                        padding: 0,
+                        fontColor: "#cccccc"
+                    }
+                }]
+            }
+        }
+    });
+}
+
+/*--------------  coin_sales5 bar chart End ------------*/
+
+/*--------------  coin_sales6 bar chart start ------------*/
+if ($('#coin_sales6').length) {
+    var ctx = document.getElementById("coin_sales6").getContext('2d');
+    var chart = new Chart(ctx, {
+        // The type of chart we want to create
+        type: 'bar',
+        // The data for our dataset
+        data: {
+            labels: ["01", "02", "03", "04", "05", "06", "07", "08", "09", "10"],
+            datasets: [{
+                label: "Sales",
+                data: [250, 320, 380, 120, 420, 530, 180, 250, 80, 250],
+                backgroundColor: [
+                    '#39A839',
+                    '#51F051',
+                    '#39A839',
+                    '#51F051',
+                    '#39A839',
+                    '#51F051',
+                    '#39A839',
+                    '#51F051',
+                    '#51F051',
+                    '#39A839'
+                ]
+            }]
+        },
+        // Configuration options go here
+        options: {
+            legend: {
+                display: false
+            },
+            animation: {
+                easing: "easeInOutBack"
+            },
+            scales: {
+                yAxes: [{
+                    display: !1,
+                    ticks: {
+                        fontColor: "#cccccc",
+                        beginAtZero: !0,
+                        padding: 0
+                    },
+                    gridLines: {
+                        zeroLineColor: "transparent"
+                    }
+                }],
+                xAxes: [{
+                    display: !1,
+                    gridLines: {
+                        zeroLineColor: "transparent",
+                        display: !1
+                    },
+                    ticks: {
+                        beginAtZero: !0,
+                        padding: 0,
+                        fontColor: "#cccccc"
+                    }
+                }]
+            }
+        }
+    });
+}
+
+/*--------------  coin_sales6 bar chart End ------------*/
+
+/*--------------  coin_sales7 bar chart start ------------*/
+if ($('#coin_sales7').length) {
+    var ctx = document.getElementById("coin_sales7").getContext('2d');
+    var chart = new Chart(ctx, {
+        // The type of chart we want to create
+        type: 'bar',
+        // The data for our dataset
+        data: {
+            labels: ["01", "02", "03", "04", "05", "06", "07", "08", "09", "10"],
+            datasets: [{
+                label: "Sales",
+                data: [100, 300, 350, 350, 420, 150, 300, 250, 250, 300],
+                backgroundColor: [
+                    '#39A839',
+                    '#51F051',
+                    '#39A839',
+                    '#51F051',
+                    '#39A839',
+                    '#51F051',
+                    '#39A839',
+                    '#51F051',
+                    '#51F051',
+                    '#39A839'
+                ]
+            }]
+        },
+        // Configuration options go here
+        options: {
+            legend: {
+                display: false
+            },
+            animation: {
+                easing: "easeInOutBack"
+            },
+            scales: {
+                yAxes: [{
+                    display: !1,
+                    ticks: {
+                        fontColor: "#cccccc",
+                        beginAtZero: !0,
+                        padding: 0
+                    },
+                    gridLines: {
+                        zeroLineColor: "transparent"
+                    }
+                }],
+                xAxes: [{
+                    display: !1,
+                    gridLines: {
+                        zeroLineColor: "transparent",
+                        display: !1
+                    },
+                    ticks: {
+                        beginAtZero: !0,
+                        padding: 0,
+                        fontColor: "#cccccc"
+                    }
+                }]
+            }
+        }
+    });
+}
+
+/*--------------  coin_sales7 bar chart End ------------*/
+    </script>
 </body>
 
 </html>
