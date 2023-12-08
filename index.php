@@ -1,4 +1,12 @@
-<?php require("./controller/db.php"); if(!isset($_SESSION['u_id'])){ redirect("./login.php");}?>
+<?php require("./controller/db.php"); if(!isset($_SESSION['u_id'])){ redirect("./login.php");}
+
+$pigsChart  = new getPigCounts();
+$pigsChartDeceased  = new getPigDeceased();
+$pigsChartExpenses = new getExpenses();
+$pigsChartEstimate  = new getEstimatedProfit();
+
+echo "<script>console.log(".json_encode($pigsChart->getList()).")</script>"
+?>
 <html class="no-js" lang="en">
 
 <head>
@@ -30,7 +38,7 @@
                                 <div class="s-sale-inner pt--30 mb-3">
                                     <div class="s-report-title d-flex justify-content-between">
                                         <h4 class="header-title mb-0">Pigs Count</h4>
-                                        Per Month - This Year
+                                        Per Month - This Year 
                                     </div>
                                 </div>
                                 <canvas id="coin_sales4" height="100"></canvas>
@@ -314,11 +322,13 @@ if ($('#coin_sales4').length) {
         type: 'bar',
         // The data for our dataset
         data: {
-            labels: ["01", "02", "03", "04", "05", "06", "07", "08", "09", "10"],
+            labels: ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"],
             datasets: [{
-                label: "Sales",
-                data: [250, 320, 380, 330, 420, 250, 180, 250, 100, 300],
+                label: "Pigs",
+                data: <?php echo json_encode($pigsChart->getList()) ?>,
                 backgroundColor: [
+                    '#39A839',
+                    '#51F051',
                     '#39A839',
                     '#51F051',
                     '#39A839',
@@ -379,11 +389,13 @@ if ($('#coin_sales5').length) {
         type: 'bar',
         // The data for our dataset
         data: {
-            labels: ["01", "02", "03", "04", "05", "06", "07", "08", "09", "10"],
+            labels: ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"],
             datasets: [{
-                label: "Sales",
-                data: [250, 220, 380, 130, 420, 230, 180, 220, 150, 300],
+                label: "Pigs",
+                data: <?php echo json_encode($pigsChartEstimate->getList()) ?>,
                 backgroundColor: [
+                    '#39A839',
+                    '#51F051',
                     '#39A839',
                     '#51F051',
                     '#39A839',
@@ -444,11 +456,13 @@ if ($('#coin_sales6').length) {
         type: 'bar',
         // The data for our dataset
         data: {
-            labels: ["01", "02", "03", "04", "05", "06", "07", "08", "09", "10"],
+            labels: ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"],
             datasets: [{
-                label: "Sales",
-                data: [250, 320, 380, 120, 420, 530, 180, 250, 80, 250],
+                label: "Pigs",
+                data: <?php echo json_encode($pigsChartExpenses->getList()) ?>,
                 backgroundColor: [
+                    '#39A839',
+                    '#51F051',
                     '#39A839',
                     '#51F051',
                     '#39A839',
@@ -509,11 +523,13 @@ if ($('#coin_sales7').length) {
         type: 'bar',
         // The data for our dataset
         data: {
-            labels: ["01", "02", "03", "04", "05", "06", "07", "08", "09", "10"],
+            labels: ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"],
             datasets: [{
-                label: "Sales",
-                data: [100, 300, 350, 350, 420, 150, 300, 250, 250, 300],
+                label: "Pigs",
+                data: <?php echo json_encode($pigsChartDeceased->getList()) ?>,
                 backgroundColor: [
+                    '#39A839',
+                    '#51F051',
                     '#39A839',
                     '#51F051',
                     '#39A839',

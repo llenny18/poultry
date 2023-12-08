@@ -33,7 +33,6 @@ interface userDisable {
 	public function disableUser($uid);
 }
 
-
 interface addEditbyID {
 	public function addUserbyID($fname,$lname,$cnum,$email,$rid,$uname,$pass);
 }
@@ -81,6 +80,23 @@ interface disaPigprice {
 interface disaPigsold {
 	public function disa_Pigsold($uid);
 }
+
+interface countOFPigs {
+	public function getList();
+}
+
+interface countOFDeceased {
+	public function getList();
+}
+
+interface expensesList {
+	public function getList();
+}
+
+interface EstimatedProfit {
+	public function getList();
+}
+
 
 Class connGateway {
 		public $server = "localhost";
@@ -194,6 +210,81 @@ return $data;
 }
 
 
+
+Class getPigCounts extends connGateway  implements countOFPigs {
+
+public function getList() {
+
+	$query = "SELECT * FROM `pigsold_permonth`";
+
+	if ($stmt = $this->conn->query($query)) {
+	
+	while ($row = $stmt->fetch_assoc()) {
+		$data = [$row["Jan"],$row["Feb"],$row["March"],$row["April"],$row["May"],$row["June"],$row["July"],$row["Aug"],$row["Sept"],$row["Oct"],$row["Nov"],$row["Decs"] ];
+	}
+	$stmt->close();
+}
+return $data;
+}
+
+}
+
+
+Class getPigDeceased extends connGateway  implements countOFDeceased {
+
+public function getList() {
+
+	$query = "SELECT * FROM `pigdeceased_permonth`";
+
+	if ($stmt = $this->conn->query($query)) {
+	
+	while ($row = $stmt->fetch_assoc()) {
+		$data = [$row["Jan"],$row["Feb"],$row["March"],$row["April"],$row["May"],$row["June"],$row["July"],$row["Aug"],$row["Sept"],$row["Oct"],$row["Nov"],$row["Decs"] ];
+	}
+	$stmt->close();
+}
+return $data;
+}
+
+}
+
+Class getEstimatedProfit extends connGateway  implements EstimatedProfit {
+
+public function getList() {
+
+	$query = "SELECT * FROM `estimatedprofit_permonth`";
+
+	if ($stmt = $this->conn->query($query)) {
+	
+	while ($row = $stmt->fetch_assoc()) {
+		$data = [$row["Jan"],$row["Feb"],$row["March"],$row["April"],$row["May"],$row["June"],$row["July"],$row["Aug"],$row["Sept"],$row["Oct"],$row["Nov"],$row["Decs"] ];
+	}
+	$stmt->close();
+}
+return $data;
+}
+
+}
+
+Class getExpenses extends connGateway  implements expensesList {
+
+public function getList() {
+
+	$query = "SELECT * FROM `expenses_permonth`";
+
+	if ($stmt = $this->conn->query($query)) {
+	
+	while ($row = $stmt->fetch_assoc()) {
+		$data = [$row["Jan"],$row["Feb"],$row["March"],$row["April"],$row["May"],$row["June"],$row["July"],$row["Aug"],$row["Sept"],$row["Oct"],$row["Nov"],$row["Decs"] ];
+	}
+	$stmt->close();
+}
+return $data;
+}
+
+}
+
+
 Class disabled_usersClass extends connGateway  implements disabledUsers {
 
 public function getUsers() {
@@ -210,8 +301,6 @@ public function getUsers() {
 }
 return $data;
 }
-
-
 
 }
 
