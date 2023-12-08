@@ -1,4 +1,8 @@
-<?php require("./controller/db.php") ?>
+<?php require("./controller/db.php");
+$global = new usersClass();
+$user = $global->getUsers() ?? [];
+
+?>
 <html class="no-js" lang="en">
 
 <head>
@@ -10,12 +14,18 @@
     <link rel="stylesheet" href="assets/css/bootstrap.min.css">
     <link rel="stylesheet" href="assets/css/font-awesome.min.css">
     <link rel="stylesheet" href="assets/css/themify-icons.css">
+    <link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css">
     <link rel="stylesheet" href="assets/css/metisMenu.css">
     <link rel="stylesheet" href="assets/css/owl.carousel.min.css">
     <link rel="stylesheet" href="assets/css/slicknav.min.css">
-    <!-- amchart css -->
+    <!-- amcharts css -->
     <link rel="stylesheet" href="https://www.amcharts.com/lib/3/plugins/export/export.css" type="text/css" media="all" />
-    <!-- others css -->
+    <!-- Start datatable css -->
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.18/css/dataTables.bootstrap4.min.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/responsive/2.2.3/css/responsive.bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/responsive/2.2.3/css/responsive.jqueryui.min.css">
+    <!-- style css -->
     <link rel="stylesheet" href="assets/css/typography.css">
     <link rel="stylesheet" href="assets/css/default-css.css">
     <link rel="stylesheet" href="assets/css/styles.css">
@@ -42,58 +52,49 @@
         <div class="main-content">
             <!-- header area start -->
             <?php include("./partials/header.php"); ?>
-
             <!-- header area end -->
             <!-- page title area start -->
-           
+          
             <!-- page title area end -->
             <div class="main-content-inner">
-                <!-- bar chart start -->
                 <div class="row">
-                    <div class="col-lg-6 mt-5">
+                    
+                    <div class="col-lg-12 mt-5">
                         <div class="card">
                             <div class="card-body">
-                                <div id="ambarchart1"></div>
+                                <h4 class="header-title">All Investments of Feeds<a href="adduser.php"><i class="fa fa-user-plus m-2"></i>Add User</a></h4>
+                                <div class="single-table">
+                                    <div class="table-responsive">
+                                    <table id="dataTable3" class="text-center">
+                                            <thead class="text-uppercase bg-info">
+                                                <tr class="text-white">
+                                                    <th scope="col">User ID</th>
+                                                    <th scope="col">Full Name</th>
+                                                    <th scope="col">Username</th>
+                                                    <th scope="col">User Description</th>
+                                                    <th scope="col">Action</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <?php foreach($user as $unow){ ?>
+                                                <tr>
+                                                    <th scope="row"><?= $unow['userID']; ?></th>
+                                                    <td><?= $unow['fullName']; ?></td>
+                                                    <td><?= $unow['u_username']; ?></td>
+                                                    <td><?= $unow['roleDesc']; ?></td>
+                                                    <td><a href="edituser.php?uid=<?= $unow['userID']; ?>"><i class="fa fa-pencil-square m-1"></i>Edit</a> | <a href="disauser.php?uid=<?= $unow['userID']; ?>"><i class="fa fa-user-times m-1"></i>Disable</a></td>
+                                                </tr>
+                                                <?php } ?>
+                                                
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
-                    <div class="col-lg-6 mt-5">
-                        <div class="card">
-                            <div class="card-body">
-                                <div id="ambarchart2"></div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-6 mt-5">
-                        <div class="card">
-                            <div class="card-body">
-                                <div id="ambarchart3"></div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-6 mt-5">
-                        <div class="card">
-                            <div class="card-body">
-                                <div id="ambarchart4"></div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-6 mt-5">
-                        <div class="card">
-                            <div class="card-body">
-                                <div id="ambarchart5"></div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-6 mt-5">
-                        <div class="card">
-                            <div class="card-body">
-                                <div id="ambarchart6"></div>
-                            </div>
-                        </div>
-                    </div>
+                  
                 </div>
-                <!-- bar chart end -->
             </div>
         </div>
         <!-- main content area end -->
@@ -282,7 +283,8 @@
     </div>
     <!-- offset area end -->
     <!-- jquery latest version -->
-    <script src="assets/js/vendor/jquery-2.2.4.min.js"></script>
+       <!-- jquery latest version -->
+       <script src="assets/js/vendor/jquery-2.2.4.min.js"></script>
     <!-- bootstrap 4 js -->
     <script src="assets/js/popper.min.js"></script>
     <script src="assets/js/bootstrap.min.js"></script>
@@ -290,27 +292,13 @@
     <script src="assets/js/metisMenu.min.js"></script>
     <script src="assets/js/jquery.slimscroll.min.js"></script>
     <script src="assets/js/jquery.slicknav.min.js"></script>
-    <!-- start chart js -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.min.js"></script>
-    <!-- start highcharts js -->
-    <script src="https://code.highcharts.com/highcharts.js"></script>
-    <!-- start zingchart js -->
-    <script src="https://cdn.zingchart.com/zingchart.min.js"></script>
-    <script>
-    zingchart.MODULESDIR = "https://cdn.zingchart.com/modules/";
-    ZC.LICENSE = ["569d52cefae586f634c54f86dc99e6a9", "ee6b7db5b51705a13dc2339db3edaf6d"];
-    </script>
-    <!-- start amchart js -->
-    <script src="https://www.amcharts.com/lib/3/amcharts.js"></script>
-    <script src="https://www.amcharts.com/lib/3/serial.js"></script>
-    <script src="https://www.amcharts.com/lib/3/plugins/export/export.min.js"></script>
-    <script src="https://www.amcharts.com/lib/3/themes/light.js"></script>
-    <!-- all line chart activation -->
-    <script src="assets/js/line-chart.js"></script>
-    <!-- all bar chart activation -->
-    <script src="assets/js/bar-chart.js"></script>
-    <!-- all pie chart -->
-    <script src="assets/js/pie-chart.js"></script>
+
+    <!-- Start datatable js -->
+    <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.js"></script>
+    <script src="https://cdn.datatables.net/1.10.18/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.18/js/dataTables.bootstrap4.min.js"></script>
+    <script src="https://cdn.datatables.net/responsive/2.2.3/js/dataTables.responsive.min.js"></script>
+    <script src="https://cdn.datatables.net/responsive/2.2.3/js/responsive.bootstrap.min.js"></script>
     <!-- others plugins -->
     <script src="assets/js/plugins.js"></script>
     <script src="assets/js/scripts.js"></script>
