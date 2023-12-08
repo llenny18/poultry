@@ -430,37 +430,7 @@ if ($('#mvaluechart4').length) {
 /*--------------  market status chart END ------------*/
 
 /*--------------  visitor graph line chart start ------------*/
-if ($('#visitor_graph').length) {
 
-    Highcharts.chart('visitor_graph', {
-        chart: {
-            type: 'areaspline'
-        },
-        title: false,
-        yAxis: {
-            title: false,
-            gridLineColor: '#fbf7f7',
-            gridLineWidth: 1
-        },
-        xAxis: {
-            gridLineColor: '#fbf7f7',
-            gridLineWidth: 1
-        },
-        series: [{
-                name: 'USD',
-                data: [400, 470, 520, 500, 420, 350, 320, 400, 550, 600, 500, 420, 400],
-                fillColor: 'rgba(57, 249, 79, 0.5)',
-                lineColor: 'transparent'
-            },
-            {
-                name: 'BTC',
-                data: [450, 520, 550, 400, 450, 500, 400, 450, 500, 450, 400, 500, 450],
-                fillColor: 'rgba(0, 186, 68, 0.5)',
-                lineColor: 'transparent'
-            }
-        ]
-    });
-}
 /*--------------  END visitor graph line chart start ------------*/
 
 /*-------------- 1 line chart amchart start ------------*/

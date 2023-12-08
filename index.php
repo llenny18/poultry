@@ -5,7 +5,7 @@ $pigsChartDeceased  = new getPigDeceased();
 $pigsChartExpenses = new getExpenses();
 $pigsChartEstimate  = new getEstimatedProfit();
 
-echo "<script>console.log(".json_encode($pigsChart->getList()).")</script>"
+echo "<script>console.log(".json_encode($pigsChartEstimate->getList1()).")</script>"
 ?>
 <html class="no-js" lang="en">
 
@@ -581,6 +581,39 @@ if ($('#coin_sales7').length) {
 }
 
 /*--------------  coin_sales7 bar chart End ------------*/
+
+
+if ($('#visitor_graph').length) {
+
+Highcharts.chart('visitor_graph', {
+    chart: {
+        type: 'areaspline'
+    },
+    title: false,
+    yAxis: {
+        title: false,
+        gridLineColor: '#fbf7f7',
+        gridLineWidth: 1
+    },
+    xAxis: {
+        gridLineColor: '#fbf7f7',
+        gridLineWidth: 1
+    },
+    series: [{
+            name: 'Estimated PRofit',
+            data: <?php echo json_encode($pigsChartEstimate->getList2()) ?>,
+            fillColor: 'rgba(57, 249, 79, 0.5)',
+            lineColor: 'transparent'
+        },
+        {
+            name: 'Total Real Profit',
+            data: <?php echo json_encode($pigsChartEstimate->getList1()) ?>,
+            fillColor: 'rgba(0, 186, 68, 0.5)',
+            lineColor: 'transparent'
+        }
+    ]
+});
+}
     </script>
 </body>
 

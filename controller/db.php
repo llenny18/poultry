@@ -250,14 +250,40 @@ return $data;
 
 Class getEstimatedProfit extends connGateway  implements EstimatedProfit {
 
-public function getList() {
+	public function getList() {
+
+$query = "SELECT * FROM `estimatedprofit_permonth`";
+
+if ($stmt = $this->conn->query($query)) {
+
+while ($row = $stmt->fetch_assoc()) {
+	$data = [$row["Jan"],$row["Feb"],$row["March"],$row["April"],$row["May"],$row["June"],$row["July"],$row["Aug"],$row["Sept"],$row["Oct"],$row["Nov"],$row["Decs"] ];
+}
+$stmt->close();
+}
+return $data;
+}
+public function getList1() {
 
 	$query = "SELECT * FROM `estimatedprofit_permonth`";
 
 	if ($stmt = $this->conn->query($query)) {
 	
 	while ($row = $stmt->fetch_assoc()) {
-		$data = [$row["Jan"],$row["Feb"],$row["March"],$row["April"],$row["May"],$row["June"],$row["July"],$row["Aug"],$row["Sept"],$row["Oct"],$row["Nov"],$row["Decs"] ];
+		$data = [0, (float)$row["Jan"],(float)$row["Feb"],(float)$row["March"],(float)$row["April"],(float)$row["May"],(float)$row["June"],(float)$row["July"],(float)$row["Aug"],(float)$row["Sept"],(float)$row["Oct"],(float)$row["Nov"],(float)$row["Decs"] ];
+	}
+	$stmt->close();
+}
+return $data;
+}
+public function getList2() {
+
+	$query = "SELECT * FROM `recordofprofits`";
+
+	if ($stmt = $this->conn->query($query)) {
+	
+	while ($row = $stmt->fetch_assoc()) {
+		$data = [0, (float)$row["Jan"],(float)$row["Feb"],(float)$row["March"],(float)$row["April"],(float)$row["May"],(float)$row["June"],(float)$row["July"],(float)$row["Aug"],(float)$row["Sept"],(float)$row["Oct"],(float)$row["Nov"],(float)$row["Decs"] ];
 	}
 	$stmt->close();
 }
