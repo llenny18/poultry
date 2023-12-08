@@ -29,10 +29,17 @@ interface disabledUsers {
 interface userGetbyID {
 	public function getUserbyID($uid);
 }
+interface userDisable {
+	public function disableUser($uid);
+}
 
 
 interface addEditbyID {
 	public function addUserbyID($fname,$lname,$cnum,$email,$rid,$uname,$pass);
+}
+
+interface editEditbyID {
+	public function editUserbyID($uid, $fname,$lname,$cnum,$email,$rid,$uname,$pass);
 }
 
 Class connGateway {
@@ -127,17 +134,21 @@ Class usernameClass extends connGateway  implements usernameInterface {
 
 public function getUsers() {
 
-	$query = "SELECT * FROM `viewusers` where RoleID > 0 and RoleID != 3";
+	$query = "SELECT * FROM `viewusers` where CreatedAt is not null and DeletedAt is null";
 
 	if ($stmt = $this->conn->query($query)) {
 	
 	$num_of_rows = $stmt->num_rows;
+	if($num_of_rows >0){
 	while ($row = $stmt->fetch_assoc()) {
 		$data[] = $row;
 	}
 	$stmt->close();
-}
 return $data;
+
+}
+
+}
 }
 
 }
@@ -147,7 +158,7 @@ Class disabled_usersClass extends connGateway  implements disabledUsers {
 
 public function getUsers() {
 
-	$query = "SELECT * FROM `viewusers` where RoleID = 3";
+	$query = "SELECT * FROM `viewusers` where DeletedAt is not null";
 
 	if ($stmt = $this->conn->query($query)) {
 	
@@ -175,7 +186,41 @@ if ($stmt = $this->conn->prepare($query)) {
 	$stmt->bind_param('sssssss', $fname,$lname,$cnum,$email,$rid,$uname,$pass);
 	$stmt->execute();
 	$stmt->close();
-	echo "<script>alert('Employee Register Successful!'); window.location='userlist.php'</script>";
+	echo "<script>alert('Account Register Successful!'); window.location='userlist.php'</script>";
+}
+
+}
+}
+
+
+Class edituserClass extends connGateway  implements editEditbyID {
+
+public function editUserbyID($uid, $fname,$lname,$cnum,$email,$rid,$uname,$pass){
+
+	
+	$query = "CALL update_employee(?,?,?,?,?,?,?,?)";
+
+if ($stmt = $this->conn->prepare($query)) {
+	$stmt->bind_param('ssssssss',$uid, $fname,$lname,$cnum,$email,$rid,$uname,$pass);
+	$stmt->execute();
+	$stmt->close();
+	echo "<script>alert('Account Updated Successful!'); window.location='userlist.php'</script>";
+}
+
+}
+}
+Class disableUserClass extends connGateway  implements userDisable {
+
+public function disableUser($uid){
+
+	
+	$query = "UPDATE `useraccounts` SET `DeletedAt` = curdate() WHERE `useraccounts`.`userID` = ?";
+
+if ($stmt = $this->conn->prepare($query)) {
+	$stmt->bind_param('s', $uid);
+	$stmt->execute();
+	$stmt->close();
+	echo "<script>alert('Account Disabled Successful!'); window.location='userlist.php'</script>";
 }
 
 }

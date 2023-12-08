@@ -5,6 +5,21 @@ $userget = new userGet();
 $userID = $_GET['uid'];
 $userInfo = $userget->getUserbyID($userID);
 
+$editemployee = new edituserClass();
+
+if(isset($_POST['edit'])){ 
+    $userIDnow = $_GET['uid'];
+    $fname = $_POST['ufname'];
+    $fname = $_POST['ufname'];
+$lname = $_POST['ulname'];
+$rid = $_POST['urole'];
+$uname = $_POST['uname'];
+$pass = $_POST['upass'];
+$cnum = $_POST['cnum'];
+$email = $_POST['email'];
+
+$editemployee->editUserbyID($userIDnow ,$fname,$lname,$rid,$uname,$pass,$cnum,$email);
+}
 
 
 ?>
@@ -42,7 +57,7 @@ $userInfo = $userget->getUserbyID($userID);
                                 <div class="card mt-5">
                                     <div class="card-body">
                                         <h4 class="header-title">Edit User Employee Account</h4>
-                                        <form class="needs-validation" novalidate="">
+                                        <form class="needs-validation" novalidate="" method="post">
                                             <div class="form-row">
                                                 
                                                 <div class="col-md-4 mb-3">
@@ -106,7 +121,7 @@ $userInfo = $userget->getUserbyID($userID);
                                                 </div>
                                                 <div class="col-md-6 mb-3">
                                                     <label for="validationCustom03">Email</label>
-                                                    <input type="email" class="form-control" id="validationCustom03" name="email" value="<?= $userInfo['email'] ?>"placeholder="@email" required="">
+                                                    <input type="text" class="form-control" id="validationCustom03" name="email" value="<?= $userInfo['email'] ?>"placeholder="@email" required="">
                                                     <div class="invalid-feedback">
                                                         Please provide a valid city.
                                                     </div>
@@ -117,11 +132,10 @@ $userInfo = $userget->getUserbyID($userID);
                                                 <div class="form-check">
                                                    
                                                     <div class="invalid-feedback">
-                                                        You must agree before submitting.
                                                     </div>
                                                 </div>
                                             </div>
-                                            <button class="btn btn-primary" type="submit" name="edit">Submit form</button>
+                                            <button class="btn btn-primary" type="submit" name="edit">Update Information</button>
                                         </form>
                                     </div>
                                 </div>

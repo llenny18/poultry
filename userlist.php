@@ -1,8 +1,7 @@
 <?php require("./controller/db.php");
 $global = new usersClass();
-$user = $global->getUsers();
+$user = $global->getUsers() ?? [];
 
-$base = "feeds";
 ?>
 <html class="no-js" lang="en">
 
@@ -83,7 +82,7 @@ $base = "feeds";
                                                     <td><?= $unow['fullName']; ?></td>
                                                     <td><?= $unow['u_username']; ?></td>
                                                     <td><?= $unow['roleDesc']; ?></td>
-                                                    <td><a href="edituser.php?uid=<?= $unow['userID']; ?>"><i class="fa fa-pencil-square m-1"></i>Edit</a> | <a href="edituser.php?uid=<?= $unow['userID']; ?>"><i class="fa fa-user-times m-1"></i>Disable</a></td>
+                                                    <td><a href="edituser.php?uid=<?= $unow['userID']; ?>"><i class="fa fa-pencil-square m-1"></i>Edit</a> | <a href="disauser.php?uid=<?= $unow['userID']; ?>"><i class="fa fa-user-times m-1"></i>Disable</a></td>
                                                 </tr>
                                                 <?php } ?>
                                                 
