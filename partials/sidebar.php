@@ -31,6 +31,22 @@ function isPageActive($page) {
                                     <li class="<?= isPageActive('payroll.php') ? 'active' : ''; ?>"><a href="payroll.php">Employee Wages</a></li>
                                 </ul>
                             </li>
+                            <li class="<?= isPageActive('piglist.php') || isPageActive('pigsold.php') || isPageActive('pigprice.php') ? 'active' : ''; ?>">
+                                <a href="javascript:void(0)" aria-expanded="true"><i class="fa fa-table"></i>
+                                    <span>Pigs</span></a>
+                                <ul class="collapse">
+                                    <li class="<?= isPageActive('piglist.php') ? 'active' : ''; ?>"><a href="piglist.php">Pigs List</a></li>
+                                    <li class="<?= isPageActive('pigsold.php') ? 'active' : ''; ?>"><a href="pigsold.php">Pigs Sold</a></li>
+                                    <li class="<?= isPageActive('pigprice.php') ? 'active' : ''; ?>"><a href="pigprice.php">Pig Price</a></li>
+                                </ul>
+                            </li>
+                            <li class="<?= isPageActive('feeds.php') || isPageActive('misc.php') || isPageActive('payroll.php') ? 'active' : ''; ?>">
+                                <a href="javascript:void(0)" aria-expanded="true"><i class="fa fa-table"></i>
+                                    <span>Papers</span></a>
+                                <ul class="collapse">
+                                    <li class="<?= isPageActive('feeds.php') ? 'active' : ''; ?>"><a href="feeds.php">Papers List</a></li>
+                                </ul>
+                            </li>
                             
                             <li class="<?= isPageActive('userlist.php') || isPageActive('disabledusers.php') ? 'active' : ''; ?>">
                                 <a href="javascript:void(0)" aria-expanded="true"><i class="fa fa-table"></i>

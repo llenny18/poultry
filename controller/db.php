@@ -45,6 +45,15 @@ interface editEditbyID {
 interface deleteEditbyID {
 	public function deletebyID($uid);
 }
+interface pigList {
+	public function display_pigList();
+}
+interface pigSold {
+	public function display_pigSold();
+}
+interface pigPrice {
+	public function display_pigPrice();
+}
 
 Class connGateway {
 		public $server = "localhost";
@@ -268,6 +277,66 @@ public function getUserbyID($uid) {
 
 return $data;
 }
+
+}
+}
+
+
+Class piglistClass extends connGateway  implements pigList {
+
+public function display_pigList(){
+
+	$query = "SELECT * FROM `piglist`  where CreatedAt is not null and DeletedAt is null";
+
+	if ($stmt = $this->conn->query($query)) {
+	
+	$num_of_rows = $stmt->num_rows;
+	while ($row = $stmt->fetch_assoc()) {
+		$data[] = $row;
+	}
+	$stmt->close();
+}
+return $data;
+}
+
+
+}
+
+Class pigsoldClass extends connGateway  implements pigSold {
+
+public function display_pigSold(){
+
+	$query = "SELECT * FROM `pigsprofit` where CreatedAt is not null and DeletedAt is null";
+
+	if ($stmt = $this->conn->query($query)) {
+	
+	$num_of_rows = $stmt->num_rows;
+	while ($row = $stmt->fetch_assoc()) {
+		$data[] = $row;
+	}
+	$stmt->close();
+}
+return $data;
+
+}
+}
+
+Class pigpriceClass extends connGateway  implements pigPrice {
+
+public function display_pigPrice(){
+
+	$query = "SELECT * FROM `pigprice` where CreatedAt is not null and DeletedAt is null";
+
+	if ($stmt = $this->conn->query($query)) {
+	
+	$num_of_rows = $stmt->num_rows;
+	while ($row = $stmt->fetch_assoc()) {
+		$data[] = $row;
+	}
+	$stmt->close();
+}
+return $data;
+
 
 }
 }
