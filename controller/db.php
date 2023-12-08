@@ -42,6 +42,10 @@ interface editEditbyID {
 	public function editUserbyID($uid, $fname,$lname,$cnum,$email,$rid,$uname,$pass);
 }
 
+interface deleteEditbyID {
+	public function deletebyID($uid);
+}
+
 Class connGateway {
 		public $server = "localhost";
 		public $username = "root";
@@ -187,6 +191,22 @@ if ($stmt = $this->conn->prepare($query)) {
 	$stmt->execute();
 	$stmt->close();
 	echo "<script>alert('Account Register Successful!'); window.location='userlist.php'</script>";
+}
+
+}
+}
+Class deleteuserClass extends connGateway  implements deleteEditbyID {
+
+public function deletebyID($uid){
+
+	
+	$query = "CALL delete_employee(?)";
+
+if ($stmt = $this->conn->prepare($query)) {
+	$stmt->bind_param('s', $uid);
+	$stmt->execute();
+	$stmt->close();
+	echo "<script>alert('Account Deleted Successful!'); window.location='disabledusers.php'</script>";
 }
 
 }

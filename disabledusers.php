@@ -1,8 +1,8 @@
 <?php require("./controller/db.php");
 $global = new disabled_usersClass();
-$feeds = $global->getUsers();
+$users = $global->getUsers();
 
-$base = "feeds";
+$base = "users";
 ?>
 <html class="no-js" lang="en">
 
@@ -76,13 +76,13 @@ $base = "feeds";
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                <?php foreach($feeds as $feed){ ?>
+                                                <?php foreach($users as $user){ ?>
                                                 <tr>
-                                                    <th scope="row"><?= $feed['userID']; ?></th>
-                                                    <td><?= $feed['fullName']; ?></td>
-                                                    <td><?= $feed['u_username']; ?></td>
-                                                    <td><?= $feed['roleDesc']; ?></td>
-                                                    <td><i class="ti-trash"></i></td>
+                                                    <th scope="row"><?= $user['userID']; ?></th>
+                                                    <td><?= $user['fullName']; ?></td>
+                                                    <td><?= $user['u_username']; ?></td>
+                                                    <td><?= $user['roleDesc']; ?></td>
+                                                    <td><a href="deleteuser.php?uid=<?= $user['userID']; ?>"><i class="fa fa-user-times m-1"></i>Delete Account</a></td>
                                                 </tr>
                                                 <?php } ?>
                                                 
