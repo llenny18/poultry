@@ -1,6 +1,6 @@
 <?php require("./controller/db.php");
-$global = new usersClass();
-$user = $global->getUsers() ?? [];
+$global = new paperListClass();
+$papers = $global->display_paperInfo() ?? [];
 
 ?>
 <html class="no-js" lang="en">
@@ -68,21 +68,21 @@ $user = $global->getUsers() ?? [];
                                     <table id="dataTable3" class="text-center">
                                             <thead class="text-uppercase bg-info">
                                                 <tr class="text-white">
-                                                    <th scope="col">User ID</th>
-                                                    <th scope="col">Full Name</th>
-                                                    <th scope="col">Username</th>
-                                                    <th scope="col">User Description</th>
+                                                    <th scope="col">Paper ID</th>
+                                                    <th scope="col">p_typeName</th>
+                                                    <th scope="col">p_typeDesc</th>
+                                                    <th scope="col">p_image</th>
                                                     <th scope="col">Action</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                <?php foreach($user as $unow){ ?>
+                                                <?php foreach($papers as $paper){ ?>
                                                 <tr>
-                                                    <th scope="row"><?= $unow['userID']; ?></th>
-                                                    <td><?= $unow['fullName']; ?></td>
-                                                    <td><?= $unow['u_username']; ?></td>
-                                                    <td><?= $unow['roleDesc']; ?></td>
-                                                    <td><a href="edituser.php?uid=<?= $unow['userID']; ?>"><i class="fa fa-pencil-square m-1"></i>Edit</a> | <a href="disauser.php?uid=<?= $unow['userID']; ?>"><i class="fa fa-user-times m-1"></i>Disable</a></td>
+                                                    <th scope="row"><?= $paper['paperID']; ?></th>
+                                                    <td><?= $paper['p_typeName']; ?></td>
+                                                    <td><?= $paper['p_typeDesc']; ?></td>
+                                                    <td><?php echo '<img src="data:image/jpg;base64,' .  base64_encode($paper['p_image'])  . '" />' ?></td>
+                                                    <td><a href="edituser.php?uid=<?= $paper['paperID']; ?>"><i class="fa fa-pencil-square m-1"></i>Edit</a> | <a href="disauser.php?uid=<?= $paper['paperID']; ?>"><i class="fa fa-user-times m-1"></i>Disable</a></td>
                                                 </tr>
                                                 <?php } ?>
                                                 

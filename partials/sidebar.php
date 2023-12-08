@@ -40,11 +40,11 @@ function isPageActive($page) {
                                     <li class="<?= isPageActive('pigprice.php') ? 'active' : ''; ?>"><a href="pigprice.php">Pig Price</a></li>
                                 </ul>
                             </li>
-                            <li class="<?= isPageActive('feeds.php') || isPageActive('misc.php') || isPageActive('payroll.php') ? 'active' : ''; ?>">
+                            <li class="<?= isPageActive('paperlist.php') ? 'active' : ''; ?>">
                                 <a href="javascript:void(0)" aria-expanded="true"><i class="fa fa-table"></i>
                                     <span>Papers</span></a>
                                 <ul class="collapse">
-                                    <li class="<?= isPageActive('feeds.php') ? 'active' : ''; ?>"><a href="feeds.php">Papers List</a></li>
+                                    <li class="<?= isPageActive('paperlist.php') ? 'active' : ''; ?>"><a href="paperlist.php">Papers List</a></li>
                                 </ul>
                             </li>
                             

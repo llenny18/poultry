@@ -54,6 +54,9 @@ interface pigSold {
 interface pigPrice {
 	public function display_pigPrice();
 }
+interface paperInfo {
+	public function display_paperInfo();
+}
 
 Class connGateway {
 		public $server = "localhost";
@@ -326,6 +329,25 @@ Class pigpriceClass extends connGateway  implements pigPrice {
 public function display_pigPrice(){
 
 	$query = "SELECT * FROM `pigprice` where CreatedAt is not null and DeletedAt is null";
+
+	if ($stmt = $this->conn->query($query)) {
+	
+	$num_of_rows = $stmt->num_rows;
+	while ($row = $stmt->fetch_assoc()) {
+		$data[] = $row;
+	}
+	$stmt->close();
+}
+return $data;
+
+
+}
+}
+Class paperListClass extends connGateway  implements paperInfo {
+
+public function display_paperInfo(){
+
+	$query = "SELECT * FROM `paperinfo` where CreatedAt is not null and DeletedAt is null";
 
 	if ($stmt = $this->conn->query($query)) {
 	
