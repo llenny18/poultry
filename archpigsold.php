@@ -1,6 +1,6 @@
 <?php require("./controller/db.php");
-$global = new pigsoldClass();
-$listsold = $global->display_pigSold() ?? [];
+$global = new archpigsoldClass();
+$listsold = $global->displayarch_pigSold() ?? [];
 
 ?>
 <html class="no-js" lang="en">
@@ -62,7 +62,7 @@ $listsold = $global->display_pigSold() ?? [];
                     <div class="col-lg-12 mt-5">
                         <div class="card">
                             <div class="card-body">
-                                <h4 class="header-title">Pig Sold List<a href="addpigsold.php"><i class="fa fa-user-plus m-2"></i>Add Pig Sold List</a></h4>
+                                <h4 class="header-title">Pigs Sold list</h4>
                                 <div class="single-table">
                                     <div class="table-responsive">
                                     <table id="dataTable3" class="text-center">
@@ -82,7 +82,7 @@ $listsold = $global->display_pigSold() ?? [];
                                                     <td><?= $listsoldnow['soldCount']; ?></td>
                                                     <td><?= $listsoldnow['profits']; ?></td>
                                                     <td><?= $listsoldnow['houseID']; ?></td>
-                                                    <td><a href="edituser.php?pid=<?= $listsoldnow['soldID']; ?>"><i class="fa fa-pencil-square m-1"></i>Edit</a> | <a href="disapigs.php?pid=<?= $listsoldnow['soldID']; ?>&processType=pigsold"><i class="fa fa-user-times m-1"></i>Disable</a></td>
+                                                    <td><a href="edituser.php?uid=<?= $listsoldnow['soldID']; ?>"><i class="fa fa-pencil-square m-1"></i>Edit</a> | <a href="disauser.php?uid=<?= $listsoldnow['soldID']; ?>"><i class="fa fa-user-times m-1"></i>Disable</a></td>
                                                 </tr>
                                                 <?php } ?>
                                                 

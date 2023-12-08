@@ -62,16 +62,16 @@ $papers = $global->display_paperInfo() ?? [];
                     <div class="col-lg-12 mt-5">
                         <div class="card">
                             <div class="card-body">
-                                <h4 class="header-title">All Investments of Feeds<a href="adduser.php"><i class="fa fa-user-plus m-2"></i>Add User</a></h4>
+                                <h4 class="header-title">Paper List<a href="addpaper.php"><i class="fa fa-user-plus m-2"></i>Add Paper</a></h4>
                                 <div class="single-table">
                                     <div class="table-responsive">
                                     <table id="dataTable3" class="text-center">
                                             <thead class="text-uppercase bg-info">
                                                 <tr class="text-white">
                                                     <th scope="col">Paper ID</th>
-                                                    <th scope="col">p_typeName</th>
-                                                    <th scope="col">p_typeDesc</th>
-                                                    <th scope="col">p_image</th>
+                                                    <th scope="col">Paper Type</th>
+                                                    <th scope="col">paper Description</th>
+                                                    <th scope="col">Image (Click to Download)</th>
                                                     <th scope="col">Action</th>
                                                 </tr>
                                             </thead>
@@ -82,7 +82,7 @@ $papers = $global->display_paperInfo() ?? [];
                                                     <td><?= $paper['p_typeName']; ?></td>
                                                     <td><?= $paper['p_typeDesc']; ?></td>
                                                     <td><?php echo '<img src="data:image/jpg;base64,' .  base64_encode($paper['p_image'])  . '" />' ?></td>
-                                                    <td><a href="edituser.php?uid=<?= $paper['paperID']; ?>"><i class="fa fa-pencil-square m-1"></i>Edit</a> | <a href="disauser.php?uid=<?= $paper['paperID']; ?>"><i class="fa fa-user-times m-1"></i>Disable</a></td>
+                                                    <td><a href="edituser.php?uid=<?= $paper['paperID']; ?>"><i class="fa fa-pencil-square m-1"></i>Edit</a> | <a href="disapaper.php?pid=<?= $paper['paperID']; ?>"><i class="fa fa-user-times m-1"></i>Disable</a></td>
                                                 </tr>
                                                 <?php } ?>
                                                 

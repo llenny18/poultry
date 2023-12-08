@@ -31,13 +31,16 @@ function isPageActive($page) {
                                     <li class="<?= isPageActive('payroll.php') ? 'active' : ''; ?>"><a href="payroll.php">Employee Wages</a></li>
                                 </ul>
                             </li>
-                            <li class="<?= isPageActive('piglist.php') || isPageActive('pigsold.php') || isPageActive('pigprice.php') ? 'active' : ''; ?>">
+                            <li class="<?= isPageActive('piglist.php') || isPageActive('pigsold.php') || isPageActive('pigprice.php') || isPageActive('archpigsold.php') || isPageActive('archpigprice.php') || isPageActive('archpigsold.php') ? 'active' : ''; ?>">
                                 <a href="javascript:void(0)" aria-expanded="true"><i class="fa fa-table"></i>
                                     <span>Pigs</span></a>
                                 <ul class="collapse">
                                     <li class="<?= isPageActive('piglist.php') ? 'active' : ''; ?>"><a href="piglist.php">Pigs List</a></li>
+                                    <li class="<?= isPageActive('archpiglist.php') ? 'active' : ''; ?>"><a href="archpiglist.php">Archived Pigs List</a></li>
                                     <li class="<?= isPageActive('pigsold.php') ? 'active' : ''; ?>"><a href="pigsold.php">Pigs Sold</a></li>
+                                    <li class="<?= isPageActive('archpigsold.php') ? 'active' : ''; ?>"><a href="archpigsold.php">Archived ived Pigs Sold</a></li>
                                     <li class="<?= isPageActive('pigprice.php') ? 'active' : ''; ?>"><a href="pigprice.php">Pig Price</a></li>
+                                    <li class="<?= isPageActive('archpigprice.php') ? 'active' : ''; ?>"><a href="archpigprice.php">Archived Pig Price</a></li>
                                 </ul>
                             </li>
                             <li class="<?= isPageActive('paperlist.php') ? 'active' : ''; ?>">

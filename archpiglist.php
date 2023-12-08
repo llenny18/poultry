@@ -1,6 +1,6 @@
 <?php require("./controller/db.php");
-$global = new pigsoldClass();
-$listsold = $global->display_pigSold() ?? [];
+$global = new archpiglistClass();
+$list = $global->displayarch_pigList() ?? [];
 
 ?>
 <html class="no-js" lang="en">
@@ -62,27 +62,25 @@ $listsold = $global->display_pigSold() ?? [];
                     <div class="col-lg-12 mt-5">
                         <div class="card">
                             <div class="card-body">
-                                <h4 class="header-title">Pig Sold List<a href="addpigsold.php"><i class="fa fa-user-plus m-2"></i>Add Pig Sold List</a></h4>
+                                <h4 class="header-title">Pigs List</h4>
                                 <div class="single-table">
                                     <div class="table-responsive">
                                     <table id="dataTable3" class="text-center">
                                             <thead class="text-uppercase bg-info">
                                                 <tr class="text-white">
-                                                    <th scope="col">Transaction ID</th>
-                                                    <th scope="col">Pigs Sold Count</th>
-                                                    <th scope="col">Total Price</th>
-                                                    <th scope="col">House</th>
+                                                    <th scope="col">House ID</th>
+                                                    <th scope="col">Pigs Count</th>
+                                                    <th scope="col">Pigs Deceased</th>
                                                     <th scope="col">Action</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                <?php foreach($listsold as $listsoldnow){ ?>
+                                                <?php foreach($list as $listnow){ ?>
                                                 <tr>
-                                                    <th scope="row"><?= $listsoldnow['soldID']; ?></th>
-                                                    <td><?= $listsoldnow['soldCount']; ?></td>
-                                                    <td><?= $listsoldnow['profits']; ?></td>
-                                                    <td><?= $listsoldnow['houseID']; ?></td>
-                                                    <td><a href="edituser.php?pid=<?= $listsoldnow['soldID']; ?>"><i class="fa fa-pencil-square m-1"></i>Edit</a> | <a href="disapigs.php?pid=<?= $listsoldnow['soldID']; ?>&processType=pigsold"><i class="fa fa-user-times m-1"></i>Disable</a></td>
+                                                    <th scope="row"><?= $listnow['HouseID']; ?></th>
+                                                    <td><?= $listnow['PigCount']; ?></td>
+                                                    <td><?= $listnow['PigDeceased']; ?></td>
+                                                    <td><a href="edituser.php?uid=<?= $listnow['HouseID']; ?>"><i class="fa fa-pencil-square m-1"></i>Edit</a> | <a href="disauser.php?uid=<?= $listnow['HouseID']; ?>"><i class="fa fa-user-times m-1"></i>Disable</a></td>
                                                 </tr>
                                                 <?php } ?>
                                                 

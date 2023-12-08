@@ -62,7 +62,7 @@ $list = $global->display_pigList() ?? [];
                     <div class="col-lg-12 mt-5">
                         <div class="card">
                             <div class="card-body">
-                                <h4 class="header-title">All Investments of Feeds<a href="adduser.php"><i class="fa fa-user-plus m-2"></i>Add User</a></h4>
+                                <h4 class="header-title">Pigs List<a href="addpiglist.php"><i class="fa fa-user-plus m-2"></i>Add Pig List</a></h4>
                                 <div class="single-table">
                                     <div class="table-responsive">
                                     <table id="dataTable3" class="text-center">
@@ -80,7 +80,7 @@ $list = $global->display_pigList() ?? [];
                                                     <th scope="row"><?= $listnow['HouseID']; ?></th>
                                                     <td><?= $listnow['PigCount']; ?></td>
                                                     <td><?= $listnow['PigDeceased']; ?></td>
-                                                    <td><a href="edituser.php?uid=<?= $listnow['HouseID']; ?>"><i class="fa fa-pencil-square m-1"></i>Edit</a> | <a href="disauser.php?uid=<?= $listnow['HouseID']; ?>"><i class="fa fa-user-times m-1"></i>Disable</a></td>
+                                                    <td><a href="edituser.php?pid=<?= $listnow['HouseID']; ?>"><i class="fa fa-pencil-square m-1"></i>Edit</a> | <a href="disapigs.php?pid=<?= $listnow['HouseID']; ?>&processType=piglist"><i class="fa fa-user-times m-1"></i>Disable</a></td>
                                                 </tr>
                                                 <?php } ?>
                                                 

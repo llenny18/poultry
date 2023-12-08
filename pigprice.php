@@ -62,7 +62,7 @@ $pricelist = $global->display_pigPrice() ?? [];
                     <div class="col-lg-12 mt-5">
                         <div class="card">
                             <div class="card-body">
-                                <h4 class="header-title">All Investments of Feeds<a href="adduser.php"><i class="fa fa-user-plus m-2"></i>Add User</a></h4>
+                                <h4 class="header-title">Pigs Price<a href="addpigprice.php"><i class="fa fa-user-plus m-2"></i>Add Pig Price</a></h4>
                                 <div class="single-table">
                                     <div class="table-responsive">
                                     <table id="dataTable3" class="text-center">
@@ -80,7 +80,7 @@ $pricelist = $global->display_pigPrice() ?? [];
                                                     <th scope="row"><?= $pricenow['priceID']; ?></th>
                                                     <td><?= $pricenow['priceDate']; ?></td>
                                                     <td><?= $pricenow['price']; ?></td>
-                                                    <td><a href="edituser.php?uid=<?= $pricenow['priceID']; ?>"><i class="fa fa-pencil-square m-1"></i>Edit</a> | <a href="disauser.php?uid=<?= $pricenow['priceID']; ?>"><i class="fa fa-user-times m-1"></i>Disable</a></td>
+                                                    <td><a href="edituser.php?pid=<?= $pricenow['priceID']; ?>"><i class="fa fa-pencil-square m-1"></i>Edit</a> | <a href="disapigs.php?pid=<?= $pricenow['priceID']; ?>&processType=pigprice"><i class="fa fa-user-times m-1"></i>Disable</a></td>
                                                 </tr>
                                                 <?php } ?>
                                                 
