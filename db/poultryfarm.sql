@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 08, 2023 at 05:33 PM
+-- Generation Time: Dec 09, 2023 at 02:20 AM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -44,6 +44,28 @@ VALUES (NULL, f_name, l_name, cnum, email, rid, (SElect newid - 1 from newid));
 
 END$$
 
+CREATE DEFINER=`root`@`localhost` PROCEDURE `Insert_investment` (IN `p_Name` VARCHAR(255), IN `p_typeID` INT, IN `p_recordPrice` DECIMAL(10,2))   BEGIN
+    -- Declare variables for autoincrement and current date
+    DECLARE newRecordID INT;
+    DECLARE currentDate DATE;
+
+    -- Set CreatedAt to the current date
+    SET currentDate = CURDATE();
+
+    -- Insert record without specifying recordID
+    INSERT INTO investmentrecords (Name, typeID, recordDate, recordPrice, CreatedAt)
+    VALUES (p_Name, p_typeID, currentDate, p_recordPrice, currentDate);
+
+    -- Get the autoincremented recordID of the inserted record
+    SET newRecordID = LAST_INSERT_ID();
+
+    -- Update the recordID with the autoincremented value
+    UPDATE investmentrecords
+    SET recordID = newRecordID
+    WHERE recordID IS NULL AND CreatedAt = currentDate;
+
+END$$
+
 CREATE DEFINER=`root`@`localhost` PROCEDURE `update_employee` (IN `user_id` VARCHAR(255), IN `f_name` VARCHAR(255), IN `l_name` VARCHAR(255), IN `cnum` VARCHAR(255), IN `email` VARCHAR(255), IN `rid` VARCHAR(255), IN `uname` VARCHAR(255), IN `pass` VARCHAR(255))   BEGIN 
 Update useraccounts set u_username = uname, u_password = SHA2(pass, 256) where userID = user_id;
 
@@ -51,6 +73,23 @@ Update userinfo set u_firstname = f_name, u_lastname= l_name, u_contactnum = cnu
 where userinfo.userID = user_id;
 
 
+END$$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `update_investment` (IN `p_recordID` INT, IN `p_Name` VARCHAR(255), IN `p_typeID` INT, IN `p_recordPrice` DECIMAL(10,2))   BEGIN
+    -- Check if the record with the specified recordID exists
+    IF EXISTS (SELECT 1 FROM investmentrecords WHERE recordID = p_recordID) THEN
+        -- Update the record with the new values
+        UPDATE investmentrecords
+        SET
+            Name = p_Name,
+            typeID = p_typeID,
+            recordPrice = p_recordPrice
+        WHERE recordID = p_recordID;
+
+        SELECT 'Record updated successfully' AS Result;
+    ELSE
+        SELECT 'Record not found' AS Result;
+    END IF;
 END$$
 
 DELIMITER ;
@@ -112,15 +151,20 @@ CREATE TABLE `investmentrecords` (
   `Name` varchar(100) NOT NULL,
   `typeID` int(11) NOT NULL,
   `recordDate` date NOT NULL,
-  `recordPrice` decimal(10,2) UNSIGNED NOT NULL CHECK (`recordPrice` >= 0)
+  `recordPrice` decimal(10,2) UNSIGNED NOT NULL CHECK (`recordPrice` >= 0),
+  `CreatedAt` date DEFAULT NULL,
+  `DeletedAt` date DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `investmentrecords`
 --
 
-INSERT INTO `investmentrecords` (`recordID`, `Name`, `typeID`, `recordDate`, `recordPrice`) VALUES
-(1, 'Electricity', 1, '2023-12-05', 3950.50);
+INSERT INTO `investmentrecords` (`recordID`, `Name`, `typeID`, `recordDate`, `recordPrice`, `CreatedAt`, `DeletedAt`) VALUES
+(1, 'Electricity', 4, '2023-12-05', 4360.00, '2023-12-09', NULL),
+(2, 'Water', 1, '2023-12-09', 6970.00, '2023-12-09', NULL),
+(3, 'Aleister Salary', 3, '2023-12-09', 5000.00, '2023-12-09', NULL),
+(4, 'Aleister Salary', 3, '2023-12-09', 5000.00, '2023-12-09', NULL);
 
 -- --------------------------------------------------------
 
@@ -139,7 +183,7 @@ CREATE TABLE `investmenttype` (
 
 INSERT INTO `investmenttype` (`typeID`, `typeName`) VALUES
 (1, 'Bills'),
-(2, 'Medicines & Vitamins'),
+(2, 'MD'),
 (3, 'E-Wages'),
 (4, 'Miscellaneous');
 
@@ -621,7 +665,7 @@ ALTER TABLE `userrole`
 -- AUTO_INCREMENT for table `investmentrecords`
 --
 ALTER TABLE `investmentrecords`
-  MODIFY `recordID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `recordID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `investmenttype`
@@ -700,17 +744,6 @@ ALTER TABLE `pigsold`
 ALTER TABLE `userinfo`
   ADD CONSTRAINT `fk_roleID` FOREIGN KEY (`roleID`) REFERENCES `userrole` (`roleID`),
   ADD CONSTRAINT `fk_userID` FOREIGN KEY (`userID`) REFERENCES `useraccounts` (`userID`);
-
---
--- Dumping data for table `investmenttype`
---
-
-INSERT INTO `investmenttype` (`typeID`, `typeName`) VALUES
-(1, 'Bills'),
-(2, 'Medicines & Vitamins'),
-(3, 'E-Wages'),
-(4, 'Miscellaneous');
-
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
