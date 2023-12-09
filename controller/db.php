@@ -118,6 +118,30 @@ interface EstimatedProfit {
 }
 
 
+interface editPigList {
+	public function getListbyID($pid);
+}
+
+
+interface editPaper {
+	public function getListbyID($pid);
+}
+
+interface addPigList {
+	public function getListbyID($pid);
+}
+
+interface editPaperList {
+	public function getListbyID($pid);
+}
+
+
+
+interface addPaper {
+	public function getListbyID($pid);
+}
+
+
 Class connGateway {
 		public $server = "localhost";
 		public $username = "root";
@@ -610,12 +634,57 @@ return $data;
 }
 
 
+Class getPiglistByID extends connGateway  implements editPigList {
+
+public function getListbyID($pid) {
+
+	$query = "SELECT * FROM `piglist` WHERE piglistID = ?";
+
+	if ($stmt = $this->conn->prepare($query)) {
+	$stmt->bind_param("s", $pid);
+	$stmt->execute();
+    $results = $stmt->get_result();
+	while ($row = $results->fetch_assoc()) {
+		$data = array("pid"=>"{$row['pigListID']}", "hid"=>"{$row['HouseID']}", "pg"=>"{$row['PigCount']}", "pd"=>"{$row['PigDeceased']}");
+	}
+	$stmt->close();
+
+return $data;
+}
+
+}
+}
+
+
+
+Class getPaperListByID extends connGateway  implements editPaperList {
+
+public function getListbyID($pid) {
+
+	$query = "SELECT * FROM `paperinfo` WHERE paperID = ?";
+
+	if ($stmt = $this->conn->prepare($query)) {
+	$stmt->bind_param("s", $pid);
+	$stmt->execute();
+    $results = $stmt->get_result();
+	while ($row = $results->fetch_assoc()) {
+		$data = array("pid"=>"{$row['paperID']}", "ptm"=>"{$row['p_typeName']}", "pi"=>"{$row['p_image']}", "pd"=>"{$row['p_typeDesc']}");
+	}
+	$stmt->close();
+
+return $data;
+}
+
+}
+}
+
+
 Class piglistClass extends connGateway  implements pigList {
 
 public function display_pigList(){
 
 	$query = "SELECT * FROM `piglist`  where CreatedAt is not null and DeletedAt is null";
-
+	
 	if ($stmt = $this->conn->query($query)) {
 	
 	$num_of_rows = $stmt->num_rows;
