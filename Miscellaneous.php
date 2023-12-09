@@ -64,7 +64,7 @@ $base = "feeds";
                     <div class="col-lg-12 mt-5">
                         <div class="card">
                             <div class="card-body">
-                                <h4 class="header-title">Miscellaneous Investment Record</h4>
+                                <h4 class="header-title">Miscellaneous Investment Record</h4><a href="addrecord.php"><i class="fa fa-user-plus m-2"></i>Add Investment Record</a></h4>
                                 <div class="single-table">
                                     <div class="table-responsive">
                                     <table id="dataTable3" class="text-center">
@@ -74,7 +74,7 @@ $base = "feeds";
                                                     <th scope="col">Name</th>
                                                     <th scope="col">Date</th>
                                                     <th scope="col">Price</th>
-                                                    <th scope="col">action</th>
+                                                    <th scope="col">Acton:</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
@@ -89,7 +89,7 @@ $base = "feeds";
                                                     <td><?= $record['Name']; ?></td>
                                                     <td><?= $record['recordDate']; ?></td>
                                                     <td><?= $record['recordPrice']; ?></td>
-                                                    <td><i class="ti-trash"></i></td>
+                                                    <td><a href="editrecord.php?recordID=<?= $record['recordID']; ?>"><i class="fa fa-pencil-square m-1"></i>Edit</a> | <a href="disauser.php?recordID=<?= $record['recordID']; ?>"><i class="fa fa-user-times m-1"></i>Disable</a></td>
                                                 </tr>
                                                 <?php } ?>
                                             <?php } ?>
