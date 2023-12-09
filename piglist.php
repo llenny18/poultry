@@ -88,7 +88,7 @@ $list = $global->display_pigList() ?? [];
                                                     <th scope="row"><?= $listnow['HouseID']; ?></th>
                                                     <td><?= $listnow['PigCount']; ?></td>
                                                     <td><?= $listnow['PigDeceased']; ?></td>
-                                                    <td><a href="editpiglist.php?pid=<?= $listnow['pigListID']; ?>"><i class="fa fa-pencil-square m-1"></i>Edit</a> | <a href="disapigs.php?pid=<?= $listnow['HouseID']; ?>&processType=piglist"><i class="fa fa-user-times m-1"></i>Disable</a></td>
+                                                    <td><a href="editpiglist.php?pid=<?= $listnow['pigListID']; ?>"><i class="fa fa-pencil-square m-1"></i>Edit</a> | <a href="disapigs.php?pid=<?= $listnow['pigListID']; ?>&processType=piglist"><i class="fa fa-user-times m-1"></i>Disable</a> | <a href="sellpig.php?pid=<?= $listnow['pigListID']; ?>"><i class="fa fa-user-times m-1"></i>Sell</a></td>
                                                 </tr>
                                                 <?php } ?>
                                                 
