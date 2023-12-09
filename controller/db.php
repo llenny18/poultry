@@ -24,6 +24,18 @@ interface investRecords {
 	public function fetchRecords($typeID);
 }
 
+interface addInvestments {
+	public function addInvestments($p_name, $p_typeID, $p_recordPrice);
+};
+
+interface recordGetbyID {
+	public function getRecordbyID($recordID);
+}
+
+interface editRecordbyID {
+	public function editRecbyID($recordID, $Name, $typeID, $price);
+}
+
 interface usernameInterface {
 	public function getUsername($uid);
 }
@@ -196,7 +208,7 @@ Class recordClass extends connGateway  implements investRecords {
 
 	public function fetchRecords($typeID) {
 
-		$query = "SELECT * FROM `investments` WHERE typeID = ?";
+		$query = "SELECT * FROM `investmentrecords` WHERE typeID = ? and CreatedAt is not null and DeletedAt is null";
 
 		if ($stmt = $this->conn->prepare($query)) {
 			$stmt->bind_param("s", $typeID);
@@ -216,6 +228,61 @@ Class recordClass extends connGateway  implements investRecords {
 		}	
 	}
 }
+
+Class addInvestClass extends connGateway  implements addInvestments {
+
+	public function addInvestments($p_name, $p_typeID, $p_recordPrice){
+	
+		
+		$query = "CALL insert_investment(?,?,?)";
+	
+	if ($stmt = $this->conn->prepare($query)) {
+		$stmt->bind_param('sss',$p_name, $p_typeID, $p_recordPrice);
+		$stmt->execute();
+		$stmt->close();
+		echo "<script>alert('Investment Record Successful!'); window.location = 'Bills.php'</script>";
+	}
+	
+	}
+	}
+
+Class recordGet extends connGateway  implements recordGetbyID {
+
+	public function getRecordbyID($recordID) {
+	
+		$query = "SELECT * FROM `investmentrecords` where recordID = ?";
+	
+			if ($stmt = $this->conn->prepare($query)) {
+			$stmt->bind_param("s", $recordID);
+			$stmt->execute();
+			$results = $stmt->get_result();
+			while ($row = $results->fetch_assoc()) {
+				$data = array("Name"=>"{$row['Name']}", "typeID"=>"{$row['typeID']}", "recordPrice"=>"{$row['recordPrice']}");
+			}
+			$stmt->close();
+		
+			return $data;
+		}
+	
+	}
+}
+
+Class editRecordClass extends connGateway  implements editRecordbyID {
+
+	public function editRecbyID($recordID, $Name, $typeID, $recordPrice){
+	
+		
+		$query = "CALL update_investment(?,?,?,?)";
+	
+	if ($stmt = $this->conn->prepare($query)) {
+		$stmt->bind_param('ssss', $recordID, $Name, $typeID, $recordPrice);
+		$stmt->execute();
+		$stmt->close();
+		echo "<script>alert('Account Updated Successful!'); window.location='Bills.php'</script>";
+	}
+	
+	}
+	}
 
 Class usernameClass extends connGateway  implements usernameInterface {
 	public function getUsername($uid) {
