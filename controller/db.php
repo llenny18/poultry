@@ -312,6 +312,12 @@ interface getGross
 	// Function declaration to be used
 	public function getGross();
 }
+// Fetching of gross profit using created gross view
+interface sellPigs
+{
+	// Function declaration to be used
+	public function sellbyID($pid);
+}
 
 
 // Connection Class
@@ -459,6 +465,30 @@ class addInvestClass extends connGateway  implements addInvestments
 			$stmt->close();
 			//  Message flash and location change
 			echo "<script>alert('Investment Record Successful!'); window.location = 'Bills.php'</script>";
+		}
+	}
+}// Inserting Investments Class using stored procedure
+class sellPigsClass extends connGateway  implements sellPigs
+{
+
+	// Function declaration to be used
+	public function sellbyID($pid)
+	{
+
+
+		// Query declaration to be executed
+		$query = "CALL sell_pigs(?)";
+
+		//  Preparing of query to be binded with parameters
+		if ($stmt = $this->conn->prepare($query)) {
+			//  Binding of parameters
+			$stmt->bind_param('s', $pid);
+			//  Query Execution
+			$stmt->execute();
+			//  Closing mysqli object
+			$stmt->close();
+			//  Message flash and location change
+			echo "<script>alert('Pigs Sold Successfully!'); window.location = 'pigsold.php'</script>";
 		}
 	}
 }

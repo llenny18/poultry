@@ -424,7 +424,7 @@ Highcharts.chart('visitor_graph', {
     },
     series: [{
             name: 'Estimated PRofit',
-            data: <?php echo json_encode($pigsChartEstimate->getList2()) ?>,
+            data: <?php echo json_encode($pigsChartEstimate->getList2()) ?>, 
             fillColor: 'rgba(57, 249, 79, 0.5)',
             lineColor: 'transparent'
         },
