@@ -90,7 +90,7 @@ $listsold = $global->display_pigSold() ?? [];
                                                     <td><?= $listsoldnow['soldCount']; ?></td>
                                                     <td><?= $listsoldnow['profits']; ?></td>
                                                     <td><?= $listsoldnow['houseID']; ?></td>
-                                                    <td><a href="edituser.php?pid=<?= $listsoldnow['soldID']; ?>"><i class="fa fa-pencil-square m-1"></i>Edit</a> | <a href="disapigs.php?pid=<?= $listsoldnow['soldID']; ?>&processType=pigsold"><i class="fa fa-user-times m-1"></i>Disable</a></td>
+                                                    <td><a href="editpigsold.php?soldid=<?= $listsoldnow['soldID']; ?>"><i class="fa fa-pencil-square m-1"></i>Edit</a> | <a href="disapigs.php?pid=<?= $listsoldnow['soldID']; ?>&processType=pigsold"><i class="fa fa-user-times m-1"></i>Disable</a></td>
                                                 </tr>
                                                 <?php } ?>
                                                 

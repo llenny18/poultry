@@ -111,10 +111,24 @@ interface pigList {
 interface pigSold {
 	public function display_pigSold();
 }
+
 // Pigs Price List Records Interface
 interface pigPrice {
 	public function display_pigPrice();
 }
+
+interface editPigSold {
+	public function editPigSoldbyID($soldID, $soldCount, $houseID, $priceID);
+}
+
+interface pigPrice {
+	public function display_pigPrice();
+}
+
+interface editPigPrice {
+	public function editPigPricebyID($priceID, $priceDate, $price);
+}
+
 // Archived Pigs List Records Interface
 interface archpigList {
 	public function displayarch_pigList();
@@ -354,7 +368,52 @@ Class recordGet extends connGateway  implements recordGetbyID {
 	}
 }
 
+
 // Updating Investments using stored proceduere Class
+
+Class recordGet1 extends connGateway  implements recordGetbyID {
+
+	public function getRecordbyID($recordID) {
+	
+		$query = "SELECT * FROM `pigprice` where priceID = ?";
+	
+			if ($stmt = $this->conn->prepare($query)) {
+			$stmt->bind_param("s", $recordID);
+			$stmt->execute();
+			$results = $stmt->get_result();
+			while ($row = $results->fetch_assoc()) {
+				$data = array("priceDate"=>"{$row['priceDate']}", "price"=>"{$row['price']}");
+			}
+			$stmt->close();
+		
+			return $data;
+		}
+	
+	}
+}
+
+Class recordGet2 extends connGateway  implements recordGetbyID {
+
+	public function getRecordbyID($recordID) {
+	
+		$query = "SELECT * FROM `pigsold` where soldID = ?";
+	
+			if ($stmt = $this->conn->prepare($query)) {
+			$stmt->bind_param("s", $recordID);
+			$stmt->execute();
+			$results = $stmt->get_result();
+			while ($row = $results->fetch_assoc()) {
+				$data = array("soldCount"=>"{$row['soldCount']}", "priceID"=>"{$row['priceID']}", "houseID"=>"{$row['houseID']}");
+			}
+			$stmt->close();
+		
+			return $data;
+		}
+	
+	}
+}
+
+
 Class editRecordClass extends connGateway  implements editRecordbyID {
 
 	public function editRecbyID($recordID, $Name, $typeID, $recordPrice){
@@ -955,6 +1014,39 @@ return $data;
 }
 }
 
+Class editPigPriceClass extends connGateway  implements editPigPrice {
+
+	public function editPigPricebyID($priceID, $priceDate, $price){
+	
+		
+		$query = "CALL update_pigPrice(?,?,?)";
+	
+	if ($stmt = $this->conn->prepare($query)) {
+		$stmt->bind_param('sss', $priceID, $priceDate, $price);
+		$stmt->execute();
+		$stmt->close();
+		echo "<script>alert('Pig Price Updated Successful!'); window.location='pigprice.php'</script>";
+	}
+	
+	}
+}
+
+Class editPigSoldClass extends connGateway  implements editPigSold {
+
+	public function editPigSoldbyID($soldID, $soldCount, $houseID, $priceID){
+	
+		
+		$query = "CALL update_pigSold(?,?,?,?)";
+	
+	if ($stmt = $this->conn->prepare($query)) {
+		$stmt->bind_param('ssss', $soldID, $soldCount, $houseID, $priceID);
+		$stmt->execute();
+		$stmt->close();
+		echo "<script>alert('Pig Sold Record Updated Successful!'); window.location='pigsold.php'</script>";
+	}
+	
+	}
+}
 
 Class archpiglistClass extends connGateway  implements archpigList {
 
