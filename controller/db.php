@@ -85,6 +85,9 @@ interface archpigPrice {
 interface paperInfo {
 	public function display_paperInfo();
 }
+
+
+
 interface archpaperInfo {
 	public function displayarch_paperInfo();
 }
@@ -127,8 +130,17 @@ interface editPaper {
 	public function getListbyID($pid);
 }
 
-interface addPigList {
-	public function getListbyID($pid);
+interface editPigListData {
+	public function editListbyID($hid, $pc, $pd, $pid);
+}
+
+
+interface editPaperData {
+	public function editPaperbyID($ptype,$pimage,$pid);
+}
+
+interface addPigListData {
+	public function addListbyID($hid, $pc, $pd);
 }
 
 interface editPaperList {
@@ -138,8 +150,10 @@ interface editPaperList {
 
 
 interface addPaper {
-	public function getListbyID($pid);
+	public function addPaperData($pType, $pImage);
 }
+
+
 
 
 Class connGateway {
@@ -610,6 +624,81 @@ if ($stmt = $this->conn->prepare($query)) {
 }
 
 }
+
+}
+
+
+
+Class editImageClass extends connGateway  implements editPaperData {
+
+public function editPaperbyID($ptype, $pimage, $pid){
+
+	
+	$query = "UPDATE `paperrecords` SET `p_typeID` = ?, `p_image` = ? WHERE `paperrecords`.`paperID` = ?";
+
+if ($stmt = $this->conn->prepare($query)) {
+	$stmt->bind_param('sss', $ptype, $pimage, $pid);
+	echo $pimage;
+	$stmt->execute();
+	$stmt->close();
+	echo "<script>alert('Paper Updated Successful!'); window.location='paperlist.php'</script>";
+}
+
+
+}
+
+}
+
+
+
+
+Class editPigListClass extends connGateway  implements editPigListData {
+
+public function editListbyID($hid, $pc, $pd, $pid){
+
+	
+	$query = "UPDATE `piglist` SET `HouseID` = ?, `PigCount` = ?, `PigDeceased` = ? WHERE `piglist`.`pigListID` = ?";
+
+if ($stmt = $this->conn->prepare($query)) {
+	$stmt->bind_param('ssss', $hid, $pc, $pd, $pid);
+	$stmt->execute();
+	$stmt->close();
+	echo "<script>alert('Pigs List Update Successful!'); window.location='piglist.php'</script>";
+}
+
+}
+}
+Class addPigDClass extends connGateway  implements addPigListData {
+
+public function addListbyID($hid, $pc, $pd){
+
+	
+	$query = "INSERT INTO `piglist` (`pigListID`, `HouseID`, `PigCount`, `PigDeceased`, `CreatedAt`, `DeletedAt`) VALUES (NULL, ?, ?, ?, curdate(), NULL)";
+
+if ($stmt = $this->conn->prepare($query)) {
+	$stmt->bind_param('sss', $hid, $pc, $pd);
+	$stmt->execute();
+	$stmt->close();
+	echo "<script>alert('Pigs List Added Successful!'); window.location='piglist.php'</script>";
+}
+
+}
+}
+Class addPaperClass extends connGateway  implements addPaper {
+
+public function addPaperData($pType, $pImage){
+
+	
+	$query = "INSERT INTO `paperrecords` (`paperID`, `p_typeID`,`p_image`, `CreatedAt`, `DeletedAt`) VALUES (NULL, ?, ?, current_timestamp(), NULL)";
+
+if ($stmt = $this->conn->prepare($query)) {
+	$stmt->bind_param('ss', $pType, $pImage);
+	$stmt->execute();
+	$stmt->close();
+	echo "<script>alert('Pigs List Added Successful!'); window.location='paperlist.php'</script>";
+}
+
+}
 }
 
 Class userGet extends connGateway  implements userGetbyID {
@@ -817,12 +906,11 @@ return $data;
 
 }
 }
-
 Class archpaperListClass extends connGateway  implements archpaperInfo {
 
 public function displayarch_paperInfo(){
 
-	$query = "SELECT * FROM `paperinfo` where DeletedAt is not null";
+	$query = "SELECT * FROM `paperinfo` where DeletedAt is Not null";
 
 	if ($stmt = $this->conn->query($query)) {
 	
@@ -837,6 +925,8 @@ return $data;
 
 }
 }
+
+
 
 	function redirect($location=Null){
 		if($location!=Null){

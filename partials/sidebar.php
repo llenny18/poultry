@@ -54,16 +54,17 @@ function hasActivePage($invests) {
                                     <li class="<?= isPageActive('piglist.php') ? 'active' : ''; ?>"><a href="piglist.php">Pigs List</a></li>
                                     <li class="<?= isPageActive('archpiglist.php') ? 'active' : ''; ?>"><a href="archpiglist.php">Archived Pigs List</a></li>
                                     <li class="<?= isPageActive('pigsold.php') ? 'active' : ''; ?>"><a href="pigsold.php">Pigs Sold</a></li>
-                                    <li class="<?= isPageActive('archpigsold.php') ? 'active' : ''; ?>"><a href="archpigsold.php">Archived ived Pigs Sold</a></li>
+                                    <li class="<?= isPageActive('archpigsold.php') ? 'active' : ''; ?>"><a href="archpigsold.php">Archived Pigs Sold</a></li>
                                     <li class="<?= isPageActive('pigprice.php') ? 'active' : ''; ?>"><a href="pigprice.php">Pig Price</a></li>
                                     <li class="<?= isPageActive('archpigprice.php') ? 'active' : ''; ?>"><a href="archpigprice.php">Archived Pig Price</a></li>
                                 </ul>
                             </li>
-                            <li class="<?= isPageActive('paperlist.php') ? 'active' : ''; ?>">
+                            <li class="<?= isPageActive('paperlist.php') || isPageActive('archpaperlist.php') ? 'active' : ''; ?>">
                                 <a href="javascript:void(0)" aria-expanded="true"><i class="fa fa-table"></i>
                                     <span>Papers</span></a>
                                 <ul class="collapse">
                                     <li class="<?= isPageActive('paperlist.php') ? 'active' : ''; ?>"><a href="paperlist.php">Papers List</a></li>
+                                    <li class="<?= isPageActive('archpaperlist.php') ? 'active' : ''; ?>"><a href="archpaperlist.php">Archived Papers List</a></li>
                                 </ul>
                             </li>
                             
