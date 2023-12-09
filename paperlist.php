@@ -71,7 +71,7 @@ $papers = $global->display_paperInfo() ?? [];
                                                     <th scope="col">Paper ID</th>
                                                     <th scope="col">Paper Type</th>
                                                     <th scope="col">paper Description</th>
-                                                    <th scope="col">Image (Click to Download)</th>
+                                                    <th scope="col">FIle</th>
                                                     <th scope="col">Action</th>
                                                 </tr>
                                             </thead>
@@ -81,7 +81,7 @@ $papers = $global->display_paperInfo() ?? [];
                                                     <th scope="row"><?= $paper['paperID']; ?></th>
                                                     <td><?= $paper['p_typeName']; ?></td>
                                                     <td><?= $paper['p_typeDesc']; ?></td>
-                                                    <td><?php echo '<img src="data:image/jpg;base64,' .  base64_encode($paper['p_image'])  . '" />' ?></td>
+                                                    <td><embed src="data:application/pdf;base64,<?php echo base64_encode($paper['p_image']) ?>" type="application/pdf" style="height:100%;width:100%"/></td>
                                                     <td><a href="editpaper.php?pid=<?= $paper['paperID']; ?>"><i class="fa fa-pencil-square m-1"></i>Edit</a> | <a href="disapaper.php?pid=<?= $paper['paperID']; ?>"><i class="fa fa-user-times m-1"></i>Disable</a></td>
                                                 </tr>
                                                 <?php } ?>

@@ -3,7 +3,19 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
+<<<<<<< HEAD
+<<<<<<< HEAD
+<<<<<<< HEAD
+-- Generation Time: Dec 05, 2023 at 03:46 AM
+=======
+-- Generation Time: Dec 05, 2023 at 02:55 AM
+>>>>>>> 59f9b06 (updated Investment Types)
+=======
+-- Generation Time: Dec 08, 2023 at 05:33 PM
+>>>>>>> fe463cf (db)
+=======
 -- Generation Time: Dec 09, 2023 at 02:20 AM
+>>>>>>> 651eb28 (updated DB with procedures of Investments)
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -151,9 +163,15 @@ CREATE TABLE `investmentrecords` (
   `Name` varchar(100) NOT NULL,
   `typeID` int(11) NOT NULL,
   `recordDate` date NOT NULL,
+<<<<<<< HEAD
+  `recordPrice` decimal(10,2) UNSIGNED NOT NULL CHECK (`recordPrice` >= 0)
+<<<<<<< HEAD
+=======
+=======
   `recordPrice` decimal(10,2) UNSIGNED NOT NULL CHECK (`recordPrice` >= 0),
   `CreatedAt` date DEFAULT NULL,
   `DeletedAt` date DEFAULT NULL
+>>>>>>> 651eb28 (updated DB with procedures of Investments)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -175,6 +193,7 @@ INSERT INTO `investmentrecords` (`recordID`, `Name`, `typeID`, `recordDate`, `re
 CREATE TABLE `investmenttype` (
   `typeID` int(11) NOT NULL,
   `typeName` varchar(100) NOT NULL
+>>>>>>> 59f9b06 (updated Investment Types)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -212,6 +231,28 @@ CREATE TABLE `paperinfo` (
 ,`p_typeName` varchar(100)
 ,`p_typeDesc` text
 );
+
+-- --------------------------------------------------------
+
+--
+<<<<<<< HEAD
+-- Table structure for table `investmenttype`
+--
+
+CREATE TABLE `investmenttype` (
+  `typeID` int(11) NOT NULL,
+  `typeName` varchar(100) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+=======
+-- Dumping data for table `investmenttype`
+--
+
+INSERT INTO `investmenttype` (`typeID`, `typeName`) VALUES
+(1, 'Bills'),
+(2, 'Medicines & Vitamins'),
+(3, 'E-Wages'),
+(4, 'Miscellaneous');
+>>>>>>> 59f9b06 (updated Investment Types)
 
 -- --------------------------------------------------------
 
@@ -428,15 +469,25 @@ CREATE TABLE `useraccounts` (
   `DeletedAt` date DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+-- --------------------------------------------------------
+
 --
--- Dumping data for table `useraccounts`
+-- Table structure for table `userinfo`
 --
 
+<<<<<<< HEAD
+<<<<<<< HEAD
+INSERT INTO `useraccounts` (`userID`, `u_username`, `u_password`) VALUES
+(2, 'poultryadmin01', 'c67515a3fe5653fb72bfc7c616c9d868eecc2951c15af6c53688787af4e1a3e9'),
+(3, 'poultryemp1', '561d787a6653743ee17a8865404e2ef866fe9d274e756acbb84e3be17d3fd120'),
+(4, 'disbaled1', '15911aff0dc3a1c204ffd4f3803d46a3bf7ad039c5cb7b81e34906f9d0e1ecd4');
+=======
 INSERT INTO `useraccounts` (`userID`, `u_username`, `u_password`, `CreatedAt`, `DeletedAt`) VALUES
 (2, 'poultryadmin01', 'c67515a3fe5653fb72bfc7c616c9d868eecc2951c15af6c53688787af4e1a3e9', '2023-12-08', NULL),
 (3, 'poultryemp1', '561d787a6653743ee17a8865404e2ef866fe9d274e756acbb84e3be17d3fd120', '2023-12-08', NULL),
 (4, '3', '7888a496b94ffb11e4c38a574507e4f6d433b8a12b1fde7e0dc345e5bf3f47da', '2023-12-08', '2023-12-13'),
 (6, '324234', '382dd1a4fc426a87c339a3e74e1418edbc02e652de51aceecaade87ae79a9a95', '2023-12-08', '2023-12-08');
+>>>>>>> fe463cf (db)
 
 -- --------------------------------------------------------
 
@@ -444,6 +495,8 @@ INSERT INTO `useraccounts` (`userID`, `u_username`, `u_password`, `CreatedAt`, `
 -- Table structure for table `userinfo`
 --
 
+=======
+>>>>>>> 59f9b06 (updated Investment Types)
 CREATE TABLE `userinfo` (
   `infoID` int(11) NOT NULL,
   `u_firstname` varchar(255) NOT NULL,
@@ -454,6 +507,7 @@ CREATE TABLE `userinfo` (
   `userID` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+<<<<<<< HEAD
 --
 -- Dumping data for table `userinfo`
 --
@@ -463,6 +517,8 @@ INSERT INTO `userinfo` (`infoID`, `u_firstname`, `u_lastname`, `u_contactnum`, `
 (2, 'Aleister', 'Alinsunurin', '09763912112', 'aleister@gmail.com', 2, 3),
 (3, 'Disabledw', 'Employeew', 'Choose User Type', '096675665', 0, 4);
 
+=======
+>>>>>>> 59f9b06 (updated Investment Types)
 -- --------------------------------------------------------
 
 --
@@ -474,6 +530,7 @@ CREATE TABLE `userrole` (
   `roleName` varchar(100) NOT NULL,
   `roleDesc` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+<<<<<<< HEAD
 
 --
 -- Dumping data for table `userrole`
@@ -585,7 +642,13 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW 
 --
 DROP TABLE IF EXISTS `viewusers`;
 
+<<<<<<< HEAD
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `viewusers`  AS SELECT concat(`ui`.`u_firstname`,' ',`ui`.`u_lastname`) AS `fullName`, `ui`.`u_contactnum` AS `u_contactnum`, `ui`.`u_email` AS `u_email`, `ua`.`userID` AS `userID`, `ua`.`u_username` AS `u_username`, `ua`.`u_password` AS `u_password`, `ur`.`roleID` AS `roleID`, `ur`.`roleName` AS `roleName`, `ur`.`roleDesc` AS `roleDesc` FROM ((`userinfo` `ui` join `useraccounts` `ua` on(`ua`.`userID` = `ui`.`userID`)) join `userrole` `ur` on(`ur`.`roleID` = `ui`.`roleID`)) ;
+=======
+>>>>>>> 59f9b06 (updated Investment Types)
+=======
 CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `viewusers`  AS SELECT `ui`.`u_firstname` AS `u_firstname`, `ui`.`u_lastname` AS `u_lastname`, `ua`.`CreatedAt` AS `CreatedAt`, `ua`.`DeletedAt` AS `DeletedAt`, concat(`ui`.`u_firstname`,' ',`ui`.`u_lastname`) AS `fullName`, `ui`.`u_contactnum` AS `u_contactnum`, `ui`.`u_email` AS `u_email`, `ua`.`userID` AS `userID`, `ua`.`u_username` AS `u_username`, `ua`.`u_password` AS `u_password`, `ur`.`roleID` AS `roleID`, `ur`.`roleName` AS `roleName`, `ur`.`roleDesc` AS `roleDesc` FROM ((`userinfo` `ui` join `useraccounts` `ua` on(`ua`.`userID` = `ui`.`userID`)) join `userrole` `ur` on(`ur`.`roleID` = `ui`.`roleID`)) ;
+>>>>>>> fe463cf (db)
 
 --
 -- Indexes for dumped tables
@@ -671,7 +734,15 @@ ALTER TABLE `investmentrecords`
 -- AUTO_INCREMENT for table `investmenttype`
 --
 ALTER TABLE `investmenttype`
+<<<<<<< HEAD
+<<<<<<< HEAD
+  MODIFY `typeID` int(11) NOT NULL AUTO_INCREMENT;
+=======
   MODIFY `typeID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+>>>>>>> 59f9b06 (updated Investment Types)
+=======
+  MODIFY `typeID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+>>>>>>> fe463cf (db)
 
 --
 -- AUTO_INCREMENT for table `paperrecords`
@@ -701,19 +772,43 @@ ALTER TABLE `pigsold`
 -- AUTO_INCREMENT for table `useraccounts`
 --
 ALTER TABLE `useraccounts`
+<<<<<<< HEAD
+<<<<<<< HEAD
+  MODIFY `userID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+=======
+  MODIFY `userID` int(11) NOT NULL AUTO_INCREMENT;
+>>>>>>> 59f9b06 (updated Investment Types)
+=======
   MODIFY `userID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+>>>>>>> fe463cf (db)
 
 --
 -- AUTO_INCREMENT for table `userinfo`
 --
 ALTER TABLE `userinfo`
+<<<<<<< HEAD
+<<<<<<< HEAD
+  MODIFY `infoID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+=======
+  MODIFY `infoID` int(11) NOT NULL AUTO_INCREMENT;
+>>>>>>> 59f9b06 (updated Investment Types)
+=======
   MODIFY `infoID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+>>>>>>> fe463cf (db)
 
 --
 -- AUTO_INCREMENT for table `userrole`
 --
 ALTER TABLE `userrole`
+<<<<<<< HEAD
+<<<<<<< HEAD
+  MODIFY `roleID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+=======
+  MODIFY `roleID` int(11) NOT NULL AUTO_INCREMENT;
+>>>>>>> 59f9b06 (updated Investment Types)
+=======
   MODIFY `roleID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+>>>>>>> fe463cf (db)
 
 --
 -- Constraints for dumped tables

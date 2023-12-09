@@ -1,18 +1,15 @@
 <?php require("./controller/db.php"); 
 if(!isset($_SESSION['u_id'])){ redirect("./login.php");}
 
-$addemployee = new adduserClass();
+$addemployee = new addPigDClass();
 
-if(isset($_POST['add_emp'])){
-$fname = $_POST['ufname'];
-$lname = $_POST['ulname'];
-$rid = $_POST['urole'];
-$uname = $_POST['uname'];
-$pass = $_POST['upass'];
-$cnum = $_POST['cnum'];
-$email = $_POST['email'];
+if(isset($_POST['add_pl'])){
+$hid = $_POST['hid'];
+$pCount = $_POST['pCount'];
+$pDeceased = $_POST['pDeceased'];
 
-    $addemployee->addUserbyID($fname,$lname,$rid,$uname,$pass,$cnum,$email);
+
+    $addemployee->addListbyID($hid,$pCount,$pDeceased);
 }
 
 ?>
@@ -55,21 +52,21 @@ $email = $_POST['email'];
                                                 
                                                 <div class="col-md-4 mb-3">
                                                     <label for="validationCustom01">House ID</label>
-                                                    <input type="number" name="ufname" class="form-control" id="validationCustom01" placeholder="0"   required="">
+                                                    <input type="number" name="hid" class="form-control" id="validationCustom01" placeholder="0"   required="">
                                                     <div class="valid-feedback">
                                                         Looks good!
                                                     </div>
                                                 </div>
                                                 <div class="col-md-4 mb-3">
                                                     <label for="validationCustom02">Pig Count</label>
-                                                    <input type="number" name="ulname" class="form-control" id="validationCustom02" placeholder="0"  required="">
+                                                    <input type="number" name="pCount" class="form-control" id="validationCustom02" placeholder="0"  required="">
                                                     <div class="valid-feedback">
                                                         Looks good!
                                                     </div>
                                                 </div>
                                                 <div class="col-md-4 mb-3">
                                                     <label for="validationCustom02">Pig Deceased</label>
-                                                    <input type="number" name="ulname" class="form-control" id="validationCustom02" placeholder="0"  required="">
+                                                    <input type="number" name="pDeceased" class="form-control" id="validationCustom02" placeholder="0"  required="">
                                                     <div class="valid-feedback">
                                                         Looks good!
                                                     </div>
@@ -85,7 +82,7 @@ $email = $_POST['email'];
                                                     </div>
                                                 </div>
                                             </div>
-                                            <button class="btn btn-primary" type="submit" name="add_emp">Submit form</button>
+                                            <button class="btn btn-primary" type="submit" name="add_pl">Submit form</button>
                                         </form>
                                     </div>
                                 </div>
