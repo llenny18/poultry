@@ -88,7 +88,7 @@ $pricelist = $global->display_pigPrice() ?? [];
                                                     <th scope="row"><?= $pricenow['priceID']; ?></th>
                                                     <td><?= $pricenow['priceDate']; ?></td>
                                                     <td><?= $pricenow['price']; ?></td>
-                                                    <td><a href="edituser.php?pid=<?= $pricenow['priceID']; ?>"><i class="fa fa-pencil-square m-1"></i>Edit</a> | <a href="disapigs.php?pid=<?= $pricenow['priceID']; ?>&processType=pigprice"><i class="fa fa-user-times m-1"></i>Disable</a></td>
+                                                    <td><a href="editpigprice.php?pid=<?= $pricenow['priceID']; ?>"><i class="fa fa-pencil-square m-1"></i>Edit</a> | <a href="disapigs.php?pid=<?= $pricenow['priceID']; ?>&processType=pigprice"><i class="fa fa-user-times m-1"></i>Disable</a></td>
                                                 </tr>
                                                 <?php } ?>
                                                 

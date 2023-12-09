@@ -13,18 +13,19 @@ Contents:
 <?php require("./controller/db.php"); 
 if(!isset($_SESSION['u_id'])){ redirect("./login.php");}
 
-$addemployee = new adduserClass();
+$recordget = new recordGet1();
+$priceID = $_GET['pid'];
+$priceInfo = $recordget->getRecordbyID($priceID);
 
-if(isset($_POST['add_emp'])){
-$fname = $_POST['ufname'];
-$lname = $_POST['ulname'];
-$rid = $_POST['urole'];
-$uname = $_POST['uname'];
-$pass = $_POST['upass'];
-$cnum = $_POST['cnum'];
-$email = $_POST['email'];
+$pigPrice = new editPigPriceClass();
 
-    $addemployee->addUserbyID($fname,$lname,$rid,$uname,$pass,$cnum,$email);
+if(isset($_POST['edit_pigprice'])){
+    $pid = $_GET['pid'];
+    $priceDate = $_POST['priceDate'];
+    $price = $_POST['price'];
+
+
+    $pigPrice->editPigPricebyID($pid, $priceDate, $price);
 }
 
 ?>
@@ -57,7 +58,7 @@ $email = $_POST['email'];
                             <div class="col-12">
                                 <div class="card mt-5">
                                     <div class="card-body">
-                                        <h4 class="header-title">Add Pigs Price</h4>
+                                        <h4 class="header-title">Edit Pigs Price</h4>
                                         <form class="needs-validation" novalidate="" method="post">
                                             <div class="form-row">
                                                 
@@ -68,7 +69,7 @@ $email = $_POST['email'];
                                                         <div class="input-group-prepend">
                                                             <span class="input-group-text" id="inputGroupPrepend"><i class="fa fa-money" aria-hidden="true"></i></span>
                                                         </div>
-                                                        <input type="text" class="form-control" id="validationCustomUsername"  name="uname" placeholder="Username" aria-describedby="inputGroupPrepend" required="">
+                                                        <input type="text" class="form-control" id="validationCustomUsername"  name="price" placeholder="Price" value="<?= $priceInfo['price'] ?>" aria-describedby="inputGroupPrepend" required="">
                                                         <div class="invalid-feedback">
                                                             Please choose a username.
                                                         </div>
@@ -80,9 +81,9 @@ $email = $_POST['email'];
                                                         <div class="input-group-prepend">
                                                             <span class="input-group-text" id="inputGroupPrepend"><i class="fa fa-calendar-plus-o" aria-hidden="true"></i></span>
                                                         </div>
-                                                        <input type="date" class="form-control" id="validationCustomUsername"  name="upass"  placeholder="Password" aria-describedby="inputGroupPrepend" required="">
+                                                        <input type="date" class="form-control" id="validationCustomUsername"  name="priceDate"  placeholder="date" value="<?= $priceInfo['priceDate'] ?>" aria-describedby="inputGroupPrepend" required="">
                                                         <div class="invalid-feedback">
-                                                            Please choose a username.
+                                                            Please choose a valid Date.
                                                         </div>
                                                     </div>
                                                 </div>
@@ -96,7 +97,7 @@ $email = $_POST['email'];
                                                     </div>
                                                 </div>
                                             </div>
-                                            <button class="btn btn-primary" type="submit" name="add_emp">Submit form</button>
+                                            <button class="btn btn-primary" type="submit" name="edit_pigprice">Submit form</button>
                                         </form>
                                     </div>
                                 </div>
