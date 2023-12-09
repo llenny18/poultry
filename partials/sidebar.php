@@ -1,3 +1,15 @@
+
+
+<!--
+Developers: Aliester Alinsunurin, Allen Eidrian S. Ramos
+Application Type: Poultry and Piggery Financial Management System
+
+This is the Home File (report.php)
+Contents:
+1. Sidebar Partial
+
+-->
+
 <?php 
 $global = new investClass();
 $invests = $global->fetchInvestments();

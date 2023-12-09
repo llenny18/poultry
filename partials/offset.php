@@ -1,4 +1,16 @@
- <!-- offset area start -->
+ 
+
+<!--
+Developers: Aliester Alinsunurin, Allen Eidrian S. Ramos
+Application Type: Poultry and Piggery Financial Management System
+
+This is the Home File (report.php)
+Contents:
+1. Offset/Notifications Partial
+
+-->
+
+<!-- offset area start -->
  <div class="offset-area">
         <div class="offset-close"><i class="ti-close"></i></div>
         <ul class="nav offset-menu-tab">
