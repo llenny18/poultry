@@ -118,7 +118,7 @@ $totalGross = $gross->getGross();
     </div>
     <!-- page container area end -->
    <?php include "./partials/offset.php"; ?>
-        <!--Scripts used for system functionalities Developers decided to used downloaded CDN in case of internet/Power outage--><!-- jquery latest version -->
+        
            <!--Scripts used for system functionalities Developers decided to used downloaded CDN in case of internet/Power outage--><!-- jquery latest version -->
        <script src="assets/js/vendor/jquery-2.2.4.min.js"></script>
     <!-- bootstrap 4 js -->
