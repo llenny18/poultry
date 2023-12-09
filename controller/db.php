@@ -165,6 +165,11 @@ interface addPaper {
 	public function addPaperData($pType, $pImage);
 }
 
+interface getGross {
+	public function getGross();
+}
+
+
 
 
 
@@ -476,6 +481,25 @@ return $data;
 
 }
 
+
+Class getGrossClass extends connGateway  implements getGross {
+
+public function getGross() {
+
+	$query = "SELECT * FROM `grossprofit`";
+
+	if ($stmt = $this->conn->query($query)) {
+	
+	while ($row = $stmt->fetch_assoc()) {
+		$data = ["profits"=>$row["totalProfit"]];
+	}
+	$stmt->close();
+}
+return $data;
+}
+
+}
+
 Class getEstimatedProfit extends connGateway  implements EstimatedProfit {
 
 	public function getList() {
@@ -709,7 +733,6 @@ public function editPaperbyID($ptype, $pimage, $pid){
 
 if ($stmt = $this->conn->prepare($query)) {
 	$stmt->bind_param('sss', $ptype, $pimage, $pid);
-	echo $pimage;
 	$stmt->execute();
 	$stmt->close();
 	echo "<script>alert('Paper Updated Successful!'); window.location='paperlist.php'</script>";
