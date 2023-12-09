@@ -105,6 +105,55 @@ $totalGross = $gross->getGross();
                                 </div>
                             </div>
                         </div>
+
+                        <div class="main-content-inner">
+                <!-- bar chart start -->
+                <div class="row">
+                    <div class="col-lg-6 mt-5">
+                        <div class="card">
+                            <div class="card-body">
+                                <div id="ambarchart1"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 mt-5">
+                        <div class="card">
+                            <div class="card-body">
+                                <div id="ambarchart2"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 mt-5">
+                        <div class="card">
+                            <div class="card-body">
+                                <div id="ambarchart3"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 mt-5">
+                        <div class="card">
+                            <div class="card-body">
+                                <div id="ambarchart4"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 mt-5">
+                        <div class="card">
+                            <div class="card-body">
+                                <div id="ambarchart5"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 mt-5">
+                        <div class="card">
+                            <div class="card-body">
+                                <div id="ambarchart6"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- bar chart end -->
+            </div>
                     </div>
                   
                 </div>
@@ -118,7 +167,92 @@ $totalGross = $gross->getGross();
     </div>
     <!-- page container area end -->
    <?php include "./partials/offset.php"; ?>
-        
+        <script>
+if ($('#ambarchart1').length) {
+    var chart = AmCharts.makeChart("ambarchart1", {
+        "theme": "light",
+        "type": "serial",
+        "balloon": {
+            "adjustBorderColor": false,
+            "horizontalPadding": 10,
+            "verticalPadding": 4,
+            "color": "#fff"
+        },
+        "dataProvider": [{
+            "country": "USA",
+            "year2004": 3.5,
+            "year2005": 4.2,
+            "color": "#bfbffd",
+            "color2": "#7474F0"
+        }, {
+            "country": "UK",
+            "year2004": 1.7,
+            "year2005": 3.1,
+            "color": "#bfbffd",
+            "color2": "#7474F0"
+        }, {
+            "country": "Canada",
+            "year2004": 2.8,
+            "year2005": 2.9,
+            "color": "#bfbffd",
+            "color2": "#7474F0"
+        }, {
+            "country": "Japan",
+            "year2004": 2.6,
+            "year2005": 2.3,
+            "color": "#bfbffd",
+            "color2": "#7474F0"
+        }, {
+            "country": "France",
+            "year2004": 1.4,
+            "year2005": 2.1,
+            "color": "#bfbffd",
+            "color2": "#7474F0"
+        }, {
+            "country": "Brazil",
+            "year2004": 2.6,
+            "year2005": 4.9,
+            "color": "#bfbffd",
+            "color2": "#7474F0"
+        }],
+        "valueAxes": [{
+            "unit": "%",
+            "position": "left",
+        }],
+        "startDuration": 1,
+        "graphs": [{
+            "balloonText": "GDP grow in [[category]] (2017): <b>[[value]]</b>",
+            "fillAlphas": 0.9,
+            "fillColorsField": "color",
+            "lineAlpha": 0.2,
+            "title": "2017",
+            "type": "column",
+            "valueField": "year2004"
+        }, {
+            "balloonText": "GDP grow in [[category]] (2018): <b>[[value]]</b>",
+            "fillAlphas": 0.9,
+            "fillColorsField": "color2",
+            "lineAlpha": 0.2,
+            "title": "2018",
+            "type": "column",
+            "clustered": false,
+            "columnWidth": 0.5,
+            "valueField": "year2005"
+        }],
+        "plotAreaFillAlphas": 0.1,
+        "categoryField": "country",
+        "categoryAxis": {
+            "gridPosition": "start"
+        },
+        "export": {
+            "enabled": false
+        }
+
+    });
+}
+
+
+        </script>
            <!--Scripts used for system functionalities Developers decided to used downloaded CDN in case of internet/Power outage--><!-- jquery latest version -->
        <script src="assets/js/vendor/jquery-2.2.4.min.js"></script>
     <!-- bootstrap 4 js -->
@@ -135,6 +269,39 @@ $totalGross = $gross->getGross();
     <script src="https://cdn.datatables.net/1.10.18/js/dataTables.bootstrap4.min.js"></script>
     <script src="https://cdn.datatables.net/responsive/2.2.3/js/dataTables.responsive.min.js"></script>
     <script src="https://cdn.datatables.net/responsive/2.2.3/js/responsive.bootstrap.min.js"></script>
+    <!-- others plugins -->
+    <script src="assets/js/plugins.js"></script>
+    <script src="assets/js/scripts.js"></script>\
+
+    <script src="assets/js/vendor/jquery-2.2.4.min.js"></script>
+    <!-- bootstrap 4 js -->
+    <script src="assets/js/popper.min.js"></script>
+    <script src="assets/js/bootstrap.min.js"></script>
+    <script src="assets/js/owl.carousel.min.js"></script>
+    <script src="assets/js/metisMenu.min.js"></script>
+    <script src="assets/js/jquery.slimscroll.min.js"></script>
+    <script src="assets/js/jquery.slicknav.min.js"></script>
+    <!-- start chart js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.min.js"></script>
+    <!-- start highcharts js -->
+    <script src="https://code.highcharts.com/highcharts.js"></script>
+    <!-- start zingchart js -->
+    <script src="https://cdn.zingchart.com/zingchart.min.js"></script>
+    <script>
+    zingchart.MODULESDIR = "https://cdn.zingchart.com/modules/";
+    ZC.LICENSE = ["569d52cefae586f634c54f86dc99e6a9", "ee6b7db5b51705a13dc2339db3edaf6d"];
+    </script>
+    <!-- start amchart js -->
+    <script src="https://www.amcharts.com/lib/3/amcharts.js"></script>
+    <script src="https://www.amcharts.com/lib/3/serial.js"></script>
+    <script src="https://www.amcharts.com/lib/3/plugins/export/export.min.js"></script>
+    <script src="https://www.amcharts.com/lib/3/themes/light.js"></script>
+    <!-- all line chart activation -->
+    <script src="assets/js/line-chart.js"></script>
+    <!-- all bar chart activation -->
+    <script src="assets/js/bar-chart.js"></script>
+    <!-- all pie chart -->
+    <script src="assets/js/pie-chart.js"></script>
     <!-- others plugins -->
     <script src="assets/js/plugins.js"></script>
     <script src="assets/js/scripts.js"></script>

@@ -1,11 +1,4 @@
--- phpMyAdmin SQL Dump
--- version 5.2.1
--- https://www.phpmyadmin.net/
---
--- Host: 127.0.0.1
--- Generation Time: Dec 09, 2023 at 11:15 AM
--- Server version: 10.4.28-MariaDB
--- PHP Version: 8.2.4
+
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -170,9 +163,11 @@ CREATE TABLE `investmentrecords` (
   `Name` varchar(100) NOT NULL,
   `typeID` int(11) NOT NULL,
   `recordDate` date NOT NULL,
+
   `recordPrice` decimal(10,2) UNSIGNED NOT NULL CHECK (`recordPrice` >= 0),
   `CreatedAt` date DEFAULT NULL,
   `DeletedAt` date DEFAULT NULL
+
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -234,6 +229,21 @@ CREATE TABLE `paperinfo` (
 -- --------------------------------------------------------
 
 --
+ 
+-- Table structure for table `investmenttype`
+--
+
+
+-- Dumping data for table `investmenttype`
+--
+
+INSERT INTO `investmenttype` (`typeID`, `typeName`) VALUES
+(1, 'Bills'),
+(2, 'Medicines & Vitamins'),
+(3, 'E-Wages'),
+(4, 'Miscellaneous');
+
+
 -- Table structure for table `paperrecords`
 --
 
@@ -306,12 +316,14 @@ CREATE TABLE `pigdeceased_permonth` (
 --
 
 CREATE TABLE `piglist` (
+  `pigListID` int(11) NOT NULL,
   `HouseID` int(11) NOT NULL,
   `PigCount` int(11) NOT NULL,
   `PigDeceased` int(11) NOT NULL,
   `CreatedAt` timestamp NULL DEFAULT NULL,
   `DeletedAt` date DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
 
 --
 -- Dumping data for table `piglist`
@@ -450,6 +462,11 @@ CREATE TABLE `useraccounts` (
 -- Dumping data for table `useraccounts`
 --
 
+INSERT INTO `useraccounts` (`userID`, `u_username`, `u_password`) VALUES
+(2, 'poultryadmin01', 'c67515a3fe5653fb72bfc7c616c9d868eecc2951c15af6c53688787af4e1a3e9'),
+(3, 'poultryemp1', '561d787a6653743ee17a8865404e2ef866fe9d274e756acbb84e3be17d3fd120'),
+(4, 'disbaled1', '15911aff0dc3a1c204ffd4f3803d46a3bf7ad039c5cb7b81e34906f9d0e1ecd4');
+ 
 INSERT INTO `useraccounts` (`userID`, `u_username`, `u_password`, `CreatedAt`, `DeletedAt`) VALUES
 (2, 'poultryadmin01', 'c67515a3fe5653fb72bfc7c616c9d868eecc2951c15af6c53688787af4e1a3e9', '2023-12-08', NULL),
 (3, 'poultryemp1', '561d787a6653743ee17a8865404e2ef866fe9d274e756acbb84e3be17d3fd120', '2023-12-08', NULL),
@@ -480,8 +497,7 @@ INSERT INTO `userinfo` (`infoID`, `u_firstname`, `u_lastname`, `u_contactnum`, `
 (1, 'Allen', 'Ramos', '0967262339', 'ramosalleneid01@gmail.com', 0, 2),
 (2, 'Aleister', 'Alinsunurin', '09763912112', 'aleister@gmail.com', 2, 3),
 (3, 'Disabledw', 'Employeew', 'Choose User Type', '096675665', 0, 4);
-
--- --------------------------------------------------------
+------------------------------------------
 
 --
 -- Table structure for table `userrole`

@@ -134,7 +134,7 @@ Contents:
                     <div class="settings-list">
                         <div class="s-settings">
                             <div class="s-sw-title">
-                                <h5>Notifications</h5>
+                                <h5>Notificationsz</h5>
                                 <div class="s-swtich">
                                     <input type="checkbox" id="switch1" />
                                     <label for="switch1">Toggle</label>
