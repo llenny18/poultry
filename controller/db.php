@@ -1,86 +1,120 @@
 <?php
-session_set_cookie_params(720000);
 
-//set cookie lifetime for 100 days (60sec * 60mins * 24hours * 100days)
+/* 
+Developers: Aliester Alinsunurin, Allen Eidrian S. Ramos
+Application Type: Poultry and Piggery Financial Management System
+
+This is the Home File (addpaper.php)
+Contents:
+1. All the OOP based functions Using SOLID Principle: Encapsulation, Polymorphism, Inheritance and Abstraction
+ */
+
+// Session start for data handling
+ session_start();
+
+ // Set Cookie time to 20 hours
+session_set_cookie_params(72000);
+
+// Set cookie lifetime for 100 days (60sec * 60mins * 24hours * 100days) for Config File
 ini_set('session.cookie_lifetime', 60 * 60 * 24 * 100);
 ini_set('session.gc_maxlifetime', 60 * 60 * 24 * 100);
 
    
-session_start();
 
+// Login Interface
 interface loginInterface {
 	public function userLogin($user_name, $user_pass);
 }
 
-interface feedInterface {
-	public function fetchFeeds();
-}
 
+// Investment Types Interface
 interface investInterface {
 	public function fetchInvestments();
 }
 
+// Investment records Interface
 interface investRecords {
 	public function fetchRecords($typeID);
 }
 
+// Investment insertion Interface
 interface addInvestments {
 	public function addInvestments($p_name, $p_typeID, $p_recordPrice);
 };
 
+// Investment records  fetch using ID Interface
 interface recordGetbyID {
 	public function getRecordbyID($recordID);
 }
 
+// Investment editing of records list Interface
 interface editRecordbyID {
 	public function editRecbyID($recordID, $Name, $typeID, $price);
 }
 
+// Disabling records Interface
 interface disableRecord {
 	public function disa_record($recordID);
 }
 
+// Disabled records list Interface
 interface disabledRecords {
 	public function getRecord();
 }
 
+// Deleting records Interface
 interface deleteRecord {
 	public function deletebyID($recordID);
 }
 
+// Record fetching of username Interface
 interface usernameInterface {
 	public function getUsername($uid);
 }
 
+// Users List Interface
 interface userList {
 	public function getUsers();
 }
+// Disabled Users list Interface
 interface disabledUsers {
 	public function getUsers();
 }
+//User Information fetching using ID Interface
 interface userGetbyID {
 	public function getUserbyID($uid);
 }
+// Disabling Users Interface
 interface userDisable {
 	public function disableUser($uid);
 }
 
+// Insertion of Users Interface
 interface addEditbyID {
 	public function addUserbyID($fname,$lname,$cnum,$email,$rid,$uname,$pass);
 }
 
+// Updating of Users Interface
 interface editEditbyID {
 	public function editUserbyID($uid, $fname,$lname,$cnum,$email,$rid,$uname,$pass);
 }
 
+// Delete User by ID Interface
 interface deleteEditbyID {
 	public function deletebyID($uid);
 }
+// Pigs List Records Interface
 interface pigList {
 	public function display_pigList();
 }
+// Pigs Sold List Records Interface
 interface pigSold {
 	public function display_pigSold();
+}
+
+// Pigs Price List Records Interface
+interface pigPrice {
+	public function display_pigPrice();
 }
 
 interface editPigSold {
@@ -95,89 +129,109 @@ interface editPigPrice {
 	public function editPigPricebyID($priceID, $priceDate, $price);
 }
 
+// Archived Pigs List Records Interface
 interface archpigList {
 	public function displayarch_pigList();
 }
+// Archived Pigs Sold List Records Interface
 interface archpigSold {
 	public function displayarch_pigSold();
 }
+// Archived Pigs Price List Records Interface
 interface archpigPrice {
 	public function displayarch_pigPrice();
 }
+// Paper Information Records Interface
 interface paperInfo {
 	public function display_paperInfo();
 }
 
-
-
+// Archived Paper Information Records Interface
 interface archpaperInfo {
 	public function displayarch_paperInfo();
 }
+// Disabling of paper record by id Interface
 interface disapaper {
 	public function disa_paper($uid);
 }
+// Disabling of Pigs list record by id Interface
 interface disaPiglist {
 	public function disa_Piglist($uid);
 }
+// Disabling of Pigs price list record by id Interface
 interface disaPigprice {
 	public function disa_Pigprice($uid);
 }
+// Disabling of Pigs sold list record by id Interface
 interface disaPigsold {
 	public function disa_Pigsold($uid);
 }
 
+// Count of pigs sold per month records Interface
 interface countOFPigs {
 	public function getList();
 }
 
+// Count of pigs deceased per month records Interface
 interface countOFDeceased {
 	public function getList();
 }
 
+// Records of expenses per month records Interface
 interface expensesList {
 	public function getList();
 }
 
+// Records of restimated profit per month records Interface
 interface EstimatedProfit {
 	public function getList();
 }
 
 
+// Updating of Pig List Interface
 interface editPigList {
 	public function getListbyID($pid);
 }
 
 
+// Updating of Paper List Interface
 interface editPaper {
 	public function getListbyID($pid);
 }
 
+// Updating of Pig List Data Interface
 interface editPigListData {
 	public function editListbyID($hid, $pc, $pd, $pid);
 }
 
 
+// Updating of Paper Data Interface
 interface editPaperData {
 	public function editPaperbyID($ptype,$pimage,$pid);
 }
 
+// Insertion of Pigs List Interface
 interface addPigListData {
 	public function addListbyID($hid, $pc, $pd);
 }
 
+// Updating of Paper List Interface
 interface editPaperList {
 	public function getListbyID($pid);
 }
 
-
-
+// Insertion of Paper Interface
 interface addPaper {
 	public function addPaperData($pType, $pImage);
 }
 
+// Fetching of gross profit using created gross view
+interface getGross {
+	public function getGross();
+}
 
 
-
+// Connection Class
 Class connGateway {
 		public $server = "localhost";
 		public $username = "root";
@@ -196,6 +250,7 @@ Class connGateway {
 
 	}
 
+// Login Class
 Class loginClass extends connGateway implements loginInterface {
 
         public function userLogin($user_name, $user_pass) {
@@ -226,25 +281,8 @@ Class loginClass extends connGateway implements loginInterface {
         }
 	}
 
-Class feedClass extends connGateway  implements feedInterface {
 
-        public function fetchFeeds() {
-
-			$query = "SELECT * FROM feedsinvestment";
-
-			if ($stmt = $this->conn->query($query)) {
-			
-            $num_of_rows = $stmt->num_rows;
-            while ($row = $stmt->fetch_assoc()) {
-                $data[] = $row;
-            }
-            $stmt->close();
-        }
-        return $data;
-    }
-
-}
-
+// Fetching Investments Class
 Class investClass extends connGateway  implements investInterface {
 
 	public function fetchInvestments() {
@@ -264,6 +302,7 @@ Class investClass extends connGateway  implements investInterface {
 
 }
 
+// Fetching Filtered Class
 Class recordClass extends connGateway  implements investRecords {
 
 	public function fetchRecords($typeID) {
@@ -289,6 +328,7 @@ Class recordClass extends connGateway  implements investRecords {
 	}
 }
 
+// Inserting Investments Class using stored procedure
 Class addInvestClass extends connGateway  implements addInvestments {
 
 	public function addInvestments($p_name, $p_typeID, $p_recordPrice){
@@ -306,6 +346,7 @@ Class addInvestClass extends connGateway  implements addInvestments {
 	}
 	}
 
+// Fetching Investments by ID Class
 Class recordGet extends connGateway  implements recordGetbyID {
 
 	public function getRecordbyID($recordID) {
@@ -326,6 +367,9 @@ Class recordGet extends connGateway  implements recordGetbyID {
 	
 	}
 }
+
+
+// Updating Investments using stored proceduere Class
 
 Class recordGet1 extends connGateway  implements recordGetbyID {
 
@@ -369,6 +413,7 @@ Class recordGet2 extends connGateway  implements recordGetbyID {
 	}
 }
 
+
 Class editRecordClass extends connGateway  implements editRecordbyID {
 
 	public function editRecbyID($recordID, $Name, $typeID, $recordPrice){
@@ -386,6 +431,7 @@ Class editRecordClass extends connGateway  implements editRecordbyID {
 	}
 }
 
+// Disabling Investments by ID Class
 Class disableRecordClass extends connGateway  implements disableRecord {
 
 	public function disa_record($recordID){
@@ -520,6 +566,25 @@ public function getList() {
 	
 	while ($row = $stmt->fetch_assoc()) {
 		$data = [$row["Jan"],$row["Feb"],$row["March"],$row["April"],$row["May"],$row["June"],$row["July"],$row["Aug"],$row["Sept"],$row["Oct"],$row["Nov"],$row["Decs"] ];
+	}
+	$stmt->close();
+}
+return $data;
+}
+
+}
+
+
+Class getGrossClass extends connGateway  implements getGross {
+
+public function getGross() {
+
+	$query = "SELECT * FROM `grossprofit`";
+
+	if ($stmt = $this->conn->query($query)) {
+	
+	while ($row = $stmt->fetch_assoc()) {
+		$data = ["profits"=>$row["totalProfit"]];
 	}
 	$stmt->close();
 }
@@ -761,7 +826,6 @@ public function editPaperbyID($ptype, $pimage, $pid){
 
 if ($stmt = $this->conn->prepare($query)) {
 	$stmt->bind_param('sss', $ptype, $pimage, $pid);
-	echo $pimage;
 	$stmt->execute();
 	$stmt->close();
 	echo "<script>alert('Paper Updated Successful!'); window.location='paperlist.php'</script>";

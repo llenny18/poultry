@@ -1,3 +1,15 @@
+
+<!--
+Developers: Aliester Alinsunurin, Allen Eidrian S. Ramos
+Application Type: Poultry and Piggery Financial Management System
+
+This is the Home File (login.php)
+Contents:
+1. Login Page for users
+
+-->
+
+
 <?php require("./controller/db.php");
 $loginFunc = new loginClass();
 
@@ -35,9 +47,7 @@ if(isset($_POST['uLogin'])){
 </head>
 
 <body>
-    <!--[if lt IE 8]>
-            <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
-        <![endif]-->
+
     <!-- preloader area start -->
     <div id="preloader">
         <div class="loader"></div>
@@ -85,7 +95,7 @@ if(isset($_POST['uLogin'])){
     </div>
     <!-- login area end -->
 
-    <!-- jquery latest version -->
+        <!--Scripts used for system functionalities Developers decided to used downloaded CDN in case of internet/Power outage--><!-- jquery latest version -->
     <script src="assets/js/vendor/jquery-2.2.4.min.js"></script>
     <!-- bootstrap 4 js -->
     <script src="assets/js/popper.min.js"></script>
