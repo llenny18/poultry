@@ -1,3 +1,13 @@
+<!--
+Developers: Aliester Alinsunurin, Allen Eidrian S. Ramos
+Application Type: Poultry and Piggery Financial Management System
+
+This is the Home File (index.php)
+Contents:
+1. Javascript based graphs for Data handling dynamically connected from MYSQL Database
+2. Summarization of Business Expenses and Profits
+
+-->
 <?php require("./controller/db.php"); if(!isset($_SESSION['u_id'])){ redirect("./login.php");}
 
 $pigsChart  = new getPigCounts();
@@ -17,18 +27,12 @@ echo "<script>console.log(".json_encode($pigsChartEstimate->getList1()).")</scri
 <body>
     
     <div class="page-container">
-        <!-- sidebar menu area start -->
+        <!-- sidebar menu partial -->
     <?php include("./partials/sidebar.php"); ?>
-        <!-- sidebar menu area end -->
         <!-- main content area start -->
         <div class="main-content">
             <!-- header area start -->
             <?php include("./partials/header.php"); ?>
-
-            <!-- header area end -->
-            <!-- page title area start -->
-            
-            <!-- page title area end -->
             <div class="main-content-inner">
                 <!-- sales report area start -->
                 <div class="sales-report-area sales-style-two">
@@ -79,8 +83,6 @@ echo "<script>console.log(".json_encode($pigsChartEstimate->getList1()).")</scri
                         </div>
                     </div>
                 </div>
-                <!-- sales report area end -->
-                <!-- visitor graph area start -->
                 <div class="card mt-5">
                     <div class="card-body">
                         <div class="d-flex justify-content-between mb-5">
@@ -93,21 +95,18 @@ echo "<script>console.log(".json_encode($pigsChartEstimate->getList1()).")</scri
                         <div id="visitor_graph"></div>
                     </div>
                 </div>
-                <!-- visitor graph area end -->
-                <!-- order list area start -->
-             
-              
             </div>
         </div>
         <!-- main content area end -->
-        <!-- footer area start-->
+        <!-- footer partial-->
     <?php include("./partials/footer.php"); ?>
-        
-        <!-- footer area end-->
     </div>
-    <!-- page container area end -->
-    <!-- offset area start --><?php include "./partials/offset.php"; ?>
+  
+    <!-- offset partial for notifications -->
+    <?php include "./partials/offset.php"; ?>
     <!-- offset area end -->
+
+    <!--Scripts used for system functionalities Developers decided to used downloaded CDN in case of internet/Power outage-->
     <!-- jquery latest version -->
     <script src="assets/js/vendor/jquery-2.2.4.min.js"></script>
     <!-- bootstrap 4 js -->

@@ -1,3 +1,14 @@
+
+<!--
+Developers: Aliester Alinsunurin, Allen Eidrian S. Ramos
+Application Type: Poultry and Piggery Financial Management System
+
+This is the Home File (report.php)
+Contents:
+1. Records of Disabled/Archived Pigs List
+
+-->
+
 <?php require("./controller/db.php");
 $global = new archpiglistClass();
 $list = $global->displayarch_pigList() ?? [];
@@ -104,7 +115,7 @@ $list = $global->displayarch_pigList() ?? [];
     <!-- page container area end -->
     <!-- offset area start --><?php include "./partials/offset.php"; ?>
     <!-- offset area end -->
-    <!-- jquery latest version -->
+        <!--Scripts used for system functionalities Developers decided to used downloaded CDN in case of internet/Power outage--><!-- jquery latest version -->
        <!-- jquery latest version -->
        <script src="assets/js/vendor/jquery-2.2.4.min.js"></script>
     <!-- bootstrap 4 js -->
