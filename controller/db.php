@@ -9,17 +9,17 @@ Contents:
 1. All the OOP based functions Using SOLID Principle: Encapsulation, Polymorphism, Inheritance and Abstraction
  */
 
-// Session start for data handling
- session_start();
-
  // Set Cookie time to 20 hours
-session_set_cookie_params(72000);
+ session_set_cookie_params(72000);
 
 // Set cookie lifetime for 100 days (60sec * 60mins * 24hours * 100days) for Config File
 ini_set('session.cookie_lifetime', 60 * 60 * 24 * 100);
 ini_set('session.gc_maxlifetime', 60 * 60 * 24 * 100);
 
    
+
+// Session start for data handling
+ session_start();
 
 // Login Interface
 interface loginInterface {
