@@ -36,7 +36,7 @@ function hasActivePage($invests) {
                                 </ul>
                             </li>
                            
-                            <li class="<?= hasActivePage($invests) ? 'active' : ''; ?>">
+                            <li class="<?= hasActivePage($invests) || isPageActive('disabledinvestment.php') ? 'active' : ''; ?>">
                                 <a href="javascript:void(0)" aria-expanded="true"><i class="fa fa-table"></i>
                                     <span>Investments</span></a>
                                 <ul class="collapse">
@@ -45,6 +45,7 @@ function hasActivePage($invests) {
                                             <a href="<?= $invest['typeName'] . '.php' ?>"><?= $invest['typeName'] ?></a>
                                         </li>
                                     <?php } ?>
+                                    <li class="<?= isPageActive('disabledinvestment.php') ? 'active' : ''; ?>"><a href="disabledinvestment.php">Record Archives</a></li>
                                 </ul>
                             </li>
                             <li class="<?= isPageActive('piglist.php') || isPageActive('pigsold.php') || isPageActive('pigprice.php') || isPageActive('archpigsold.php') || isPageActive('archpigprice.php') || isPageActive('archpigsold.php') ? 'active' : ''; ?>">

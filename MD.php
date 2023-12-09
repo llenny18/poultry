@@ -89,7 +89,7 @@ $base = "feeds";
                                                     <td><?= $record['Name']; ?></td>
                                                     <td><?= $record['recordDate']; ?></td>
                                                     <td><?= $record['recordPrice']; ?></td>
-                                                    <td><a href="editrecord.php?recordID=<?= $record['recordID']; ?>"><i class="fa fa-pencil-square m-1"></i>Edit</a> | <a href="disauser.php?recordID=<?= $record['recordID']; ?>"><i class="fa fa-user-times m-1"></i>Disable</a></td>
+                                                    <td><a href="editrecord.php?recordID=<?= $record['recordID']; ?>"><i class="fa fa-pencil-square m-1"></i>Edit</a> | <a href="disainvestment.php?recordID=<?= $record['recordID']; ?>"><i class="fa fa-user-times m-1"></i>Disable</a></td>                                                
                                                 </tr>
                                                 <?php } ?>
                                             <?php } ?>
