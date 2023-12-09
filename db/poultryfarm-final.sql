@@ -111,9 +111,9 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `update_pigSold` (IN `p_soldID` INT,
         soldID = p_soldID;
 END$$
 
-DELIMITER ;
-
+DELIMITER $$
 CREATE PROCEDURE `sell_pigs`(IN `list_id` VARCHAR(255)) BEGIN INSERT INTO `pigsold` (`soldID`, `soldCount`, `priceID`, `houseID`) VALUES (NULL, (select piglist.PigCount from piglist where piglist.pigListID = list_id), (select pigprice.priceID from pigprice order by pigprice.priceDate desc limit 1), (select piglist.HouseID from piglist where piglist.pigListID = list_id)); delete from piglist where piglist.pigListID = list_id; END;
+END$$
 
 -- --------------------------------------------------------
 
