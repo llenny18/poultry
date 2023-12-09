@@ -85,6 +85,25 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `update_investment` (IN `p_recordID`
     END IF;
 END$$
 
+CREATE DEFINER=`root`@`localhost` PROCEDURE `update_pigPrice` (IN `p_priceID` INT, IN `p_priceDate` DATE, IN `p_price` DECIMAL(10,2))   BEGIN
+    UPDATE pigprice
+    SET
+        priceDate = p_priceDate,
+        price = p_price
+    WHERE
+        priceID = p_priceID;
+END$$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `update_pigSold` (IN `p_soldID` INT, IN `p_soldCount` INT, IN `p_priceID` INT, IN `p_houseID` INT)   BEGIN
+    UPDATE pigsold
+    SET
+        soldCount = p_soldCount,
+        priceID = p_priceID,
+        houseID = p_houseID
+    WHERE
+        soldID = p_soldID;
+END$$
+
 DELIMITER ;
 
 -- --------------------------------------------------------
@@ -148,7 +167,7 @@ CREATE TABLE `investmentrecords` (
   `recordPrice` decimal(10,2) UNSIGNED NOT NULL CHECK (`recordPrice` >= 0),
   `CreatedAt` date DEFAULT NULL,
   `DeletedAt` date DEFAULT NULL
- 
+
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -156,8 +175,7 @@ CREATE TABLE `investmentrecords` (
 --
 
 INSERT INTO `investmentrecords` (`recordID`, `Name`, `typeID`, `recordDate`, `recordPrice`, `CreatedAt`, `DeletedAt`) VALUES
-(1, 'Electricity', 4, '2023-12-05', 4360.00, '2023-12-09', NULL),
-(2, 'Water', 1, '2023-12-09', 6970.00, '2023-12-09', NULL),
+(1, 'Electricity', 1, '2023-12-05', 4360.00, '2023-12-09', NULL),
 (3, 'Aleister Salary', 3, '2023-12-09', 5000.00, '2023-12-09', NULL),
 (4, 'Aleister Salary', 3, '2023-12-09', 5000.00, '2023-12-09', NULL);
 
@@ -225,9 +243,7 @@ INSERT INTO `investmenttype` (`typeID`, `typeName`) VALUES
 (3, 'E-Wages'),
 (4, 'Miscellaneous');
 
--- --------------------------------------------------------
 
---
 -- Table structure for table `paperrecords`
 --
 
@@ -337,8 +353,8 @@ CREATE TABLE `pigprice` (
 --
 
 INSERT INTO `pigprice` (`priceID`, `priceDate`, `price`, `CreatedAt`, `DeletedAt`) VALUES
-(1, '2023-12-02', 130.87, '2023-12-08 11:11:14', NULL),
-(2, '2023-12-08', 124.87, '2023-12-08 11:11:17', NULL);
+(1, '2023-12-09', 130.87, '2023-12-08 11:11:14', NULL),
+(2, '2023-12-09', 124.87, '2023-12-08 11:11:17', NULL);
 
 -- --------------------------------------------------------
 
@@ -360,7 +376,7 @@ CREATE TABLE `pigsold` (
 --
 
 INSERT INTO `pigsold` (`soldID`, `soldCount`, `priceID`, `houseID`, `CreatedAt`, `DeletedAt`) VALUES
-(1, 5, 1, 1, '2023-12-01 16:00:00', NULL),
+(1, 5, 1, 1, '2023-12-07 16:00:00', NULL),
 (2, 10, 2, 2, '2023-11-30 16:00:00', NULL),
 (3, 40, 2, 2, '2023-11-30 16:00:00', NULL);
 
@@ -442,14 +458,10 @@ CREATE TABLE `useraccounts` (
   `DeletedAt` date DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
--- --------------------------------------------------------
-
 --
--- Table structure for table `userinfo`
+-- Dumping data for table `useraccounts`
 --
 
- 
- 
 INSERT INTO `useraccounts` (`userID`, `u_username`, `u_password`) VALUES
 (2, 'poultryadmin01', 'c67515a3fe5653fb72bfc7c616c9d868eecc2951c15af6c53688787af4e1a3e9'),
 (3, 'poultryemp1', '561d787a6653743ee17a8865404e2ef866fe9d274e756acbb84e3be17d3fd120'),
@@ -467,7 +479,6 @@ INSERT INTO `useraccounts` (`userID`, `u_username`, `u_password`, `CreatedAt`, `
 -- Table structure for table `userinfo`
 --
 
- 
 CREATE TABLE `userinfo` (
   `infoID` int(11) NOT NULL,
   `u_firstname` varchar(255) NOT NULL,
@@ -478,7 +489,6 @@ CREATE TABLE `userinfo` (
   `userID` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
- 
 --
 -- Dumping data for table `userinfo`
 --
@@ -487,9 +497,7 @@ INSERT INTO `userinfo` (`infoID`, `u_firstname`, `u_lastname`, `u_contactnum`, `
 (1, 'Allen', 'Ramos', '0967262339', 'ramosalleneid01@gmail.com', 0, 2),
 (2, 'Aleister', 'Alinsunurin', '09763912112', 'aleister@gmail.com', 2, 3),
 (3, 'Disabledw', 'Employeew', 'Choose User Type', '096675665', 0, 4);
-
- 
--- --------------------------------------------------------
+------------------------------------------
 
 --
 -- Table structure for table `userrole`
@@ -500,7 +508,6 @@ CREATE TABLE `userrole` (
   `roleName` varchar(100) NOT NULL,
   `roleDesc` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
- 
 
 --
 -- Dumping data for table `userrole`
@@ -612,10 +619,6 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW 
 --
 DROP TABLE IF EXISTS `viewusers`;
 
- 
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `viewusers`  AS SELECT concat(`ui`.`u_firstname`,' ',`ui`.`u_lastname`) AS `fullName`, `ui`.`u_contactnum` AS `u_contactnum`, `ui`.`u_email` AS `u_email`, `ua`.`userID` AS `userID`, `ua`.`u_username` AS `u_username`, `ua`.`u_password` AS `u_password`, `ur`.`roleID` AS `roleID`, `ur`.`roleName` AS `roleName`, `ur`.`roleDesc` AS `roleDesc` FROM ((`userinfo` `ui` join `useraccounts` `ua` on(`ua`.`userID` = `ui`.`userID`)) join `userrole` `ur` on(`ur`.`roleID` = `ui`.`roleID`)) ;
- 
- 
 CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `viewusers`  AS SELECT `ui`.`u_firstname` AS `u_firstname`, `ui`.`u_lastname` AS `u_lastname`, `ua`.`CreatedAt` AS `CreatedAt`, `ua`.`DeletedAt` AS `DeletedAt`, concat(`ui`.`u_firstname`,' ',`ui`.`u_lastname`) AS `fullName`, `ui`.`u_contactnum` AS `u_contactnum`, `ui`.`u_email` AS `u_email`, `ua`.`userID` AS `userID`, `ua`.`u_username` AS `u_username`, `ua`.`u_password` AS `u_password`, `ur`.`roleID` AS `roleID`, `ur`.`roleName` AS `roleName`, `ur`.`roleDesc` AS `roleDesc` FROM ((`userinfo` `ui` join `useraccounts` `ua` on(`ua`.`userID` = `ui`.`userID`)) join `userrole` `ur` on(`ur`.`roleID` = `ui`.`roleID`)) ;
 
 --
@@ -702,12 +705,6 @@ ALTER TABLE `investmentrecords`
 -- AUTO_INCREMENT for table `investmenttype`
 --
 ALTER TABLE `investmenttype`
- 
- 
-  MODIFY `typeID` int(11) NOT NULL AUTO_INCREMENT;
- 
-  MODIFY `typeID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
- 
   MODIFY `typeID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
@@ -738,31 +735,18 @@ ALTER TABLE `pigsold`
 -- AUTO_INCREMENT for table `useraccounts`
 --
 ALTER TABLE `useraccounts`
- 
- 
-  MODIFY `userID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
- 
-  MODIFY `userID` int(11) NOT NULL AUTO_INCREMENT;
- 
   MODIFY `userID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `userinfo`
 --
 ALTER TABLE `userinfo`
- 
-
- 
   MODIFY `infoID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT for table `userrole`
 --
 ALTER TABLE `userrole`
- 
- 
-;
- 
   MODIFY `roleID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
