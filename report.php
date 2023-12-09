@@ -9,8 +9,8 @@ Contents:
 -->
 
 <?php require("./controller/db.php");
-$global = new usersClass();
-$user = $global->getUsers() ?? [];
+$global = new getProfitClass();
+$yearProfits = $global->getProfit() ?? [];
 
 $gross = new getGrossClass();
 $totalGross = $gross->getGross();
@@ -75,27 +75,24 @@ $totalGross = $gross->getGross();
                                   
                         <div class="card"> <h1 class="mt-3 text-center">Gross Profit is: PHP <?= $totalGross['profits'] ?> </h1><hr>
                             <div class="card-body">
-                                <h4 class="header-title">Profits Report Records Yearly<a href="adduser.php"></h4>
+                                <h4 class="header-title">Profits Report Records Yearly</h4>
                                 <div class="single-table">
                                     <div class="table-responsive">
                                     <table id="dataTable3" class="text-center">
                                             <thead class="text-uppercase bg-info">
                                                 <tr class="text-white">
-                                                    <th scope="col">User ID</th>
-                                                    <th scope="col">Full Name</th>
-                                                    <th scope="col">Username</th>
-                                                    <th scope="col">User Description</th>
-                                                    <th scope="col">Action</th>
+                                                    <th scope="col">YearID</th>
+                                                    <th scope="col">Year</th>
+                                                    <th scope="col">Total Profit</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                <?php foreach($user as $unow){ ?>
+                                                <?php $autoIncrement = 1;
+                                                foreach($yearProfits as $yearProfit){ ?>
                                                 <tr>
-                                                    <th scope="row"><?= $unow['userID']; ?></th>
-                                                    <td><?= $unow['fullName']; ?></td>
-                                                    <td><?= $unow['u_username']; ?></td>
-                                                    <td><?= $unow['roleDesc']; ?></td>
-                                                    <td><a href="edituser.php?uid=<?= $unow['userID']; ?>"><i class="fa fa-pencil-square m-1"></i>Edit</a> | <a href="disauser.php?uid=<?= $unow['userID']; ?>"><i class="fa fa-user-times m-1"></i>Disable</a></td>
+                                                    <th scope="row"><?= $autoIncrement++; ?></th>
+                                                    <td><?= $yearProfit['ProfitYear']; ?></td>
+                                                    <td><?= $yearProfit['TotalProfit']; ?></td>
                                                 </tr>
                                                 <?php } ?>
                                                 
