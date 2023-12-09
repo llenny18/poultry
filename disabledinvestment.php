@@ -1,10 +1,8 @@
 <?php require("./controller/db.php");
-$global = new investClass();
-$invests = $global->fetchInvestments();
-$recordbills = new recordClass();
-$records = $recordbills->fetchRecords(1);
+$global = new disabled_recordsClass();
+$records = $global->getRecord();
 
-$base = "feeds";
+$base = "record";
 ?>
 <html class="no-js" lang="en">
 
@@ -64,7 +62,7 @@ $base = "feeds";
                     <div class="col-lg-12 mt-5">
                         <div class="card">
                             <div class="card-body">
-                                <h4 class="header-title">Bills Investment Record</h4><a href="addrecord.php"><i class="fa fa-user-plus m-2"></i>Add Investment Record</a></h4>
+                                <h4 class="header-title">All Investments of Feeds</h4>
                                 <div class="single-table">
                                     <div class="table-responsive">
                                     <table id="dataTable3" class="text-center">
@@ -89,7 +87,7 @@ $base = "feeds";
                                                     <td><?= $record['Name']; ?></td>
                                                     <td><?= $record['recordDate']; ?></td>
                                                     <td><?= $record['recordPrice']; ?></td>
-                                                    <td><a href="editrecord.php?recordID=<?= $record['recordID']; ?>"><i class="fa fa-pencil-square m-1"></i>Edit</a> | <a href="disainvestment.php?recordID=<?= $record['recordID']; ?>"><i class="fa fa-user-times m-1"></i>Disable</a></td>
+                                                    <td><a href="deleteinvestment.php?recordID=<?= $record['recordID']; ?>"><i class="fa fa-user-times m-1"></i>Delete Investment Record</a></td>
                                                 </tr>
                                                 <?php } ?>
                                             <?php } ?>

@@ -36,6 +36,18 @@ interface editRecordbyID {
 	public function editRecbyID($recordID, $Name, $typeID, $price);
 }
 
+interface disableRecord {
+	public function disa_record($recordID);
+}
+
+interface disabledRecords {
+	public function getRecord();
+}
+
+interface deleteRecord {
+	public function deletebyID($recordID);
+}
+
 interface usernameInterface {
 	public function getUsername($uid);
 }
@@ -303,6 +315,65 @@ Class editRecordClass extends connGateway  implements editRecordbyID {
 		$stmt->execute();
 		$stmt->close();
 		echo "<script>alert('Account Updated Successful!'); window.location='Bills.php'</script>";
+	}
+	
+	}
+}
+
+Class disableRecordClass extends connGateway  implements disableRecord {
+
+	public function disa_record($recordID){
+	
+		
+		$query = "UPDATE `investmentrecords` SET `DeletedAt` = curdate() WHERE `investmentrecords`.`recordID` = ?";
+	
+	if ($stmt = $this->conn->prepare($query)) {
+		$stmt->bind_param('s', $recordID);
+		$stmt->execute();
+		$stmt->close();
+		echo "<script>alert('Investment Record Disabled Successful!'); window.location='Bills.php'</script>";
+	}
+	
+	}
+}
+
+Class disabled_recordsClass extends connGateway  implements disabledRecords {
+
+	public function getRecord() {
+	
+		$query = "SELECT * FROM `investmentrecords` where DeletedAt is not null";
+	
+		if ($stmt = $this->conn->query($query)) {
+		
+		$num_of_rows = $stmt->num_rows;
+		while ($row = $stmt->fetch_assoc()) {
+			$data[] = $row;
+		}
+		$stmt->close();
+	}
+	if (empty($data)) {
+		// Handle the case when no data is found
+		echo "No records found.";
+	}
+	else { 
+		return $data;
+	}
+	}
+	
+}
+
+Class deleteRecordClass extends connGateway  implements deleteRecord {
+
+	public function deletebyID($recordID){
+	
+		
+		$query = "DELETE FROM `investmentrecords` WHERE recordID = ?";
+	
+	if ($stmt = $this->conn->prepare($query)) {
+		$stmt->bind_param('s', $recordID);
+		$stmt->execute();
+		$stmt->close();
+		echo "<script>alert('Investment Record Deleted Successful!'); window.location='disabledinvestment.php'</script>";
 	}
 	
 	}
