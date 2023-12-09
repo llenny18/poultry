@@ -1,6 +1,10 @@
 <?php require("./controller/db.php"); 
 if(!isset($_SESSION['u_id'])){ redirect("./login.php");}
 
+$userget = new getPiglistByID();
+$listID = $_GET['pid'];
+$listInfo = $userget->getListbyID($listID);
+
 $addemployee = new adduserClass();
 
 if(isset($_POST['add_emp'])){
@@ -55,21 +59,21 @@ $email = $_POST['email'];
                                                 
                                                 <div class="col-md-4 mb-3">
                                                     <label for="validationCustom01">House ID</label>
-                                                    <input type="number" name="ufname" class="form-control" id="validationCustom01" placeholder="0"   required="">
+                                                    <input type="number" name="ufname" class="form-control" id="validationCustom01" placeholder="0" value="<?= $listInfo['hid'] ?>"  required="">
                                                     <div class="valid-feedback">
                                                         Looks good!
                                                     </div>
                                                 </div>
                                                 <div class="col-md-4 mb-3">
                                                     <label for="validationCustom02">Pig Count</label>
-                                                    <input type="number" name="ulname" class="form-control" id="validationCustom02" placeholder="0"  required="">
+                                                    <input type="number" name="ulname" class="form-control" id="validationCustom02" placeholder="0"value="<?= $listInfo['pg'] ?>"  required="">
                                                     <div class="valid-feedback">
                                                         Looks good!
                                                     </div>
                                                 </div>
                                                 <div class="col-md-4 mb-3">
                                                     <label for="validationCustom02">Pig Deceased</label>
-                                                    <input type="number" name="ulname" class="form-control" id="validationCustom02" placeholder="0"  required="">
+                                                    <input type="number" name="ulname" class="form-control" id="validationCustom02" placeholder="0" value="<?= $listInfo['pd'] ?>" required="">
                                                     <div class="valid-feedback">
                                                         Looks good!
                                                     </div>

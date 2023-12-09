@@ -82,7 +82,7 @@ $papers = $global->display_paperInfo() ?? [];
                                                     <td><?= $paper['p_typeName']; ?></td>
                                                     <td><?= $paper['p_typeDesc']; ?></td>
                                                     <td><?php echo '<img src="data:image/jpg;base64,' .  base64_encode($paper['p_image'])  . '" />' ?></td>
-                                                    <td><a href="edituser.php?uid=<?= $paper['paperID']; ?>"><i class="fa fa-pencil-square m-1"></i>Edit</a> | <a href="disapaper.php?pid=<?= $paper['paperID']; ?>"><i class="fa fa-user-times m-1"></i>Disable</a></td>
+                                                    <td><a href="editpaper.php?pid=<?= $paper['paperID']; ?>"><i class="fa fa-pencil-square m-1"></i>Edit</a> | <a href="disapaper.php?pid=<?= $paper['paperID']; ?>"><i class="fa fa-user-times m-1"></i>Disable</a></td>
                                                 </tr>
                                                 <?php } ?>
                                                 

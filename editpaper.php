@@ -1,6 +1,12 @@
 <?php require("./controller/db.php"); 
 if(!isset($_SESSION['u_id'])){ redirect("./login.php");}
 
+
+$userget = new getPaperListByID();
+$listID = $_GET['pid'];
+$listInfo = $userget->getListbyID($listID);
+
+
 $addemployee = new adduserClass();
 
 if(isset($_POST['add_emp'])){
@@ -52,16 +58,27 @@ $email = $_POST['email'];
                                         <h4 class="header-title">Add User Employee Account</h4>
                                         <form class="needs-validation" novalidate="" method="post">
                                             <div class="form-row">
-                                                
+                                            <div class="col-md-6 mb-3">
+                                                    <label for="validationCustomUsername">Paper ID</label>
+                                                    <div class="input-group">
+                                                        <div class="input-group-prepend">
+                                                            <span class="input-group-text" id="inputGroupPrepend"><i class="fa fa-file-image-o" aria-hidden="true"></i></span>
+                                                        </div>
+                                                        <input type="text" class="form-control" id="validationCustomUsername"  name="upass"  placeholder="Password"  value="<?= $listInfo['pid'] ?>"  aria-describedby="inputGroupPrepend" required="">
+                                                        <div class="invalid-feedback">
+                                                            Please choose a username.
+                                                        </div>
+                                                    </div>
+                                                </div>
                                                 
                                                 <div class="col-md-6 mb-3">
-                                                    <label for="validationCustomUsername">Username</label>
+                                                    <label for="validationCustomUsername">Paper Type</label>
                                                     <div class="input-group">
                                                         <div class="input-group-prepend">
                                                             <span class="input-group-text" id="inputGroupPrepend"><i class="fa fa-list-alt" aria-hidden="true"></i></span>
                                                         </div>
                                                         <select name="urole" class="form-control" aria-label="Default select example">
-                                                            <option>Choose User Type</option>
+                                                            <option>Choose Paper Type</option>
                                                             <option  value="1">Receipt</option>
                                                             <option  value="2">Documents</option>
                                                             <option  value="3">Legal Paper</option>
@@ -76,7 +93,21 @@ $email = $_POST['email'];
                                                         <div class="input-group-prepend">
                                                             <span class="input-group-text" id="inputGroupPrepend"><i class="fa fa-file-image-o" aria-hidden="true"></i></span>
                                                         </div>
-                                                        <input type="text" class="form-control" id="validationCustomUsername"  name="upass"  placeholder="Password" aria-describedby="inputGroupPrepend" required="">
+                                                        <textarea name="" id="" cols="30" rows="10" class="form-control" id="validationCustomUsername"  name="upass"  placeholder="Password"  aria-describedby="inputGroupPrepend" required=""><?= $listInfo['pd'] ?></textarea>
+                                                        <div class="invalid-feedback">
+                                                            Please choose a username.
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6 mb-3">
+                                                    <label for="validationCustomUsername">Paper Image</label>
+                                                    <hr>
+                                                    <?php echo '<img style="height: 200px;" src="data:image/jpg;base64,' .  base64_encode($listInfo['pi'])  . '" />' ?>
+                                                    <div class="input-group">
+                                                        <div class="input-group-prepend">
+                                                            <span class="input-group-text" id="inputGroupPrepend"><i class="fa fa-file-image-o" aria-hidden="true"></i></span>
+                                                        </div>
+                                                        <input type="file" class="form-control" id="validationCustomUsername"  name="upass"  placeholder="Password"  value="<?= $listInfo['pid'] ?>"  aria-describedby="inputGroupPrepend" required="">
                                                         <div class="invalid-feedback">
                                                             Please choose a username.
                                                         </div>
