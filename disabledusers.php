@@ -3,7 +3,7 @@
 Developers: Aliester Alinsunurin, Allen Eidrian S. Ramos
 Application Type: Poultry and Piggery Financial Management System
 
-This is the Home File (report.php)
+This is the Home File (disableduser.php)
 Contents:
 1. Records of Disabled/Archived Users List
 
