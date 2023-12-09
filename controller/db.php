@@ -319,6 +319,12 @@ interface sellPigs
 	public function sellbyID($pid);
 }
 
+interface getProfit{
+	// Function declaration to be used
+	public function getProfit();
+}
+
+
 
 // Connection Class
 class connGateway
@@ -907,6 +913,34 @@ class getEstimatedProfit extends connGateway  implements EstimatedProfit
 			//  Fetching of rows selected using the query
 			while ($row = $stmt->fetch_assoc()) {
 				$data = [0, (float)$row["Jan"], (float)$row["Feb"], (float)$row["March"], (float)$row["April"], (float)$row["May"], (float)$row["June"], (float)$row["July"], (float)$row["Aug"], (float)$row["Sept"], (float)$row["Oct"], (float)$row["Nov"], (float)$row["Decs"]];
+			}
+			//  Closing mysqli object
+			$stmt->close();
+		}
+		//  Returning of data fetched
+		return $data;
+	}
+	
+}
+
+class getProfitClass extends connGateway  implements getProfit
+{
+
+	// Function declaration to be used
+	public function getProfit()
+	{
+
+		// Query declaration to be executed
+		$query = "SELECT *
+		FROM yearly_profits
+		GROUP BY ProfitYear;";
+
+		// Query execution and if success will return a value/execute mysql query
+		if ($stmt = $this->conn->query($query)) {
+
+			//  Fetching of rows selected using the query
+			while ($row = $stmt->fetch_assoc()) {
+				$data[] = $row;
 			}
 			//  Closing mysqli object
 			$stmt->close();

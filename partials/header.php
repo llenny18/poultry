@@ -1,4 +1,8 @@
-
+<?php
+// Get the current page dynamically from the URL
+$current_page = basename($_SERVER['REQUEST_URI']);
+$current_page_name = pathinfo(basename($_SERVER['REQUEST_URI']), PATHINFO_FILENAME);
+?>
 
 
 
@@ -181,7 +185,7 @@ Contents:
                             <h4 class="page-title pull-left">Dashboard</h4>
                             <ul class="breadcrumbs pull-left">
                                 <li><a href="index.php">Home</a></li>
-                                <li><span>Home</span></li>
+                                <li><span><a href="<?php ucfirst($current_page); ?>"><?php echo ($current_page_name); ?></a></span></li>
                             </ul>
                         </div>
                     </div>
