@@ -682,6 +682,11 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW 
 -- Indexes for dumped tables
 --
 
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `monthly_profit`  AS SELECT year(`pigsold`.`CreatedAt`) AS `Year`, monthname(`pigsold`.`CreatedAt`) AS `Month`, sum(`pigsold`.`soldCount` * `pigprice`.`price`) AS `MonthlyProfit` FROM (`pigsold` join `pigprice` on(month(`pigsold`.`CreatedAt`) = month(`pigprice`.`priceDate`))) GROUP BY year(`pigsold`.`CreatedAt`), month(`pigsold`.`CreatedAt`) ;
+
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `monthly_expenses`  AS SELECT year(`pigsold`.`CreatedAt`) AS `Year`, monthname(`pigsold`.`CreatedAt`) AS `Month`, (select coalesce(sum(`investmentrecords`.`recordPrice`),0) from `investmentrecords` where month(`investmentrecords`.`recordDate`) = month(`pigsold`.`CreatedAt`)) AS `MonthlyExpenses` FROM `pigsold` GROUP BY year(`pigsold`.`CreatedAt`), month(`pigsold`.`CreatedAt`) ;
+
+
 --
 -- Indexes for table `investmentrecords`
 --
