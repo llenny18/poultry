@@ -1,3 +1,21 @@
+
+<?php
+// Get the current page dynamically from the URL
+$current_page = basename($_SERVER['REQUEST_URI']);
+$current_page_name = pathinfo(basename($_SERVER['REQUEST_URI']), PATHINFO_FILENAME);
+?>
+
+
+
+<!--
+Developers: Aliester Alinsunurin, Allen Eidrian S. Ramos
+Application Type: Poultry and Piggery Financial Management System
+
+This is the Home File (report.php)
+Contents:
+1. Header Partial
+
+-->
 <?php
 // Get the current page dynamically from the URL
 $current_page = basename($_SERVER['REQUEST_URI']);
@@ -72,84 +90,7 @@ Contents:
                                     </div>
                                 </div>
                             </li>
-                            <li class="dropdown">
-                                <i class="fa fa-envelope-o dropdown-toggle" data-toggle="dropdown"><span>3</span></i>
-                                <div class="dropdown-menu notify-box nt-enveloper-box">
-                                    <span class="notify-title">You have 3 new notifications <a href="#">view all</a></span>
-                                    <div class="nofity-list">
-                                        <a href="#" class="notify-item">
-                                            <div class="notify-thumb">
-                                                <img src="assets/images/author/author-img1.jpg" alt="image">
-                                            </div>
-                                            <div class="notify-text">
-                                                <p>Aglae Mayer</p>
-                                                <span class="msg">Hey I am waiting for you...</span>
-                                                <span>3:15 PM</span>
-                                            </div>
-                                        </a>
-                                        <a href="#" class="notify-item">
-                                            <div class="notify-thumb">
-                                                <img src="assets/images/author/author-img2.jpg" alt="image">
-                                            </div>
-                                            <div class="notify-text">
-                                                <p>Aglae Mayer</p>
-                                                <span class="msg">When you can connect with me...</span>
-                                                <span>3:15 PM</span>
-                                            </div>
-                                        </a>
-                                        <a href="#" class="notify-item">
-                                            <div class="notify-thumb">
-                                                <img src="assets/images/author/author-img3.jpg" alt="image">
-                                            </div>
-                                            <div class="notify-text">
-                                                <p>Aglae Mayer</p>
-                                                <span class="msg">I missed you so much...</span>
-                                                <span>3:15 PM</span>
-                                            </div>
-                                        </a>
-                                        <a href="#" class="notify-item">
-                                            <div class="notify-thumb">
-                                                <img src="assets/images/author/author-img4.jpg" alt="image">
-                                            </div>
-                                            <div class="notify-text">
-                                                <p>Aglae Mayer</p>
-                                                <span class="msg">Your product is completely Ready...</span>
-                                                <span>3:15 PM</span>
-                                            </div>
-                                        </a>
-                                        <a href="#" class="notify-item">
-                                            <div class="notify-thumb">
-                                                <img src="assets/images/author/author-img2.jpg" alt="image">
-                                            </div>
-                                            <div class="notify-text">
-                                                <p>Aglae Mayer</p>
-                                                <span class="msg">Hey I am waiting for you...</span>
-                                                <span>3:15 PM</span>
-                                            </div>
-                                        </a>
-                                        <a href="#" class="notify-item">
-                                            <div class="notify-thumb">
-                                                <img src="assets/images/author/author-img1.jpg" alt="image">
-                                            </div>
-                                            <div class="notify-text">
-                                                <p>Aglae Mayer</p>
-                                                <span class="msg">Hey I am waiting for you...</span>
-                                                <span>3:15 PM</span>
-                                            </div>
-                                        </a>
-                                        <a href="#" class="notify-item">
-                                            <div class="notify-thumb">
-                                                <img src="assets/images/author/author-img3.jpg" alt="image">
-                                            </div>
-                                            <div class="notify-text">
-                                                <p>Aglae Mayer</p>
-                                                <span class="msg">Hey I am waiting for you...</span>
-                                                <span>3:15 PM</span>
-                                            </div>
-                                        </a>
-                                    </div>
-                                </div>
-                            </li>
+                         
                             <li class="settings-btn">
                                 <i class="ti-settings"></i>
                             </li>
@@ -173,8 +114,6 @@ Contents:
                             <img class="avatar user-thumb" src="assets/images/author/avatar.png" alt="avatar">
                             <h4 class="user-name dropdown-toggle" data-toggle="dropdown"> <?php $conc = new usernameClass(); ;$unames = $conc->getUsername($_SESSION['u_id']); foreach($unames as $uname){ echo $uname['fullName']; } ?><i class="fa fa-angle-down"></i></h4>
                             <div class="dropdown-menu">
-                                <a class="dropdown-item" href="#">Message</a>
-                                <a class="dropdown-item" href="#">Settings</a>
                                 <a class="dropdown-item" href="#">Log Out</a>
                             </div>
                         </div>
