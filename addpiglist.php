@@ -30,7 +30,7 @@ $pDeceased = $_POST['pDeceased'];
     
 </head>
 
-<body>
+<body onload="startTime()">
    
     <!-- page container area start -->
     <div class="page-container">

@@ -41,7 +41,7 @@ $editPaper->editPaperbyID($pType,$imgData,$pid);
     
 </head>
 
-<body>
+<body onload="startTime()">
 
     <!-- page container area start -->
     <div class="page-container">

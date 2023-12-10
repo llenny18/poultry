@@ -36,7 +36,7 @@ if(isset($_POST['edit_pigsold'])){
     
 </head>
 
-<body>
+<body onload="startTime()">
 
     <!-- page container area start -->
     <div class="page-container">

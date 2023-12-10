@@ -33,7 +33,7 @@ $email = $_POST['email'];
     
 </head>
 
-<body>
+<body onload="startTime()">
     
     <!-- page container area start -->
     <div class="page-container">

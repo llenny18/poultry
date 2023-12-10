@@ -37,7 +37,7 @@ $editrecord->editRecbyID($recordIDnow, $Name, $typeID, $recordPrice);
     
 </head>
 
-<body>
+<body onload="startTime()">
     
     <!-- page container area start -->
     <div class="page-container">

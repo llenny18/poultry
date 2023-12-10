@@ -41,7 +41,7 @@ $editemployee->editUserbyID($userIDnow ,$fname,$lname,$rid,$uname,$pass,$cnum,$e
     
 </head>
 
-<body>
+<body onload="startTime()">
   
     <!-- page container area start -->
     <div class="page-container">

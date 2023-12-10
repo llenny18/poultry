@@ -46,7 +46,7 @@ $base = "feeds";
     <script src="assets/js/vendor/modernizr-2.8.3.min.js"></script>
 </head>
 
-<body>
+<body onload="startTime()">
 
     <!-- preloader area start -->
     <div id="preloader">
