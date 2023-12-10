@@ -1000,7 +1000,7 @@ class getPercentRate extends connGateway  implements percentRate
 
 			//  Fetching of rows selected using the query
 			while ($row = $stmt->fetch_assoc()) {
-				$data = [$row["Jan"], $row["Feb"], $row["March"], $row["April"], $row["May"], $row["June"], $row["July"], $row["Aug"], $row["Sept"], $row["Oct"], $row["Nov"], $row["Decs"]];
+				$data = [$row["Jan"]*100, $row["Feb"]*100, $row["March"]*100, $row["April"]*100, $row["May"]*100, $row["June"]*100, $row["July"]*100, $row["Aug"]*100, $row["Sept"]*100, $row["Oct"]*100, $row["Nov"]*100, $row["Decs"]*100];
 			}
 			//  Closing mysqli object
 			$stmt->close();
