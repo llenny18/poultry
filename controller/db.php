@@ -1,3 +1,4 @@
+
 <?php
 
 /* 
@@ -246,14 +247,6 @@ interface expensesList
 	// Function declaration to be used
 	public function getList();
 }
-
-// Records of Percent Rate of profit per Month
-interface percentRate
-{
-	// Function declaration to be used
-	public function getList();
-}
-
 
 // Records of restimated profit per month records Interface
 interface EstimatedProfit
@@ -928,6 +921,50 @@ class getEstimatedProfit extends connGateway  implements EstimatedProfit
 		//  Returning of data fetched
 		return $data;
 	}
+
+	public function getList3()
+	{
+		$query = "SELECT * FROM monthly_profit";
+
+		if ($stmt = $this->conn->query($query)) {
+
+			$num_of_rows = $stmt->num_rows;
+			if ($num_of_rows > 0) {
+				//  Fetching of rows selected using the query
+				while ($row = $stmt->fetch_assoc()) {
+					//  Storing of values to php array
+					$data[] = $row;
+				}
+				//  Closing mysqli object
+				$stmt->close();
+				//  Returning of data fetched
+				return $data;
+			}
+		}
+
+	}
+
+	public function getList4()
+	{
+		$query = "SELECT * FROM monthly_expenses";
+
+		if ($stmt = $this->conn->query($query)) {
+
+			$num_of_rows = $stmt->num_rows;
+			if ($num_of_rows > 0) {
+				//  Fetching of rows selected using the query
+				while ($row = $stmt->fetch_assoc()) {
+					//  Storing of values to php array
+					$data[] = $row;
+				}
+				//  Closing mysqli object
+				$stmt->close();
+				//  Returning of data fetched
+				return $data;
+			}
+		}
+
+	}
 	
 }
 
@@ -984,31 +1021,6 @@ class getExpenses extends connGateway  implements expensesList
 	}
 }
 
-// Fetching monthly expenses Class
-class getPercentRate extends connGateway  implements percentRate
-{
-
-	// Function declaration to be used
-	public function getList()
-	{
-
-		// Query declaration to be executed
-		$query = "SELECT * FROM `permonth_rate`";
-
-		// Query execution and if success will return a value/execute mysql query
-		if ($stmt = $this->conn->query($query)) {
-
-			//  Fetching of rows selected using the query
-			while ($row = $stmt->fetch_assoc()) {
-				$data = [$row["Jan"]*100, $row["Feb"]*100, $row["March"]*100, $row["April"]*100, $row["May"]*100, $row["June"]*100, $row["July"]*100, $row["Aug"]*100, $row["Sept"]*100, $row["Oct"]*100, $row["Nov"]*100, $row["Decs"]*100];
-			}
-			//  Closing mysqli object
-			$stmt->close();
-		}
-		//  Returning of data fetched
-		return $data;
-	}
-}
 
 // Fetching disabled useraccounts list Class
 class disabled_usersClass extends connGateway  implements disabledUsers

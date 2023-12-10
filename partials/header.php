@@ -1,7 +1,30 @@
+
 <?php
 // Get the current page dynamically from the URL
 $current_page = basename($_SERVER['REQUEST_URI']);
 $current_page_name = pathinfo(basename($_SERVER['REQUEST_URI']), PATHINFO_FILENAME);
+?>
+
+
+
+<!--
+Developers: Aliester Alinsunurin, Allen Eidrian S. Ramos
+Application Type: Poultry and Piggery Financial Management System
+
+This is the Home File (report.php)
+Contents:
+1. Header Partial
+
+-->
+<?php
+// Get the current page dynamically from the URL
+$current_page = basename($_SERVER['REQUEST_URI']);
+$current_page_name = pathinfo(basename($_SERVER['REQUEST_URI']), PATHINFO_FILENAME);
+
+$current_month = new getEstimatedProfit();
+$current_monthinfos = $current_month->getList3();
+$current_month_expenses = $current_month->getList4();
+
 ?>
 
 
@@ -41,59 +64,33 @@ Contents:
                                 <div class="dropdown-menu bell-notify-box notify-box">
                                     <span class="notify-title">You have 3 new notifications <a href="#">view all</a></span>
                                     <div class="nofity-list">
+                                        <?php foreach($current_monthinfos as $current_monthinfo){ ?>
                                         <a href="#" class="notify-item">
                                             <div class="notify-thumb"><i class="ti-key btn-danger"></i></div>
                                             <div class="notify-text">
-                                                <p>You have Changed Your Password</p>
+                                                <p><?= $current_monthinfo["Year"]; ?></p>
+                                                <p><b><?= $current_monthinfo["Month"]; ?></b></p>
+                                                <p>Total Profit for this month: <?= $current_monthinfo["MonthlyProfit"]; ?></p>
                                                 <span>Just Now</span>
                                             </div>
                                         </a>
-                                        <a href="#" class="notify-item">
-                                            <div class="notify-thumb"><i class="ti-comments-smiley btn-info"></i></div>
-                                            <div class="notify-text">
-                                                <p>New Commetns On Post</p>
-                                                <span>30 Seconds ago</span>
-                                            </div>
-                                        </a>
-                                        <a href="#" class="notify-item">
-                                            <div class="notify-thumb"><i class="ti-key btn-primary"></i></div>
-                                            <div class="notify-text">
-                                                <p>Some special like you</p>
-                                                <span>Just Now</span>
-                                            </div>
-                                        </a>
-                                        <a href="#" class="notify-item">
-                                            <div class="notify-thumb"><i class="ti-comments-smiley btn-info"></i></div>
-                                            <div class="notify-text">
-                                                <p>New Commetns On Post</p>
-                                                <span>30 Seconds ago</span>
-                                            </div>
-                                        </a>
-                                        <a href="#" class="notify-item">
-                                            <div class="notify-thumb"><i class="ti-key btn-primary"></i></div>
-                                            <div class="notify-text">
-                                                <p>Some special like you</p>
-                                                <span>Just Now</span>
-                                            </div>
-                                        </a>
+                                        <?php } ?>
+                                        <?php foreach($current_month_expenses as $current_month_expense){ ?>
                                         <a href="#" class="notify-item">
                                             <div class="notify-thumb"><i class="ti-key btn-danger"></i></div>
                                             <div class="notify-text">
-                                                <p>You have Changed Your Password</p>
+                                                <p><?= $current_month_expense["Year"]; ?></p>
+                                                <p><b><?= $current_month_expense["Month"]; ?></b></p>
+                                                <p>Total Expenses for this month: <?= $current_month_expense["MonthlyExpenses"]; ?></p>
                                                 <span>Just Now</span>
                                             </div>
                                         </a>
-                                        <a href="#" class="notify-item">
-                                            <div class="notify-thumb"><i class="ti-key btn-danger"></i></div>
-                                            <div class="notify-text">
-                                                <p>You have Changed Your Password</p>
-                                                <span>Just Now</span>
-                                            </div>
-                                        </a>
+                                        <?php } ?>
+                        
                                     </div>
                                 </div>
                             </li>
-                            
+                         
                             <li class="settings-btn">
                                 <i class="ti-settings"></i>
                             </li>
@@ -117,7 +114,7 @@ Contents:
                             <img class="avatar user-thumb" src="assets/images/author/avatar.png" alt="avatar">
                             <h4 class="user-name dropdown-toggle" data-toggle="dropdown"> <?php $conc = new usernameClass(); ;$unames = $conc->getUsername($_SESSION['u_id']); foreach($unames as $uname){ echo $uname['fullName']; } ?><i class="fa fa-angle-down"></i></h4>
                             <div class="dropdown-menu">
-                                <a class="dropdown-item" href="../logout.php">Log Out</a>
+                                <a class="dropdown-item" href="#">Log Out</a>
                             </div>
                         </div>
                     </div>
