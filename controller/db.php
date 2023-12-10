@@ -247,6 +247,14 @@ interface expensesList
 	public function getList();
 }
 
+// Records of Percent Rate of profit per Month
+interface percentRate
+{
+	// Function declaration to be used
+	public function getList();
+}
+
+
 // Records of restimated profit per month records Interface
 interface EstimatedProfit
 {
@@ -1020,6 +1028,31 @@ class getExpenses extends connGateway  implements expensesList
 	}
 }
 
+// Fetching monthly expenses Class
+class getPercentRate extends connGateway  implements percentRate
+{
+
+	// Function declaration to be used
+	public function getList()
+	{
+
+		// Query declaration to be executed
+		$query = "SELECT * FROM `permonth_rate`";
+
+		// Query execution and if success will return a value/execute mysql query
+		if ($stmt = $this->conn->query($query)) {
+
+			//  Fetching of rows selected using the query
+			while ($row = $stmt->fetch_assoc()) {
+				$data = [$row["Jan"], $row["Feb"], $row["March"], $row["April"], $row["May"], $row["June"], $row["July"], $row["Aug"], $row["Sept"], $row["Oct"], $row["Nov"], $row["Decs"]];
+			}
+			//  Closing mysqli object
+			$stmt->close();
+		}
+		//  Returning of data fetched
+		return $data;
+	}
+}
 
 // Fetching disabled useraccounts list Class
 class disabled_usersClass extends connGateway  implements disabledUsers

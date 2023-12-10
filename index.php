@@ -14,6 +14,7 @@ $pigsChart  = new getPigCounts();
 $pigsChartDeceased  = new getPigDeceased();
 $pigsChartExpenses = new getExpenses();
 $pigsChartEstimate  = new getEstimatedProfit();
+$pigsChartPercent = new getPercentRate();
 
 echo "<script>console.log(".json_encode($pigsChartEstimate->getList1()).")</script>"
 ?>
@@ -63,7 +64,7 @@ echo "<script>console.log(".json_encode($pigsChartEstimate->getList1()).")</scri
                             <div class="single-report">
                                 <div class="s-sale-inner pt--30 mb-3">
                                     <div class="s-report-title d-flex justify-content-between">
-                                        <h4 class="header-title mb-0">Expenses</h4>
+                                        <h4 class="header-title mb-0">Percent Rate of Profit</h4>
                                         Per Month - This Year
                                     </div>
                                 </div>
@@ -281,8 +282,8 @@ if ($('#coin_sales6').length) {
         data: {
             labels: ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"],
             datasets: [{
-                label: "Pigs",
-                data: <?php echo json_encode($pigsChartExpenses->getList()) ?>,
+                label: "Percent Rate",
+                data: <?php echo json_encode($pigsChartPercent->getList()) ?>,
                 backgroundColor: [
                     '#39A839',
                     '#51F051',
