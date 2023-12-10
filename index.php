@@ -24,7 +24,7 @@ echo "<script>console.log(".json_encode($pigsChartEstimate->getList1()).")</scri
     
 </head>
 
-<body>
+<body onload="startTime()">
     
     <div class="page-container">
         <!-- sidebar menu partial -->

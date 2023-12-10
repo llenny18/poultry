@@ -61,7 +61,7 @@ function hasActivePage($invests) {
                                 </ul>
                             </li>
                             <li class="<?= isPageActive('piglist.php') || isPageActive('pigsold.php') || isPageActive('pigprice.php') || isPageActive('archpigsold.php') || isPageActive('archpigprice.php') || isPageActive('archpigsold.php') ? 'active' : ''; ?>">
-                                <a href="javascript:void(0)" aria-expanded="true"><i class="fa fa-table"></i>
+                                <a href="javascript:void(0)" aria-expanded="true"><i class="fa fa-paw"></i>
                                     <span>Pigs</span></a>
                                 <ul class="collapse">
                                     <li class="<?= isPageActive('piglist.php') ? 'active' : ''; ?>"><a href="piglist.php">Pigs List</a></li>
@@ -73,7 +73,7 @@ function hasActivePage($invests) {
                                 </ul>
                             </li>
                             <li class="<?= isPageActive('paperlist.php') || isPageActive('archpaperlist.php') ? 'active' : ''; ?>">
-                                <a href="javascript:void(0)" aria-expanded="true"><i class="fa fa-table"></i>
+                                <a href="javascript:void(0)" aria-expanded="true"><i class="fa fa-envelope"></i>
                                     <span>Papers</span></a>
                                 <ul class="collapse">
                                     <li class="<?= isPageActive('paperlist.php') ? 'active' : ''; ?>"><a href="paperlist.php">Papers List</a></li>
@@ -82,14 +82,13 @@ function hasActivePage($invests) {
                             </li>
                             
                             <li class="<?= isPageActive('userlist.php') || isPageActive('disabledusers.php') ? 'active' : ''; ?>">
-                                <a href="javascript:void(0)" aria-expanded="true"><i class="fa fa-table"></i>
+                                <a href="javascript:void(0)" aria-expanded="true"><i class="fa fa-users"></i>
                                     <span>Manage Users</span></a>
                                 <ul class="collapse">
                                     <li class="<?= isPageActive('userlist.php') ? 'active' : ''; ?>"><a href="userlist.php">Users List</a></li>
                                     <li class="<?= isPageActive('disabledusers.php') ? 'active' : ''; ?>"><a href="disabledusers.php">Disabled Accounts</a></li>
                                 </ul>
                             </li>
-                            <li class="<?= isPageActive('record.php') ? 'active' : ''; ?>"> <a href="record.php"><i class="ti-receipt"></i> <span>Records of Profits</span></a></li>
                             <li class="<?= isPageActive('logout.php') ? 'active' : ''; ?>"> <a href="logout.php"><i class="ti-back-left"></i> <span>Logout</span></a></li>
                        
                         </ul>

@@ -29,7 +29,7 @@ if(isset($_POST['add_invest'])){
     
 </head>
 
-<body>
+<body onload="startTime()">
    
     <!-- page container area start -->
     <div class="page-container">

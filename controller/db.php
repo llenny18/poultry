@@ -920,50 +920,6 @@ class getEstimatedProfit extends connGateway  implements EstimatedProfit
 		//  Returning of data fetched
 		return $data;
 	}
-
-	public function getList3()
-	{
-		$query = "SELECT * FROM monthly_profit";
-
-		if ($stmt = $this->conn->query($query)) {
-
-			$num_of_rows = $stmt->num_rows;
-			if ($num_of_rows > 0) {
-				//  Fetching of rows selected using the query
-				while ($row = $stmt->fetch_assoc()) {
-					//  Storing of values to php array
-					$data[] = $row;
-				}
-				//  Closing mysqli object
-				$stmt->close();
-				//  Returning of data fetched
-				return $data;
-			}
-		}
-
-	}
-
-	public function getList4()
-	{
-		$query = "SELECT * FROM monthly_expenses";
-
-		if ($stmt = $this->conn->query($query)) {
-
-			$num_of_rows = $stmt->num_rows;
-			if ($num_of_rows > 0) {
-				//  Fetching of rows selected using the query
-				while ($row = $stmt->fetch_assoc()) {
-					//  Storing of values to php array
-					$data[] = $row;
-				}
-				//  Closing mysqli object
-				$stmt->close();
-				//  Returning of data fetched
-				return $data;
-			}
-		}
-
-	}
 	
 }
 

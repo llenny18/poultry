@@ -35,7 +35,7 @@ if(isset($_POST['edit_pigprice'])){
     
 </head>
 
-<body>
+<body onload="startTime()">
   
     
     <!-- page container area start -->
